@@ -41,7 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Country.cs" />
+    <Compile Include="Enums\Territory.cs" />
     <Compile Include="Enums\UnitType.cs" />
+    <Compile Include="Models\GameState.cs" />
     <Compile Include="Models\Territory.cs" />
     <Compile Include="Models\Unit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
