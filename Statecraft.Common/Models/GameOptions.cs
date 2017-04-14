@@ -9,5 +9,7 @@ namespace Statecraft.Common.Models
     public class GameOptions
     {
         public bool IsGunboat { get; set; }
+        public bool IsRanked { get; set; }
+        public TimeSpan RoundLength { get; set; }
     }
 }

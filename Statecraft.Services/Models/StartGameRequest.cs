@@ -13,7 +13,14 @@ namespace Statecraft.Services.Models
 
     public class StartGameModel
     {
-        public IList<Player> Players { get; set; }
+        public int GameId { get; set; }
+        public Guid? EnglandPlayerId { get; set; }
+        public Guid? FrancePlayerId { get; set; }
+        public Guid? ItalyPlayerId { get; set; }
+        public Guid? RussiaPlayerId { get; set; }
+        public Guid? AustriaPlayerId { get; set; }
+        public Guid? TurkeyPlayerId { get; set; }
+        public Guid? GermanyPlayerId { get; set; }
         public GameOptions Options { get; set; }
     }
 }

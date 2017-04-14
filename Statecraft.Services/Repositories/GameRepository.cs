@@ -13,5 +13,15 @@ namespace Statecraft.Services.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public Game GetGameById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Game UpdateGame(Game game)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -10,5 +10,7 @@ namespace Statecraft.Services.Interfaces
     public interface IGameRepository
     {
         Game CreateNewGame(Game game);
+        Game GetGameById(int id);
+        Game UpdateGame(Game game);
     }
 }
