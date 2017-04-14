@@ -9,16 +9,16 @@ namespace Statecraft.Common.Models
 {
     public class Unit
     {
-        private Country owner;
+        private Country country;
         private UnitType unitType;
 
-        public Unit(Country owner, UnitType unitType)
+        public Unit(Country country, UnitType unitType)
         {
-            this.owner = owner;
+            this.country = country;
             this.unitType = unitType;
         }
 
-        public Country Owner { get { return owner; } }
+        public Country Country { get { return country; } }
 
         public UnitType UnitType { get { return unitType; } }
     }
