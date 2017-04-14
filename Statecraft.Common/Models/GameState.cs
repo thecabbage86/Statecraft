@@ -9,11 +9,14 @@ namespace Statecraft.Common.Models
 {
     public class GameState
     {
+        //public int GameId { get; set; }
+        public GameRound Round { get; set; }
         public IList<Territory> Territories { get; set; }
-        //players
 
         public GameState()
         {
+            Round = new GameRound() { Phase = Phase.Movement, Season = Season.Spring, Year = 1901 };
+
             Territories = new List<Territory>()
             {
                 new Territory("Ankara", true, TerritoryType.Land),
@@ -21,7 +24,7 @@ namespace Statecraft.Common.Models
                 new Territory("Berlin", true, TerritoryType.Land, new Unit(Country.Germany, UnitType.Land)),
                 new Territory("Brest", true, TerritoryType.Land, new Unit(Country.France, UnitType.Sea)),
                 new Territory("Budapest", true, TerritoryType.Land, new Unit(Country.Austria, UnitType.Land)),
-                new Territory("Bulgaria", true, TerritoryType.Land),
+                new Territory("Bulgaria", true, TerritoryType.Land, new List<Coast>() { new Coast(CoastType.East), new Coast(CoastType.South) }),
                 new Territory("Constantinople", true, TerritoryType.Land),
                 new Territory("Denmark", true, TerritoryType.Land),
                 new Territory("Edinburgh", true, TerritoryType.Land, new Unit(Country.England, UnitType.Sea)),
@@ -43,7 +46,7 @@ namespace Statecraft.Common.Models
                 new Territory("Serbia", true, TerritoryType.Land),
                 new Territory("Sevastopol", true, TerritoryType.Land, new Unit(Country.Russia, UnitType.Sea)),
                 new Territory("Smyrna", true, TerritoryType.Land),
-                new Territory("Spain", true, TerritoryType.Land),
+                new Territory("Spain", true, TerritoryType.Land, new List<Coast>() { new Coast(CoastType.North), new Coast(CoastType.South) }),
                 new Territory("Sweden", true, TerritoryType.Land),
                 new Territory("Trieste", true, TerritoryType.Land, new Unit(Country.Austria, UnitType.Sea)),
                 new Territory("Tunis", true, TerritoryType.Land),

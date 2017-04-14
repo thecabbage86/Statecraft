@@ -42,11 +42,17 @@
   <ItemGroup>
     <Compile Include="Enums\CoastType.cs" />
     <Compile Include="Enums\Country.cs" />
+    <Compile Include="Enums\Phase.cs" />
+    <Compile Include="Enums\Season.cs" />
     <Compile Include="Enums\Territory.cs" />
     <Compile Include="Enums\TerritoryType.cs" />
     <Compile Include="Enums\UnitType.cs" />
     <Compile Include="Models\Coast.cs" />
+    <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\GameOptions.cs" />
+    <Compile Include="Models\GameRound.cs" />
     <Compile Include="Models\GameState.cs" />
+    <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Territory.cs" />
     <Compile Include="Models\Unit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

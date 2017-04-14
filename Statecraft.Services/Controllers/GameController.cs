@@ -1,4 +1,6 @@
 ﻿using Statecraft.Common.Models;
+using Statecraft.Services.Interfaces;
+using Statecraft.Services.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,20 +12,27 @@ namespace Statecraft.Services.Controllers
 {
     public class GameController : ApiController
     {
-        [HttpGet]
-        public HttpResponseMessage SetInitialGameBoard()
+        private IGameRepository gameRepo;
+
+        public GameController()
         {
-            GameState gameState = new GameState();
+            gameRepo = new GameRepository(); //TODO: dependency injection
+        }
+
+        [HttpPost]
+        public HttpResponseMessage StartGame()
+        {
+            Game game = new Game() { CurrentGameState = new GameState() };
             
 
             //call repo to save to DB
 
 
-            return Request.CreateResponse<GameState>(gameState);
+            return Request.CreateResponse<Game>(game);
         }
 
         [HttpGet]
-        public HttpResponseMessage GetGameState()
+        public HttpResponseMessage GetCurrentGameState(int gameId)
         {
             throw new NotImplementedException();
         }
