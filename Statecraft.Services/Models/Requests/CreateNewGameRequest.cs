@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Statecraft.Services.Models
+namespace Statecraft.Services.Models.Requests
 {
     public class CreateNewGameRequest
     {
-        public CreateNewGameModel StartGame { get; set; }
+        public CreateNewGameModel CreateGame { get; set; }
     }
 
     public class CreateNewGameModel

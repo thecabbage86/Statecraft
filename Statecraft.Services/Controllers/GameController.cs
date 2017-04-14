@@ -2,13 +2,12 @@
 using Statecraft.Common.Models;
 using Statecraft.Services.Interfaces;
 using Statecraft.Services.Models;
+using Statecraft.Services.Models.Requests;
+using Statecraft.Services.Models.Responses;
 using Statecraft.Services.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
 
 namespace Statecraft.Services.Controllers
@@ -19,7 +18,7 @@ namespace Statecraft.Services.Controllers
 
         public GameController()
         {
-            gameRepo = new GameRepository(); //TODO: dependency injection
+            gameRepo = new GameRepositoryFake(); //TODO: dependency injection
         }
 
         [HttpPost]
@@ -30,25 +29,25 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.BadRequest); 
             }
 
-            var game = new Game() { CreatorPlayerId = createNewGameRequest.StartGame.FirstPlayerId, Options = createNewGameRequest.StartGame.Options };
+            var game = new Game() { CreatorPlayerId = createNewGameRequest.CreateGame.FirstPlayerId, Options = createNewGameRequest.CreateGame.Options };
 
-            switch (createNewGameRequest.StartGame.SelectedCountry)
+            switch (createNewGameRequest.CreateGame.SelectedCountry)
             {
                 case Country.England:
-                    game.EnglandPlayerId = createNewGameRequest.StartGame.FirstPlayerId; break;
+                    game.EnglandPlayerId = createNewGameRequest.CreateGame.FirstPlayerId; break;
                 case Country.France:
-                    game.FrancePlayerId = createNewGameRequest.StartGame.FirstPlayerId; break;
+                    game.FrancePlayerId = createNewGameRequest.CreateGame.FirstPlayerId; break;
                 case Country.Italy:
-                    game.ItalyPlayerId = createNewGameRequest.StartGame.FirstPlayerId; break;
+                    game.ItalyPlayerId = createNewGameRequest.CreateGame.FirstPlayerId; break;
                 case Country.Russia:
-                    game.RussiaPlayerId = createNewGameRequest.StartGame.FirstPlayerId; break;
+                    game.RussiaPlayerId = createNewGameRequest.CreateGame.FirstPlayerId; break;
                 case Country.Austria:
-                    game.AustriaPlayerId = createNewGameRequest.StartGame.FirstPlayerId; break;
+                    game.AustriaPlayerId = createNewGameRequest.CreateGame.FirstPlayerId; break;
                 case Country.Germany:
-                    game.GermanyPlayerId = createNewGameRequest.StartGame.FirstPlayerId; break;
+                    game.GermanyPlayerId = createNewGameRequest.CreateGame.FirstPlayerId; break;
                 case Country.Turkey:
                 default:
-                    game.TurkeyPlayerId = createNewGameRequest.StartGame.FirstPlayerId; break;
+                    game.TurkeyPlayerId = createNewGameRequest.CreateGame.FirstPlayerId; break;
             }
 
             try
@@ -61,7 +60,7 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.InternalServerError);
             }
 
-            return Request.CreateResponse<Game>(game);
+            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(game));
         }
 
         [HttpPost]
@@ -72,9 +71,11 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
+            Game game;
+
             try
             {
-                var game = gameRepo.GetGameById(startGameRequest.StartGame.GameId);
+                game = gameRepo.GetGameById(startGameRequest.StartGame.GameId);
 
                 game.Options = startGameRequest.StartGame.Options;
                 game.EnglandPlayerId = startGameRequest.StartGame.EnglandPlayerId;
@@ -94,7 +95,34 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.InternalServerError);
             }
 
-            throw new NotImplementedException();
+            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(game));
+        }
+
+        [HttpPost]
+        public HttpResponseMessage UpdateGameState(UpdateGameStateRequest updateGameStateRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
+            Game game;
+
+            try
+            {
+                game = gameRepo.GetGameById(updateGameStateRequest.UpdateGameState.GameId);
+
+                game.CurrentGameState = updateGameStateRequest.UpdateGameState.GameState;
+
+                gameRepo.UpdateGame(game);
+            }
+            catch (Exception)
+            {
+                //TODO: log
+                throw new HttpResponseException(HttpStatusCode.InternalServerError);
+            }
+
+            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(game));
         }
 
         [HttpGet]
