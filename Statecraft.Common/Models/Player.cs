@@ -13,5 +13,6 @@ namespace Statecraft.Common.Models
         //public int UserId { get; set; }
         //public Country Country { get; set; }
         public int RankScore { get; set; }
+        public int Reliability { get; set; }
     }
 }
