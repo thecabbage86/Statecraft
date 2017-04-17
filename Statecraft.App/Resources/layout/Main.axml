@@ -7,17 +7,22 @@
         android:text="Join Game"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button1" />
+        android:id="@+id/JoinGameButton" />
     <Button
         android:text="Create New Game"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button2" />
+        android:id="@+id/CreateGameButton" />
     <TextView
-        android:text="YOUR GAMES:"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView1"
+        android:id="@+id/YourGamesText"
         android:gravity="center" />
+    <ListView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@android:id/list" />
 </LinearLayout>
