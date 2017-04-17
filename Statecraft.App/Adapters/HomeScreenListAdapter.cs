@@ -15,12 +15,14 @@ namespace Statecraft.App.Adapters
 {
     public class HomeScreenListAdapter : BaseAdapter<Game>
     {
-        Game[] games;
+        private Game[] games;
+        private Player player;
         Activity context;
-        public HomeScreenListAdapter(Activity context, Game[] items) : base()
+        public HomeScreenListAdapter(Activity context, Game[] items, Player player) : base()
         {
             this.context = context;
             this.games = items;
+            this.player = player;
         }
         public override long GetItemId(int position)
         {
@@ -39,8 +41,37 @@ namespace Statecraft.App.Adapters
             View view = convertView; // re-use an existing view, if one is available
             if (view == null) // otherwise create a new one
                 view = context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, null);
-            view.FindViewById<TextView>(Android.Resource.Id.Text1).Text = "Game id:" + games[position].Id;
+            view.FindViewById<TextView>(Android.Resource.Id.Text1).Text = GetGameDisplayText(games[position]);
             return view;
+        }
+
+        private string GetGameDisplayText(Game game)
+        {
+            string displayText = "Id: " + game.Id + " Status: ";
+
+            if(!game.HasBegun)
+            {
+                displayText += "Waiting for players ";
+            }
+            else if(game.IsFinished)
+            {
+                displayText += "Finished ";
+            }
+            else
+            {
+                displayText += "In progress ";
+            }
+
+            if (player.Id == game.AustriaPlayerId)
+            {
+                displayText += "Country: Austria ";
+            }
+            else if (player.Id == game.GermanyPlayerId)
+            {
+                displayText += "Country: Germany ";
+            }
+
+            return displayText;
         }
     }
 }

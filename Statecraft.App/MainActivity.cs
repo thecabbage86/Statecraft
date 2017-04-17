@@ -5,13 +5,15 @@ using System.Collections.Generic;
 using Statecraft.Common.Models;
 using Android.Views;
 using Statecraft.App.Adapters;
+using System;
 
 namespace Statecraft.App
 {
     [Activity(Label = "Statecraft", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : ListActivity
     {
-        private Game[] games = new Game[1] { new Game() { Id = 22 } };
+        private Game[] games = new Game[1] { new Game() { Id = 22, GermanyPlayerId = Guid.Parse("456e822a-8249-453c-9a02-74a31c1d24ae") } }; //TODO
+        private Player player = new Player() { Id = Guid.Parse("456e822a-8249-453c-9a02-74a31c1d24ae") }; //TODO
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -28,7 +30,7 @@ namespace Statecraft.App
             if (games != null && games.Length > 0)
             {
                 yourGamesText.Text = "YOUR GAMES:";
-                ListAdapter = new HomeScreenListAdapter(this, games);
+                ListAdapter = new HomeScreenListAdapter(this, games, player);
             }
         }
 
