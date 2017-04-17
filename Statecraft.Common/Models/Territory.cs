@@ -13,6 +13,11 @@ namespace Statecraft.Common.Models
         private bool isSupplyCenter;
         private TerritoryType type;
 
+        public Territory()
+        {
+
+        }
+
         public Territory(string name, bool isSupplyCenter, TerritoryType type, Unit occupyingUnit = null)
         {
             this.name = name;

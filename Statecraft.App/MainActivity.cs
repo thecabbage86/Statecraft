@@ -6,13 +6,17 @@ using Statecraft.Common.Models;
 using Android.Views;
 using Statecraft.App.Adapters;
 using System;
+using Android.Content;
+using Statecraft.App.Activities;
+using Newtonsoft.Json;
 
 namespace Statecraft.App
 {
     [Activity(Label = "Statecraft", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : ListActivity
     {
-        private Game[] games = new Game[1] { new Game() { Id = 22, GermanyPlayerId = Guid.Parse("456e822a-8249-453c-9a02-74a31c1d24ae") } }; //TODO
+        private Game[] games = new Game[2] { new Game() { Id = 22, GermanyPlayerId = Guid.Parse("456e822a-8249-453c-9a02-74a31c1d24ae") },
+            new Game() { Id = 223, AustriaPlayerId = Guid.Parse("456e822a-8249-453c-9a02-74a31c1d24ae"), CurrentGameState = new GameState(), HasBegun = true }}; //TODO
         private Player player = new Player() { Id = Guid.Parse("456e822a-8249-453c-9a02-74a31c1d24ae") }; //TODO
 
         protected override void OnCreate(Bundle bundle)
@@ -37,7 +41,13 @@ namespace Statecraft.App
         protected override void OnListItemClick(ListView l, View v, int position, long id)
         {
             var game = games[position];
-            Android.Widget.Toast.MakeText(this, "Game: game.Id", ToastLength.Short);
+
+            var gameIntent = new Intent(this, typeof(GameActivity));
+            gameIntent.PutExtra("Game", JsonConvert.SerializeObject(game));
+            gameIntent.PutExtra("Player", JsonConvert.SerializeObject(player));
+            StartActivity(gameIntent);
+            //Android.Widget.Toast.MakeText(this, "Game: game.Id", ToastLength.Short);
+            //TODO: open new view/activity
         }
     }
 }
