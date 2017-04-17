@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Statecraft.Common.Models;
+using Statecraft.GameLogic.UI;
 
 namespace Statecraft.App.Adapters
 {
@@ -41,37 +42,10 @@ namespace Statecraft.App.Adapters
             View view = convertView; // re-use an existing view, if one is available
             if (view == null) // otherwise create a new one
                 view = context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, null);
-            view.FindViewById<TextView>(Android.Resource.Id.Text1).Text = GetGameDisplayText(games[position]);
+            view.FindViewById<TextView>(Android.Resource.Id.Text1).Text = DisplayTextHelper.GetGameDisplayText(games[position], player);
             return view;
         }
 
-        private string GetGameDisplayText(Game game)
-        {
-            string displayText = "Id: " + game.Id + " Status: ";
-
-            if(!game.HasBegun)
-            {
-                displayText += "Waiting for players ";
-            }
-            else if(game.IsFinished)
-            {
-                displayText += "Finished ";
-            }
-            else
-            {
-                displayText += "In progress ";
-            }
-
-            if (player.Id == game.AustriaPlayerId)
-            {
-                displayText += "Country: Austria ";
-            }
-            else if (player.Id == game.GermanyPlayerId)
-            {
-                displayText += "Country: Germany ";
-            }
-
-            return displayText;
-        }
+       
     }
 }

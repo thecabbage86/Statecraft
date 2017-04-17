@@ -13,5 +13,10 @@ namespace Statecraft.Common.Models
 
         public Phase Phase { get; set; }
         public int Year { get; set; }
+
+        public override string ToString()
+        {
+            return Season.ToString() + " " + Year.ToString() + " " + Phase.ToString();
+        }
     }
 }

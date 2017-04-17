@@ -27,7 +27,7 @@ namespace Statecraft.Common.Models
 
         public Game()
         {
-            CurrentGameState = new GameState();
+            //CurrentGameState = new GameState();
         }
     }
 }

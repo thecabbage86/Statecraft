@@ -29,7 +29,8 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.BadRequest); 
             }
 
-            var game = new Game() { CreatorPlayerId = createNewGameRequest.CreateGame.FirstPlayerId, Options = createNewGameRequest.CreateGame.Options };
+            var game = new Game() { CreatorPlayerId = createNewGameRequest.CreateGame.FirstPlayerId, Options = createNewGameRequest.CreateGame.Options,
+                CurrentGameState = new GameState() };
 
             switch (createNewGameRequest.CreateGame.SelectedCountry)
             {
