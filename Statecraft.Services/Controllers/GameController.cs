@@ -1,17 +1,19 @@
 ﻿using Statecraft.Common.Enums;
+using Statecraft.Common.JsonModels.Requests;
+using Statecraft.Common.JsonModels.Responses;
 using Statecraft.Common.Models;
 using Statecraft.Services.Interfaces;
 using Statecraft.Services.Models;
-using Statecraft.Services.Models.Requests;
-using Statecraft.Services.Models.Responses;
 using Statecraft.Services.Repositories;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
 namespace Statecraft.Services.Controllers
 {
+    [Route("games")]
     public class GameController : ApiController
     {
         private IGameRepository gameRepo;
@@ -21,7 +23,26 @@ namespace Statecraft.Services.Controllers
             gameRepo = new GameRepositoryFake(); //TODO: dependency injection
         }
 
+        [HttpGet]
+        public HttpResponseMessage GetGames([FromUri]Guid? playerId = null)
+        {
+            IList<Game> games = null;
+
+            try
+            {
+                games = gameRepo.GetGamesByPlayerId((Guid)playerId);
+            }
+            catch (Exception)
+            {
+                //TODO: log
+                throw new HttpResponseException(HttpStatusCode.InternalServerError);
+            }
+
+            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(games));
+        }
+
         [HttpPost]
+        [Route("_services/create")]
         public HttpResponseMessage CreateNewGame(CreateNewGameRequest createNewGameRequest)
         {
             if(!ModelState.IsValid)
@@ -65,6 +86,7 @@ namespace Statecraft.Services.Controllers
         }
 
         [HttpPost]
+        [Route("_services/start")]
         public HttpResponseMessage StartGame(StartGameRequest startGameRequest)
         {
             if (!ModelState.IsValid)
@@ -97,39 +119,6 @@ namespace Statecraft.Services.Controllers
             }
 
             return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(game));
-        }
-
-        [HttpPost]
-        public HttpResponseMessage UpdateGameState(UpdateGameStateRequest updateGameStateRequest)
-        {
-            if (!ModelState.IsValid)
-            {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
-            }
-
-            Game game;
-
-            try
-            {
-                game = gameRepo.GetGameById(updateGameStateRequest.UpdateGameState.GameId);
-
-                game.CurrentGameState = updateGameStateRequest.UpdateGameState.GameState;
-
-                gameRepo.UpdateGame(game);
-            }
-            catch (Exception)
-            {
-                //TODO: log
-                throw new HttpResponseException(HttpStatusCode.InternalServerError);
-            }
-
-            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(game));
-        }
-
-        [HttpGet]
-        public HttpResponseMessage GetCurrentGameState(int gameId)
-        {
-            throw new NotImplementedException();
         }
     }
 }

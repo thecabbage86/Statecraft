@@ -11,6 +11,7 @@ namespace Statecraft.Services.Interfaces
     {
         Game CreateNewGame(Game game);
         Game GetGameById(int id);
+        IList<Game> GetGamesByPlayerId(Guid playerId);
         Game UpdateGame(Game game);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Statecraft.Common.JsonModels.Responses;
 using Statecraft.Common.Models;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace Statecraft.GameLogic.Http
         public Game[] GetGamesByPlayerId(Guid playerId)
         {
             Game[] games = null;
-            var requestUri = string.Format("games", playerId);
+            var requestUri = string.Format("games?playerId={0}", playerId);
 
             using (var client = new HttpClient())
             {
@@ -31,7 +32,8 @@ namespace Statecraft.GameLogic.Http
                     throw new Exception(error);
                 }
 
-                //games = JsonConvert.DeserializeObject<GameResponse>(response.Content.ReadAsStringAsync().Result); //TODO: move json models to Common?
+                var gameResponse = JsonConvert.DeserializeObject<GameResponse>(response.Content.ReadAsStringAsync().Result);
+                games = gameResponse.Games.ToArray();
             }
 
             return games;

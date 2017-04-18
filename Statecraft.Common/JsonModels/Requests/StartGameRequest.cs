@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Statecraft.Services.Models.Requests
+namespace Statecraft.Common.JsonModels.Requests
 {
     public class StartGameRequest
     {
