@@ -17,9 +17,13 @@ namespace Statecraft.App
     public class MainActivity : ListActivity
     {
         private GameHttpHelper gameHttpHelper = new GameHttpHelper();
+
         private Game[] games = new Game[2] { new Game() { Id = 22, GermanyPlayerId = Guid.Parse("456e822a-8249-453c-9a02-74a31c1d24ae") },
             new Game() { Id = 223, AustriaPlayerId = Guid.Parse("456e822a-8249-453c-9a02-74a31c1d24ae"), CurrentGameState = new GameState(), HasBegun = true }}; //TODO
-        private Player player = new Player() { Id = Guid.Parse("456e822a-8249-453c-9a02-74a31c1d24ae") }; //TODO
+        private Player player; // = new Player() { Id = Guid.Parse("456e822a-8249-453c-9a02-74a31c1d24ae") }; //TODO
+        private ISharedPreferences prefs;
+
+        private const string PLAYER_ID_PREF = "playerId";
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -27,6 +31,18 @@ namespace Statecraft.App
 
             // Set our view from the "main" layout resource
             SetContentView (Resource.Layout.Main);
+
+            prefs = GetSharedPreferences("statecraftPreferences", FileCreationMode.Private);
+
+            string playerId = prefs.GetString(PLAYER_ID_PREF, null);
+            if (playerId == null)
+            {
+                playerId = Guid.NewGuid().ToString();
+                var prefsEditor = prefs.Edit();
+                prefsEditor.PutString(PLAYER_ID_PREF, playerId);
+                prefsEditor.Commit();
+            }
+            player = new Player() { Id = Guid.Parse(playerId) }; //TODO: retrieve player info from web service, when necessary
 
             //games = gameHttpHelper.GetGamesByPlayerId(player.Id).Result;
 
@@ -50,6 +66,19 @@ namespace Statecraft.App
             StartActivity(gameIntent);
             //Android.Widget.Toast.MakeText(this, "Game: game.Id", ToastLength.Short);
             //TODO: open new view/activity
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+
+            //const string PLAYER_ID_PREF = "playerId";
+
+            //var playerId = prefs.GetString(PLAYER_ID_PREF, null);
+            //if (playerId == null)
+            //{
+            //    prefs.Edit().PutString(PLAYER_ID_PREF, Guid.NewGuid().ToString());
+            //}
         }
     }
 }
