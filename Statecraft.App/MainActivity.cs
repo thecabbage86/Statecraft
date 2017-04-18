@@ -9,12 +9,14 @@ using System;
 using Android.Content;
 using Statecraft.App.Activities;
 using Newtonsoft.Json;
+using Statecraft.GameLogic.Http;
 
 namespace Statecraft.App
 {
     [Activity(Label = "Statecraft", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : ListActivity
     {
+        private GameHttpHelper gameHttpHelper = new GameHttpHelper();
         private Game[] games = new Game[2] { new Game() { Id = 22, GermanyPlayerId = Guid.Parse("456e822a-8249-453c-9a02-74a31c1d24ae") },
             new Game() { Id = 223, AustriaPlayerId = Guid.Parse("456e822a-8249-453c-9a02-74a31c1d24ae"), CurrentGameState = new GameState(), HasBegun = true }}; //TODO
         private Player player = new Player() { Id = Guid.Parse("456e822a-8249-453c-9a02-74a31c1d24ae") }; //TODO
@@ -26,7 +28,7 @@ namespace Statecraft.App
             // Set our view from the "main" layout resource
             SetContentView (Resource.Layout.Main);
 
-            //TODO: call API endpoint to retrieve the user's existing games
+            //games = gameHttpHelper.GetGamesByPlayerId(player.Id).Result;
 
             TextView yourGamesText = FindViewById<TextView>(Resource.Id.YourGamesText);
             //ListView yourGames = FindViewById<ListView>(Resource.Id.list);

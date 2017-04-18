@@ -13,7 +13,7 @@ namespace Statecraft.GameLogic.Http
 {
     public class GameHttpHelper
     {
-        public Game[] GetGamesByPlayerId(Guid playerId)
+        public async Task<Game[]> GetGamesByPlayerId(Guid playerId)
         {
             Game[] games = null;
             var requestUri = string.Format("games?playerId={0}", playerId);
@@ -21,13 +21,13 @@ namespace Statecraft.GameLogic.Http
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:64660/"); //TODO: use config
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = client.GetAsync(requestUri).Result;
+                var response = await client.GetAsync(requestUri);
 
                 if(!response.IsSuccessStatusCode)
                 {
-                    string error = response.Content.ReadAsStringAsync().Result;
+                    string error = await response.Content.ReadAsStringAsync();
                     //Log.Error(string.Format("Error returned", error));
                     throw new Exception(error);
                 }
