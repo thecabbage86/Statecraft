@@ -20,10 +20,10 @@ namespace Statecraft.GameLogic.Http
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:64660/"); //TODO: use config
+                client.BaseAddress = new Uri("http://statecraftservices.azurewebsites.net/"); //TODO: use config
                 //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = await client.GetAsync(requestUri);
+                var response = await client.GetAsync(requestUri).ConfigureAwait(false);
 
                 if(!response.IsSuccessStatusCode)
                 {

@@ -18,8 +18,8 @@ namespace Statecraft.App
     {
         private GameHttpHelper gameHttpHelper = new GameHttpHelper();
 
-        private Game[] games = new Game[2] { new Game() { Id = 22, GermanyPlayerId = Guid.Parse("456e822a-8249-453c-9a02-74a31c1d24ae") },
-            new Game() { Id = 223, AustriaPlayerId = Guid.Parse("456e822a-8249-453c-9a02-74a31c1d24ae"), CurrentGameState = new GameState(), HasBegun = true }}; //TODO
+        private Game[] games; //= new Game[2] { new Game() { Id = 22, GermanyPlayerId = Guid.Parse("456e822a-8249-453c-9a02-74a31c1d24ae") },
+        //    new Game() { Id = 223, AustriaPlayerId = Guid.Parse("456e822a-8249-453c-9a02-74a31c1d24ae"), CurrentGameState = new GameState(), HasBegun = true }}; //TODO
         private Player player; // = new Player() { Id = Guid.Parse("456e822a-8249-453c-9a02-74a31c1d24ae") }; //TODO
         private ISharedPreferences prefs;
 
@@ -34,6 +34,7 @@ namespace Statecraft.App
 
             prefs = GetSharedPreferences("statecraftPreferences", FileCreationMode.Private);
 
+            //create or retrieve player id
             string playerId = prefs.GetString(PLAYER_ID_PREF, null);
             if (playerId == null)
             {
@@ -44,10 +45,16 @@ namespace Statecraft.App
             }
             player = new Player() { Id = Guid.Parse(playerId) }; //TODO: retrieve player info from web service, when necessary
 
-            //games = gameHttpHelper.GetGamesByPlayerId(player.Id).Result;
+            try
+            {
+                games = gameHttpHelper.GetGamesByPlayerId(player.Id).Result;
+            }
+            catch (Exception)
+            {
+                Toast.MakeText(ApplicationContext, "A communication error occurred.", ToastLength.Long);
+            }
 
             TextView yourGamesText = FindViewById<TextView>(Resource.Id.YourGamesText);
-            //ListView yourGames = FindViewById<ListView>(Resource.Id.list);
 
             if (games != null && games.Length > 0)
             {
