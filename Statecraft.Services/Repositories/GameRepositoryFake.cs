@@ -25,8 +25,8 @@ namespace Statecraft.Services.Repositories
         public IList<Game> GetGamesByPlayerId(Guid playerId)
         {
             return new List<Game>() { new Game() { Id = 10, AustriaPlayerId = playerId, CreatorPlayerId = playerId, HasBegun = false },
-                new Game() { Id = 10, GermanyPlayerId = playerId, HasBegun = true, CurrentGameState = new GameState(), Options = new GameOptions() { IsRanked = true, RoundLength = new TimeSpan(10, 0, 0) }  },
-                new Game() { Id = 10, EnglandPlayerId = playerId, HasBegun = true, IsFinished = true, CurrentGameState = new GameState(), Options = new GameOptions() { IsRanked = true, RoundLength = new TimeSpan(10, 0, 0) } },
+                new Game() { Id = 100, GermanyPlayerId = playerId, HasBegun = true, CurrentGameState = new GameState(), Options = new GameOptions() { IsRanked = true, RoundLength = new TimeSpan(10, 0, 0) }  },
+                new Game() { Id = 103, EnglandPlayerId = playerId, HasBegun = true, IsFinished = true, CurrentGameState = new GameState(), Options = new GameOptions() { IsRanked = true, RoundLength = new TimeSpan(10, 0, 0) } },
             };
         }
 
