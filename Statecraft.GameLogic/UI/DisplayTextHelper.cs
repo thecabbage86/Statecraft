@@ -63,5 +63,43 @@ namespace Statecraft.GameLogic.UI
             return displayText;
         }
 
+        public static string GetGameStateDisplayText(Game game, Player player)
+        {
+            string displayText = string.Empty;
+
+            if (player.Id == game.AustriaPlayerId)
+            {
+                displayText += "Austria";
+            }
+            else if (player.Id == game.GermanyPlayerId)
+            {
+                displayText += "Germany";
+            }
+            else if (player.Id == game.EnglandPlayerId)
+            {
+                displayText += "England";
+            }
+            else if (player.Id == game.FrancePlayerId)
+            {
+                displayText += "France";
+            }
+            else if (player.Id == game.ItalyPlayerId)
+            {
+                displayText += "Italy";
+            }
+            else if (player.Id == game.RussiaPlayerId)
+            {
+                displayText += "Russia";
+            }
+            else if (player.Id == game.TurkeyPlayerId)
+            {
+                displayText += "Turkey";
+            }
+
+            displayText += ", " + game.CurrentGameState.Round.Season + ", " + game.CurrentGameState.Round.Year + " (" + game.CurrentGameState.Round.Phase + ")";
+
+            return displayText;
+        }
+
     }
 }

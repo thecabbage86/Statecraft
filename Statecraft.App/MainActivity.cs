@@ -57,12 +57,17 @@ namespace Statecraft.App
         {
             var game = games[position];
 
-            var gameIntent = new Intent(this, typeof(GameActivity));
-            gameIntent.PutExtra("Game", JsonConvert.SerializeObject(game));
-            gameIntent.PutExtra("Player", JsonConvert.SerializeObject(player));
-            StartActivity(gameIntent);
-            //Android.Widget.Toast.MakeText(this, "Game: game.Id", ToastLength.Short);
-            //TODO: open new view/activity
+            if (game.HasBegun && !game.IsFinished)
+            {
+                var gameIntent = new Intent(this, typeof(GameActivity));
+                gameIntent.PutExtra("Game", JsonConvert.SerializeObject(game));
+                gameIntent.PutExtra("Player", JsonConvert.SerializeObject(player));
+                StartActivity(gameIntent);
+            }
+
+            //TODO: if game hasn't begun, open up details of pending game
+
+            //TODO: if game is finished, open up details of finished game
         }
 
         protected override void OnResume()
