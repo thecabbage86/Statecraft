@@ -12,6 +12,7 @@ using Android.Widget;
 using Newtonsoft.Json;
 using Statecraft.Common.Models;
 using Statecraft.GameLogic.UI;
+using Statecraft.GameLogic.GameLogic;
 
 namespace Statecraft.App.Activities
 {
@@ -20,6 +21,9 @@ namespace Statecraft.App.Activities
     {
         private Game game;
         private Player player;
+        private ImageView map;
+        private ClickHandler clickHandler;
+        private MoveAttempt moveAttempt;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -32,13 +36,35 @@ namespace Statecraft.App.Activities
             var serializedPlayer = Intent.GetStringExtra("Player");
             player = JsonConvert.DeserializeObject<Player>(serializedPlayer);
 
-            
+            moveAttempt = OrderHandler.SetFirstTerritoriesAllowed(game, player);
+            clickHandler = new ClickHandler(game, player, moveAttempt);
+
+            map = FindViewById<ImageView>(Resource.Id.map);
+            map.Touch += (s, e) =>
+            {
+                if (e.Event.Action == MotionEventActions.Up)
+                {
+                    moveAttempt = clickHandler.Handle(e.Event.GetX(), e.Event.GetY());
+                }
+            };
+            //map.Click += (s, e) =>
+            //{
+            //    //Toast.MakeText(ActivationContext, "Clicked on map", ToastLength.Long);
+            //    clickHandler.Handle(e.Event.GetX(), e.Event.GetY());
+            //};
         }
 
         public override void OnAttachedToWindow()
         {
             base.OnAttachedToWindow();
             Window.SetTitle(DisplayTextHelper.GetGameStateDisplayText(game, player));
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+
+            //TODO: handle refreshing of game data by calling server
         }
     }
 }
