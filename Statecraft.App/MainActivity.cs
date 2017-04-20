@@ -10,6 +10,7 @@ using Android.Content;
 using Statecraft.App.Activities;
 using Newtonsoft.Json;
 using Statecraft.GameLogic.Http;
+using Statecraft.Common.Enums;
 
 namespace Statecraft.App
 {

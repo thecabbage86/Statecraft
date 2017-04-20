@@ -42,6 +42,7 @@ namespace Statecraft.App.Adapters
             View view = convertView; // re-use an existing view, if one is available
             if (view == null) // otherwise create a new one
                 view = context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, null);
+
             view.FindViewById<TextView>(Android.Resource.Id.Text1).Text = DisplayTextHelper.GetGameDisplayText(games[position], player);
             return view;
         }

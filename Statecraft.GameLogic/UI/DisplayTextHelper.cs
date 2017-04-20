@@ -1,4 +1,6 @@
-﻿using Statecraft.Common.Models;
+﻿using Statecraft.Common.Enums;
+using Statecraft.Common.Models;
+using Statecraft.GameLogic.GameLogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,34 +28,7 @@ namespace Statecraft.GameLogic.UI
                 displayText += "In progress, ";
             }
 
-            if (player.Id == game.AustriaPlayerId)
-            {
-                displayText += "Country: Austria";
-            }
-            else if (player.Id == game.GermanyPlayerId)
-            {
-                displayText += "Country: Germany";
-            }
-            else if (player.Id == game.EnglandPlayerId)
-            {
-                displayText += "Country: England";
-            }
-            else if (player.Id == game.FrancePlayerId)
-            {
-                displayText += "Country: France";
-            }
-            else if (player.Id == game.ItalyPlayerId)
-            {
-                displayText += "Country: Italy";
-            }
-            else if (player.Id == game.RussiaPlayerId)
-            {
-                displayText += "Country: Russia";
-            }
-            else if (player.Id == game.TurkeyPlayerId)
-            {
-                displayText += "Country: Turkey";
-            }
+            displayText += "Country: " + Enum.GetName(typeof(Country), CountryHelper.DeterminePlayerCountry(game, player));
 
             if(game.CurrentGameState != null && game.CurrentGameState.Round != null)
             {
@@ -63,41 +38,10 @@ namespace Statecraft.GameLogic.UI
             return displayText;
         }
 
-        public static string GetGameStateDisplayText(Game game, Player player)
+        public static string GetGameStateDisplayText(Game game, Country playerCountry)
         {
-            string displayText = string.Empty;
-
-            if (player.Id == game.AustriaPlayerId)
-            {
-                displayText += "Austria";
-            }
-            else if (player.Id == game.GermanyPlayerId)
-            {
-                displayText += "Germany";
-            }
-            else if (player.Id == game.EnglandPlayerId)
-            {
-                displayText += "England";
-            }
-            else if (player.Id == game.FrancePlayerId)
-            {
-                displayText += "France";
-            }
-            else if (player.Id == game.ItalyPlayerId)
-            {
-                displayText += "Italy";
-            }
-            else if (player.Id == game.RussiaPlayerId)
-            {
-                displayText += "Russia";
-            }
-            else if (player.Id == game.TurkeyPlayerId)
-            {
-                displayText += "Turkey";
-            }
-
+            string displayText = Enum.GetName(typeof(Country), playerCountry);
             displayText += ", " + game.CurrentGameState.Round.Season + ", " + game.CurrentGameState.Round.Year + " (" + game.CurrentGameState.Round.Phase + ")";
-
             return displayText;
         }
 

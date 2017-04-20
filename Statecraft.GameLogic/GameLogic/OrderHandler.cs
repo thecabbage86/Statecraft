@@ -10,44 +10,12 @@ namespace Statecraft.GameLogic.GameLogic
 {
     public static class OrderHandler
     {
-        public static MoveAttempt SetFirstTerritoriesAllowed(Game game, Player player)
+        public static MoveAttempt SetFirstTerritoriesAllowed(Game game, Country playerCountry)
         {
-            MoveAttempt moveAttempt = new MoveAttempt();
-
-            //TODO: place playerCountry in a model somewhere
-            Country playerCountry;
-            if (player.Id == game.AustriaPlayerId)
+            return new MoveAttempt()
             {
-                playerCountry = Country.Austria;
-            }
-            else if (player.Id == game.GermanyPlayerId)
-            {
-                playerCountry = Country.Germany;
-            }
-            else if (player.Id == game.EnglandPlayerId)
-            {
-                playerCountry = Country.England;
-            }
-            else if (player.Id == game.FrancePlayerId)
-            {
-                playerCountry = Country.France;
-            }
-            else if (player.Id == game.ItalyPlayerId)
-            {
-                playerCountry = Country.Italy;
-            }
-            else if (player.Id == game.RussiaPlayerId)
-            {
-                playerCountry = Country.Russia;
-            }
-            else 
-            {
-                playerCountry = Country.Turkey;
-            }
-
-            moveAttempt.AllowedNextTerritories = game.CurrentGameState.Territories.Where(t => t.OccupyingUnit != null && t.OccupyingUnit.Country == playerCountry).ToList();
-
-            return moveAttempt;
+                AllowedNextTerritories = game.CurrentGameState.Territories.Where(t => t.OccupyingUnit != null && t.OccupyingUnit.Country == playerCountry).ToList()
+            };
         }
 
         public static void Execute(GameState gameState, Common.Models.Territory selectedTerritory, OrderType orderType, ref MoveAttempt moveAttempt)

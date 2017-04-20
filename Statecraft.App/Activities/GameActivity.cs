@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using Statecraft.Common.Models;
 using Statecraft.GameLogic.UI;
 using Statecraft.GameLogic.GameLogic;
+using Statecraft.Common.Enums;
 
 namespace Statecraft.App.Activities
 {
@@ -21,6 +22,7 @@ namespace Statecraft.App.Activities
     {
         private Game game;
         private Player player;
+        private Country playerCountry;
         private ImageView map;
         private ClickHandler clickHandler;
         private MoveAttempt moveAttempt;
@@ -36,7 +38,9 @@ namespace Statecraft.App.Activities
             var serializedPlayer = Intent.GetStringExtra("Player");
             player = JsonConvert.DeserializeObject<Player>(serializedPlayer);
 
-            moveAttempt = OrderHandler.SetFirstTerritoriesAllowed(game, player);
+            playerCountry = CountryHelper.DeterminePlayerCountry(game, player);
+
+            moveAttempt = OrderHandler.SetFirstTerritoriesAllowed(game, playerCountry);
             clickHandler = new ClickHandler(game, player, moveAttempt);
 
             map = FindViewById<ImageView>(Resource.Id.map);
@@ -57,7 +61,7 @@ namespace Statecraft.App.Activities
         public override void OnAttachedToWindow()
         {
             base.OnAttachedToWindow();
-            Window.SetTitle(DisplayTextHelper.GetGameStateDisplayText(game, player));
+            Window.SetTitle(DisplayTextHelper.GetGameStateDisplayText(game, playerCountry));
         }
 
         protected override void OnResume()

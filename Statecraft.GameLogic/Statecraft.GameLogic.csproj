@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameLogic\CountryHelper.cs" />
     <Compile Include="GameLogic\OrderHandler.cs" />
     <Compile Include="Http\GameHttpHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
