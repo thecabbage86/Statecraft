@@ -27,11 +27,13 @@ namespace Statecraft.GameLogic.UI
         {
             Common.Models.Territory territoryClicked = null;
 
-            //TODO: only set territoryClicked if it's a validly selectable territory for this player (from moveAttempt.AllowedNextTerritories)
+            //TODO: Map out each territory using polygon logic: http://stackoverflow.com/questions/217578/how-can-i-determine-whether-a-2d-point-is-within-a-polygon
+            //only set territoryClicked if it's a validly selectable territory for this player (from moveAttempt.AllowedNextTerritories)
             if (x >= 1300 && x <= 1590 && y >= 55 && y <= 350)
             {
-                territoryClicked = game.CurrentGameState.Territories.FirstOrDefault(t => t.Name == "St. Petersburg");
+                territoryClicked = game.CurrentGameState.Territories.Vertices.FirstOrDefault(t => t.Name == "St. Petersburg");
             }
+            //TODO: condition for each territory
             
             if (territoryClicked != null)
             {

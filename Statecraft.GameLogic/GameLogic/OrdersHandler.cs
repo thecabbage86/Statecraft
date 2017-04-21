@@ -14,7 +14,7 @@ namespace Statecraft.GameLogic.GameLogic
         {
             return new MoveAttempt()
             {
-                AllowedNextTerritories = game.CurrentGameState.Territories.Where(t => t.OccupyingUnit != null && t.OccupyingUnit.Country == playerCountry).ToList()
+                AllowedNextTerritories = game.CurrentGameState.Territories.Vertices.Where(t => t.OccupyingUnit != null && t.OccupyingUnit.Country == playerCountry).ToList()
             };
         }
 
