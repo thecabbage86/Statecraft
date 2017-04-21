@@ -35,8 +35,8 @@ namespace Statecraft.GameLogic.UI
             
             if (territoryClicked != null)
             {
-                OrderType orderType = OrderType.Attack; //TODO: add a modal for selecting order type
-                OrderHandler.Execute(game.CurrentGameState, territoryClicked, orderType, ref moveAttempt);
+                OrdersType orderType = OrdersType.Attack; //TODO: add a modal for selecting order type
+                OrdersHandler.Execute(game.CurrentGameState, territoryClicked, orderType, ref moveAttempt);
             }
 
             return moveAttempt;

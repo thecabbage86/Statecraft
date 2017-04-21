@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameLogic\CountryHelper.cs" />
-    <Compile Include="GameLogic\OrderHandler.cs" />
+    <Compile Include="GameLogic\OrdersHandler.cs" />
     <Compile Include="Http\GameHttpHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\ClickHandler.cs" />

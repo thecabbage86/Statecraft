@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Statecraft.GameLogic.GameLogic
 {
-    public static class OrderHandler
+    public static class OrdersHandler
     {
         public static MoveAttempt SetFirstTerritoriesAllowed(Game game, Country playerCountry)
         {
@@ -18,23 +18,23 @@ namespace Statecraft.GameLogic.GameLogic
             };
         }
 
-        public static void Execute(GameState gameState, Common.Models.Territory selectedTerritory, OrderType orderType, ref MoveAttempt moveAttempt)
+        public static void Execute(GameState gameState, Common.Models.Territory selectedTerritory, OrdersType orderType, ref MoveAttempt moveAttempt)
         {
             if (moveAttempt.SelectedTerritory == null)
             {
                 moveAttempt = new MoveAttempt();
                 moveAttempt.SelectedTerritory = selectedTerritory;
-                moveAttempt.OrderType = orderType;
+                moveAttempt.OrdersType = orderType;
 
-                if(orderType == OrderType.Attack)
+                if(orderType == OrdersType.Attack)
                 {
                     HandleFirstAttackMove(gameState, ref moveAttempt);
                 }
-                else if(orderType == OrderType.Support)
+                else if(orderType == OrdersType.Support)
                 {
                     HandleFirstSupportMove(gameState, ref moveAttempt);
                 }
-                else if(orderType == OrderType.Convoy)
+                else if(orderType == OrdersType.Convoy)
                 {
                     HandleFirstConvoyMove(gameState, ref moveAttempt);
                 }
@@ -48,6 +48,7 @@ namespace Statecraft.GameLogic.GameLogic
 
         private static void HandleFirstAttackMove(GameState gameState, ref MoveAttempt moveAttempt)
         {
+            //gameState.Territories
             throw new NotImplementedException();
         }
         private static void HandleFirstSupportMove(GameState gameState, ref MoveAttempt moveAttempt)

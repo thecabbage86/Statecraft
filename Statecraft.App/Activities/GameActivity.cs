@@ -40,7 +40,7 @@ namespace Statecraft.App.Activities
 
             playerCountry = CountryHelper.DeterminePlayerCountry(game, player);
 
-            moveAttempt = OrderHandler.SetFirstTerritoriesAllowed(game, playerCountry);
+            moveAttempt = OrdersHandler.SetFirstTerritoriesAllowed(game, playerCountry);
             clickHandler = new ClickHandler(game, player, moveAttempt);
 
             map = FindViewById<ImageView>(Resource.Id.map);

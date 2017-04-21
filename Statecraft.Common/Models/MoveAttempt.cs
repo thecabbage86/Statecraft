@@ -9,7 +9,7 @@ namespace Statecraft.Common.Models
 {
     public class MoveAttempt
     {
-        public OrderType OrderType { get; set; }
+        public OrdersType OrdersType { get; set; }
         public Territory SelectedTerritory { get; set; }
         public Territory SupportedOrConvoyedTerritory { get; set; }
         public Territory DestinationTerritory { get; set; }

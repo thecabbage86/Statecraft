@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Statecraft.Common.Enums
 {
-    public enum OrderType
+    public enum OrdersType
     {
         Attack,
         Hold,
