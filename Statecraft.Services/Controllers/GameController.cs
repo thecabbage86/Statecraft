@@ -13,6 +13,9 @@ using System.Web.Http;
 
 namespace Statecraft.Services.Controllers
 {
+    /// <summary>
+    /// Create, start, and retrieve games.
+    /// </summary>
     [Route("games")]
     public class GameController : ApiController
     {
@@ -23,6 +26,11 @@ namespace Statecraft.Services.Controllers
             gameRepo = new GameRepositoryFake(); //TODO: dependency injection
         }
 
+        /// <summary>
+        /// Get games by player ID.
+        /// </summary>
+        /// <param name="playerId"></param>
+        /// <returns>The list of games associated with the player with playerId.</returns>
         [HttpGet]
         public HttpResponseMessage GetGames([FromUri]Guid? playerId = null)
         {
