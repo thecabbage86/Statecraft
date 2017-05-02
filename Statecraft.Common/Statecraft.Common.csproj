@@ -52,14 +52,17 @@
     <Compile Include="JsonModels\Requests\StartGameRequest.cs" />
     <Compile Include="JsonModels\Requests\UpdateGameStateRequest.cs" />
     <Compile Include="JsonModels\Responses\GameResponse.cs" />
-    <Compile Include="Models\Coast.cs" />
+    <Compile Include="Models\Territories\Coast.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameOptions.cs" />
     <Compile Include="Models\GameRound.cs" />
     <Compile Include="Models\GameState.cs" />
+    <Compile Include="Models\Territories\EdgeToNeighbor.cs" />
+    <Compile Include="Models\Territories\GameMap.cs" />
+    <Compile Include="Models\Territories\TerritoryList.cs" />
     <Compile Include="Models\MoveAttempt.cs" />
     <Compile Include="Models\Player.cs" />
-    <Compile Include="Models\Territory.cs" />
+    <Compile Include="Models\Territories\Territory.cs" />
     <Compile Include="Models\Unit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

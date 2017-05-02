@@ -5,17 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Statecraft.Common.Models
+namespace Statecraft.Common.Models.Territories
 {
     public class Territory
     {
         private string name;
         private bool isSupplyCenter;
         private TerritoryType type;
+        private IList<EdgeToNeighbor> neighbors;
 
         public Territory()
         {
-
+            neighbors = new List<EdgeToNeighbor>();
         }
 
         public Territory(string name, bool isSupplyCenter, TerritoryType type, Unit occupyingUnit = null)
@@ -23,6 +24,7 @@ namespace Statecraft.Common.Models
             this.name = name;
             this.isSupplyCenter = isSupplyCenter;
             this.type = type;
+            this.neighbors = new List<EdgeToNeighbor>();
             OccupyingUnit = occupyingUnit;
             if(OccupyingUnit != null)
             {
@@ -44,6 +46,19 @@ namespace Statecraft.Common.Models
         public Country Owner { get; set; }
         public IList<Coast> Coasts { get; set; }
 
-	    //adjacent territories?
+        protected internal virtual void AddNeighbor(Territory n)
+        {
+            AddNeighbor(new EdgeToNeighbor(n));
+        }
+
+        protected internal virtual void AddNeighbor(Territory n, int cost)
+        {
+            AddNeighbor(new EdgeToNeighbor(n, cost));
+        }
+
+        protected internal virtual void AddNeighbor(EdgeToNeighbor e)
+        {
+            neighbors.Add(e);
+        }
     }
 }

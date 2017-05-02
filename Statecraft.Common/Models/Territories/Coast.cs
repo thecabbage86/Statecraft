@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Statecraft.Common.Models
+namespace Statecraft.Common.Models.Territories
 {
     public class Coast
     {

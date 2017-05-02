@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Statecraft.Common.Models.Territories;
 
 namespace Statecraft.Common.Models
 {
@@ -11,15 +12,16 @@ namespace Statecraft.Common.Models
     {
         //public int GameId { get; set; }
         public GameRound Round { get; set; }
-        public IList<Territory> Territories { get; set; }
+        //public IList<Territory> Territories { get; set; }
+        public GameMap Map { get; set; }
 
         public GameState()
-        {
+        { 
             Round = new GameRound() { Phase = Phase.Movement, Season = Season.Spring, Year = 1901 };
 
-            Territories = new List<Territory>()
-            {
-                new Territory("Ankara", true, TerritoryType.Land),
+            Map = new GameMap();
+
+            Map.AddTerritory(new Territory("Ankara", true, TerritoryType.Land));
                 new Territory("Belgium", true, TerritoryType.Land),
                 new Territory("Berlin", true, TerritoryType.Land, new Unit(Country.Germany, UnitType.Land)),
                 new Territory("Brest", true, TerritoryType.Land, new Unit(Country.France, UnitType.Sea)),

@@ -18,7 +18,7 @@ namespace Statecraft.GameLogic.GameLogic
             };
         }
 
-        public static void Execute(GameState gameState, Common.Models.Territory selectedTerritory, OrdersType orderType, ref MoveAttempt moveAttempt)
+        public static void Execute(GameState gameState, Common.Models.Territories.Territory selectedTerritory, OrdersType orderType, ref MoveAttempt moveAttempt)
         {
             if (moveAttempt.SelectedTerritory == null)
             {
