@@ -82,7 +82,7 @@ namespace Statecraft.Common.Models.Territories
         }
 
 
-        public virtual IList<Territory> Territories
+        public IList<Territory> Territories
         {
             get
             {

@@ -40,8 +40,9 @@ namespace Statecraft.App
             {
                 games = gameHttpHelper.GetGamesByPlayerId(player.Id).Result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                var inner = ex.InnerException;
                 Toast.MakeText(ApplicationContext, "A communication error occurred.", ToastLength.Long);
             }
 

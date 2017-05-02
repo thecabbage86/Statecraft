@@ -21,7 +21,7 @@ namespace Statecraft.Common.Models
 
             Map = new GameMap();
 
-            Map.AddTerritory(Map.AddTerritory(new Territory("Ankara", true, TerritoryType.Land)));
+            Map.AddTerritory(new Territory("Ankara", true, TerritoryType.Land));
             Map.AddTerritory(new Territory("Belgium", true, TerritoryType.Land));
             Map.AddTerritory(new Territory("Berlin", true, TerritoryType.Land, new Unit(Country.Germany, UnitType.Land)));
             Map.AddTerritory(new Territory("Brest", true, TerritoryType.Land, new Unit(Country.France, UnitType.Sea)));
