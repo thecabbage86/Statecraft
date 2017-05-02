@@ -1,4 +1,5 @@
 ﻿using Statecraft.Common.Enums;
+using Statecraft.Common.Models.Territories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,6 @@ namespace Statecraft.Common.Models
         public Territory SupportedOrConvoyedTerritory { get; set; }
         public Territory DestinationTerritory { get; set; }
 
-        public IList<Territory> AllowedNextTerritories { get; set; }
+        public IList<Territory> AllowedNextTerritories { get; set; } //????
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Statecraft.Common.Enums;
 using Statecraft.Common.Models;
+using Statecraft.Common.Models.Territories;
 using Statecraft.GameLogic.GameLogic;
 using System;
 using System.Collections.Generic;
@@ -25,12 +26,12 @@ namespace Statecraft.GameLogic.UI
 
         public MoveAttempt Handle(float x, float y)
         {
-            Common.Models.Territory territoryClicked = null;
+            Territory territoryClicked = null;
 
             //TODO: only set territoryClicked if it's a validly selectable territory for this player (from moveAttempt.AllowedNextTerritories)
             if (x >= 1300 && x <= 1590 && y >= 55 && y <= 350)
             {
-                territoryClicked = game.CurrentGameState.Territories.FirstOrDefault(t => t.Name == "St. Petersburg");
+                territoryClicked = game.CurrentGameState.Map.Territories["St. Petersburg"]; 
             }
             
             if (territoryClicked != null)
