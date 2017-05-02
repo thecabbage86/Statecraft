@@ -8,19 +8,19 @@ namespace Statecraft.Common.Models.Territories
 {
     public class GameMap
     {
-        private TerritoryList territoryList;
+        private IList<Territory> territoryList;
 
 
         public GameMap()
         {
-            this.territoryList = new TerritoryList();
+            this.territoryList = new List<Territory>();
         }
 
 
         public virtual Territory AddTerritory(Territory territory)
         {
             // Make sure the key is unique
-            if (!territoryList.ContainsKey(territory.Name))
+            if (!Contains(territory.Name))
             {
                 territoryList.Add(territory);
                 return territory;
@@ -46,8 +46,8 @@ namespace Statecraft.Common.Models.Territories
         public virtual void AddUndirectedEdge(string uKey, string vKey, int cost)
         {
             // get references to uKey and vKey
-            if (territoryList.ContainsKey(uKey) && territoryList.ContainsKey(vKey))
-                AddUndirectedEdge(territoryList[uKey], territoryList[vKey], cost);
+            if (Contains(uKey) && Contains(vKey))
+                AddUndirectedEdge(territoryList.First(t => t.Name == uKey), territoryList.First( t => t.Name == vKey), cost);
             else
                 throw new ArgumentException("One or both of the Territories supplied were not members of the map.");
         }
@@ -60,7 +60,7 @@ namespace Statecraft.Common.Models.Territories
         public virtual void AddUndirectedEdge(Territory u, Territory v, int cost)
         {
             // Make sure u and v are Territorys in this graph
-            if (territoryList.ContainsKey(u.Name) && territoryList.ContainsKey(v.Name))
+            if (Contains(u.Name) && Contains(v.Name))
             {
                 // Add an edge from u -> v and from v -> u
                 u.AddNeighbor(v, cost);
@@ -78,16 +78,21 @@ namespace Statecraft.Common.Models.Territories
 
         public virtual bool Contains(string key)
         {
-            return territoryList.ContainsKey(key);
+            return territoryList.FirstOrDefault(t => t.Name == key) != null ? true : false;
         }
 
 
-        public virtual TerritoryList Territories
+        public virtual IList<Territory> Territories
         {
             get
             {
                 return this.territoryList;
             }
         }
+
+        //private bool ContainsTerritory(string key)
+        //{
+        //    return territoryList.FirstOrDefault(t => t.Name == key) != null ? true : false;
+        //}
     }
 }

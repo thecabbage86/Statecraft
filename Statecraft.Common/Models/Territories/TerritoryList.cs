@@ -9,35 +9,41 @@ namespace Statecraft.Common.Models.Territories
 {
     public class TerritoryList : IEnumerable
     {
-        private Hashtable data = new Hashtable();
+        //private Hashtable data = new Hashtable();
+        private IList<Territory> data = new List<Territory>();
 
         public virtual Territory this[string key]
         {
             get
             {
-                return (Territory)data[key];
+                return (Territory)data.FirstOrDefault(t => t.Name == key);
             }
         }
 
         public virtual void Add(Territory n)
         {
-            data.Add(n.Name, n);
+            data.Add(n);
         }
 
         public virtual void Remove(Territory n)
         {
-            data.Remove(n.Name);
+            data.Remove(n);
         }
 
         public virtual bool ContainsKey(string key)
         {
-            return data.ContainsKey(key);
+            return data.FirstOrDefault(t => t.Name == key) != null ? true : false;
         }
 
         public virtual void Clear()
         {
             data.Clear();
         }
+
+        //public virtual List<Territory> Where()
+        //{
+
+        //}
 
         public IEnumerator GetEnumerator()
         {
