@@ -31,7 +31,7 @@ namespace Statecraft.GameLogic.UI
             //TODO: only set territoryClicked if it's a validly selectable territory for this player (from moveAttempt.AllowedNextTerritories)
             if (x >= 1300 && x <= 1590 && y >= 55 && y <= 350)
             {
-                territoryClicked = game.CurrentGameState.Map.Territories.FirstOrDefault(t => t.Name == "St. Petersburg"); 
+                territoryClicked = game.CurrentGameState.Map.Territories.FirstOrDefault(t => t.Name == TerritoryName.SaintPetersburg); 
             }
             
             if (territoryClicked != null)

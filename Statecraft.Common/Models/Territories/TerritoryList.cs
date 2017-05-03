@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Statecraft.Common.Enums;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Statecraft.Common.Models.Territories
         //private Hashtable data = new Hashtable();
         private IList<Territory> data = new List<Territory>();
 
-        public virtual Territory this[string key]
+        public virtual Territory this[TerritoryName key]
         {
             get
             {
@@ -30,7 +31,7 @@ namespace Statecraft.Common.Models.Territories
             data.Remove(n);
         }
 
-        public virtual bool ContainsKey(string key)
+        public virtual bool ContainsKey(TerritoryName key)
         {
             return data.FirstOrDefault(t => t.Name == key) != null ? true : false;
         }

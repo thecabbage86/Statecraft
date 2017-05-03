@@ -9,7 +9,7 @@ namespace Statecraft.Common.Models.Territories
 {
     public class Territory
     {
-        private string name;
+        private TerritoryName name;
         private bool isSupplyCenter;
         private TerritoryType type;
         private IList<EdgeToNeighbor> neighbors;
@@ -19,7 +19,7 @@ namespace Statecraft.Common.Models.Territories
             neighbors = new List<EdgeToNeighbor>();
         }
 
-        public Territory(string name, bool isSupplyCenter, TerritoryType type, Unit occupyingUnit = null)
+        public Territory(TerritoryName name, bool isSupplyCenter, TerritoryType type, Unit occupyingUnit = null)
         {
             this.name = name;
             this.isSupplyCenter = isSupplyCenter;
@@ -32,14 +32,14 @@ namespace Statecraft.Common.Models.Territories
             }
         }
 
-        public Territory(string name, bool isSupplyCenter, TerritoryType type, IList<Coast> coasts) : this(name, isSupplyCenter, type, null, coasts){ }
+        public Territory(TerritoryName name, bool isSupplyCenter, TerritoryType type, IList<Coast> coasts) : this(name, isSupplyCenter, type, null, coasts){ }
 
-        public Territory(string name, bool isSupplyCenter, TerritoryType type, Unit occupyingUnit, IList<Coast> coasts) : this(name, isSupplyCenter, type, occupyingUnit)
+        public Territory(TerritoryName name, bool isSupplyCenter, TerritoryType type, Unit occupyingUnit, IList<Coast> coasts) : this(name, isSupplyCenter, type, occupyingUnit)
         {
             this.Coasts = coasts;
         }
 
-        public string Name { get { return name; } }
+        public TerritoryName Name { get { return name; } }
         public bool IsSupplyCenter { get { return isSupplyCenter; } }
         public TerritoryType Type { get { return type; } }
         public Unit OccupyingUnit { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Statecraft.Common.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,12 +39,12 @@ namespace Statecraft.Common.Models.Territories
         //        throw new ArgumentException("There already exists a Territory in the map with name " + n.Name);
         //}
    
-        public virtual void AddUndirectedEdge(string uKey, string vKey)
+        public virtual void AddUndirectedEdge(TerritoryName uKey, TerritoryName vKey)
         {
             AddUndirectedEdge(uKey, vKey, 0);
         }
 
-        public virtual void AddUndirectedEdge(string uKey, string vKey, int cost)
+        public virtual void AddUndirectedEdge(TerritoryName uKey, TerritoryName vKey, int cost)
         {
             // get references to uKey and vKey
             if (Contains(uKey) && Contains(vKey))
@@ -76,7 +77,7 @@ namespace Statecraft.Common.Models.Territories
             return Contains(n.Name);
         }
 
-        public virtual bool Contains(string key)
+        public virtual bool Contains(TerritoryName key)
         {
             return territoryList.FirstOrDefault(t => t.Name == key) != null ? true : false;
         }

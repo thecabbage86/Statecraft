@@ -45,7 +45,7 @@
     <Compile Include="Enums\OrdersType.cs" />
     <Compile Include="Enums\Phase.cs" />
     <Compile Include="Enums\Season.cs" />
-    <Compile Include="Enums\Territory.cs" />
+    <Compile Include="Enums\TerritoryName.cs" />
     <Compile Include="Enums\TerritoryType.cs" />
     <Compile Include="Enums\UnitType.cs" />
     <Compile Include="JsonModels\Requests\CreateNewGameRequest.cs" />
