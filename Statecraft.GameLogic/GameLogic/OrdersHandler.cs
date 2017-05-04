@@ -1,5 +1,7 @@
 ﻿using Statecraft.Common.Enums;
 using Statecraft.Common.Models;
+using Statecraft.Common.Models.Territories;
+using Statecraft.GameLogic.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +45,7 @@ namespace Statecraft.GameLogic.GameLogic
             {
                 if (orderType == OrdersType.Attack)
                 {
-                    HandleAttackDestinationMove(gameState, ref moveAttempt);
+                    HandleAttackDestinationMove(gameState, selectedTerritory, ref moveAttempt);
                 }
 
                 if (moveAttempt.SupportedOrConvoyedTerritory == null)
@@ -94,9 +96,11 @@ namespace Statecraft.GameLogic.GameLogic
             throw new NotImplementedException();
         }
 
-        private static void HandleAttackDestinationMove(GameState gameState, ref MoveAttempt moveAttempt)
+        private static void HandleAttackDestinationMove(GameState gameState, Territory selectedTerritory, ref MoveAttempt moveAttempt)
         {
-            throw new NotImplementedException();
+            moveAttempt.DestinationTerritory = selectedTerritory;
+            moveAttempt.IsFinished = true;
+            //update gameState?
         }
 
         private static void HandleSupportMove(GameState gameState, ref MoveAttempt moveAttempt)

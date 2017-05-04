@@ -16,5 +16,7 @@ namespace Statecraft.Common.Models
         public Territory DestinationTerritory { get; set; }
 
         public IList<Territory> AllowedNextTerritories { get; set; }
+        public bool IsFinished { get; set; }
+        //public bool MoveSaved { get; set; }
     }
 }

@@ -14,12 +14,14 @@ using Statecraft.Common.Models;
 using Statecraft.GameLogic.UI;
 using Statecraft.GameLogic.GameLogic;
 using Statecraft.Common.Enums;
+using Statecraft.GameLogic.Http;
 
 namespace Statecraft.App.Activities
 {
     [Activity(Label = "GameActivity")]
     public class GameActivity : Activity
     {
+        private OrdersHttpHelper ordersHttpHelper;
         private Game game;
         private Player player;
         private Country playerCountry;
@@ -31,6 +33,8 @@ namespace Statecraft.App.Activities
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Game);
+
+            ordersHttpHelper = new OrdersHttpHelper();
 
             var serializedGame = Intent.GetStringExtra("Game");
             game = JsonConvert.DeserializeObject<Game>(serializedGame);
@@ -49,6 +53,10 @@ namespace Statecraft.App.Activities
                 if (e.Event.Action == MotionEventActions.Up)
                 {
                     moveAttempt = clickHandler.Handle(e.Event.GetX(), e.Event.GetY());
+                    if(moveAttempt.IsFinished)
+                    {
+                        CompleteMove();
+                    }
                 }
             };
             //map.Click += (s, e) =>
@@ -69,6 +77,21 @@ namespace Statecraft.App.Activities
             base.OnResume();
 
             //TODO: handle refreshing of game data by calling server
+        }
+
+        private void CompleteMove()
+        {
+            try
+            {
+                ordersHttpHelper.SaveOrders(moveAttempt);
+                //TODO: update UI
+                moveAttempt = null;
+            }
+            catch (Exception)
+            {
+                //TODO: log error
+                Toast.MakeText(ApplicationContext, "A communication error occurred.", ToastLength.Long);
+            }
         }
     }
 }

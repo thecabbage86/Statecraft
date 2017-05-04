@@ -33,7 +33,11 @@ namespace Statecraft.GameLogic.UI
             {
                 territoryClicked = game.CurrentGameState.Map.Territories.FirstOrDefault(t => t.Name == TerritoryName.SaintPetersburg); 
             }
-            
+            else if (x >= 1250 && x <= 1590 && y >= 0 && y < 55)
+            {
+                territoryClicked = game.CurrentGameState.Map.Territories.FirstOrDefault(t => t.Name == TerritoryName.BerentsSea);
+            }
+
             if (territoryClicked != null)
             {
                 OrdersType orderType = OrdersType.Attack; //TODO: add a modal for selecting order type
