@@ -41,15 +41,48 @@ namespace Statecraft.GameLogic.GameLogic
             }
             else
             {
-                //TODO: handle SupportedOrConvoyedTerritory and DestinationTerritory
+                if (orderType == OrdersType.Attack)
+                {
+                    HandleAttackDestinationMove(gameState, ref moveAttempt);
+                }
+
+                if (moveAttempt.SupportedOrConvoyedTerritory == null)
+                {
+                    if (orderType == OrdersType.Support)
+                    {
+                        HandleSupportMove(gameState, ref moveAttempt);
+                    }
+                    else if (orderType == OrdersType.Convoy)
+                    {
+                        HandleConvoyMove(gameState, ref moveAttempt);
+                    }
+                }
+                else
+                {
+                    if (orderType == OrdersType.Support)
+                    {
+                        HandleSupportDestinationMove(gameState, ref moveAttempt);
+                    }
+                    else if (orderType == OrdersType.Convoy)
+                    {
+                        HandleConvoyDestinationMove(gameState, ref moveAttempt);
+                    }
+                }
             }
 
         }
 
         private static void HandleFirstAttackMove(GameState gameState, ref MoveAttempt moveAttempt)
         {
-            //gameState.Territories
-            throw new NotImplementedException();
+            //allowed moves: adjacent territories, taking UnitType into account
+            if (moveAttempt.SelectedTerritory.OccupyingUnit.UnitType == UnitType.Land)
+            {
+                moveAttempt.AllowedNextTerritories = moveAttempt.SelectedTerritory.Neighbors.Where(n => n.Type == TerritoryType.Land).ToList();
+            }
+            else
+            {
+                moveAttempt.AllowedNextTerritories = moveAttempt.SelectedTerritory.Neighbors;
+            }
         }
         private static void HandleFirstSupportMove(GameState gameState, ref MoveAttempt moveAttempt)
         {
@@ -57,6 +90,31 @@ namespace Statecraft.GameLogic.GameLogic
         }
 
         private static void HandleFirstConvoyMove(GameState gameState, ref MoveAttempt moveAttempt)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void HandleAttackDestinationMove(GameState gameState, ref MoveAttempt moveAttempt)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void HandleSupportMove(GameState gameState, ref MoveAttempt moveAttempt)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void HandleConvoyMove(GameState gameState, ref MoveAttempt moveAttempt)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void HandleSupportDestinationMove(GameState gameState, ref MoveAttempt moveAttempt)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void HandleConvoyDestinationMove(GameState gameState, ref MoveAttempt moveAttempt)
         {
             throw new NotImplementedException();
         }

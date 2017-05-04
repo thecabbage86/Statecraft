@@ -62,7 +62,7 @@ namespace Statecraft.App
             if (game.HasBegun && !game.IsFinished)
             {
                 var gameIntent = new Intent(this, typeof(GameActivity));
-                gameIntent.PutExtra("Game", JsonConvert.SerializeObject(game));
+                gameIntent.PutExtra("Game", JsonConvert.SerializeObject(game, new JsonSerializerSettings(){ ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
                 gameIntent.PutExtra("Player", JsonConvert.SerializeObject(player));
                 StartActivity(gameIntent);
             }

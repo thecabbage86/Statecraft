@@ -15,6 +15,6 @@ namespace Statecraft.Common.Models
         public Territory SupportedOrConvoyedTerritory { get; set; }
         public Territory DestinationTerritory { get; set; }
 
-        public IList<Territory> AllowedNextTerritories { get; set; } //????
+        public IList<Territory> AllowedNextTerritories { get; set; }
     }
 }

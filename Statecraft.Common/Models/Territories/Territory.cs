@@ -12,11 +12,11 @@ namespace Statecraft.Common.Models.Territories
         private TerritoryName name;
         private bool isSupplyCenter;
         private TerritoryType type;
-        private IList<EdgeToNeighbor> neighbors;
+        private IList<Territory> neighbors;
 
         public Territory()
         {
-            neighbors = new List<EdgeToNeighbor>();
+            neighbors = new List<Territory>();
         }
 
         public Territory(TerritoryName name, bool isSupplyCenter, TerritoryType type, Unit occupyingUnit = null)
@@ -24,7 +24,7 @@ namespace Statecraft.Common.Models.Territories
             this.name = name;
             this.isSupplyCenter = isSupplyCenter;
             this.type = type;
-            this.neighbors = new List<EdgeToNeighbor>();
+            this.neighbors = new List<Territory>();
             OccupyingUnit = occupyingUnit;
             if(OccupyingUnit != null)
             {
@@ -46,19 +46,11 @@ namespace Statecraft.Common.Models.Territories
         public Country Owner { get; set; }
         public IList<Coast> Coasts { get; set; }
 
-        protected internal virtual void AddNeighbor(Territory n)
-        {
-            AddNeighbor(new EdgeToNeighbor(n));
-        }
-
-        protected internal virtual void AddNeighbor(Territory n, int cost)
-        {
-            AddNeighbor(new EdgeToNeighbor(n, cost));
-        }
-
-        protected internal virtual void AddNeighbor(EdgeToNeighbor e)
+        public void AddNeighbor(Territory e)
         {
             neighbors.Add(e);
         }
+
+        public IList<Territory> Neighbors { get { return neighbors; } }
     }
 }

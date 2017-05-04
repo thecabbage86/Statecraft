@@ -18,7 +18,11 @@ namespace Statecraft.Common.Models
         public GameState()
         { 
             Round = new GameRound() { Phase = Phase.Movement, Season = Season.Spring, Year = 1901 };
+            InitializeMap();
+        }
 
+        public void InitializeMap()
+        {
             Map = new GameMap();
 
             Map.AddTerritory(new Territory(TerritoryName.Ankara, true, TerritoryType.Land));
@@ -95,6 +99,18 @@ namespace Statecraft.Common.Models
             Map.AddTerritory(new Territory(TerritoryName.AegeanSea, false, TerritoryType.Sea));
             Map.AddTerritory(new Territory(TerritoryName.EasternMediterranean, false, TerritoryType.Sea));
             Map.AddTerritory(new Territory(TerritoryName.BlackSea, false, TerritoryType.Sea));
+
+            //Map.AddUndirectedEdge(TerritoryName.Ankara, TerritoryName.Smyrna);
+            //Map.AddUndirectedEdge(TerritoryName.Ankara, TerritoryName.Constantinople);
+            //Map.AddUndirectedEdge(TerritoryName.Ankara, TerritoryName.BlackSea);
+            //Map.AddUndirectedEdge(TerritoryName.Ankara, TerritoryName.Armenia);
+
+            Map.AddUndirectedEdge(TerritoryName.SaintPetersburg, TerritoryName.Norway);
+            //Map.AddUndirectedEdge(TerritoryName.SaintPetersburg, TerritoryName.BerentsSea);
+            //Map.AddUndirectedEdge(TerritoryName.SaintPetersburg, TerritoryName.Finland);
+            //Map.AddUndirectedEdge(TerritoryName.SaintPetersburg, TerritoryName.Livonia);
+            //Map.AddUndirectedEdge(TerritoryName.SaintPetersburg, TerritoryName.Moscow);
+            //Map.AddUndirectedEdge(TerritoryName.SaintPetersburg, TerritoryName.GulfofBothnia);
         }
     }
 }

@@ -48,24 +48,19 @@ namespace Statecraft.Common.Models.Territories
         {
             // get references to uKey and vKey
             if (Contains(uKey) && Contains(vKey))
-                AddUndirectedEdge(territoryList.First(t => t.Name == uKey), territoryList.First( t => t.Name == vKey), cost);
+                AddUndirectedEdge(territoryList.First(t => t.Name == uKey), territoryList.First( t => t.Name == vKey));
             else
                 throw new ArgumentException("One or both of the Territories supplied were not members of the map.");
         }
 
         public virtual void AddUndirectedEdge(Territory u, Territory v)
         {
-            AddUndirectedEdge(u, v, 0);
-        }
-
-        public virtual void AddUndirectedEdge(Territory u, Territory v, int cost)
-        {
             // Make sure u and v are Territorys in this graph
             if (Contains(u.Name) && Contains(v.Name))
             {
                 // Add an edge from u -> v and from v -> u
-                u.AddNeighbor(v, cost);
-                v.AddNeighbor(u, cost);
+                u.AddNeighbor(v);
+                v.AddNeighbor(u);
             }
             else
                 // one or both of the Territorys were not found in the graph
