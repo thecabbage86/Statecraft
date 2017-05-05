@@ -58,7 +58,12 @@ namespace Statecraft.App.Activities
                     if(moveAttempt.IsFinished)
                     {
                         CompleteMove();
-                        GetCurrentGameState();
+                        var newGameState = GetCurrentGameState();
+                        //if game progressed to next round, reload UI with new game state
+                        if(newGameState != null && newGameState.Round.Phase != game.CurrentGameState.Round.Phase)
+                        {
+                            StartNewGameRound(newGameState);
+                        }
                     }
                 }
             };
@@ -79,7 +84,12 @@ namespace Statecraft.App.Activities
         {
             base.OnResume();
 
-            //TODO: handle refreshing of game data by calling server
+            var newGameState = GetCurrentGameState();
+            //if game progressed to next round, reload UI with new game state
+            if (newGameState != null && newGameState.Round.Phase != game.CurrentGameState.Round.Phase)
+            {
+                StartNewGameRound(newGameState);
+            }
         }
 
         private void CompleteMove()
@@ -98,12 +108,13 @@ namespace Statecraft.App.Activities
             }
         }
 
-        private void GetCurrentGameState()
+        private GameState GetCurrentGameState()
         {
+            GameState newGameState = null;
+
             try
             {
-                game.CurrentGameState = gameStateHttpHelper.GetGameState(game.Id).Result;
-                //TODO: update UI
+                newGameState = gameStateHttpHelper.GetGameState(game.Id).Result;
             }
             catch (Exception ex)
             {
@@ -111,6 +122,17 @@ namespace Statecraft.App.Activities
                 //TODO: log error
                 Toast.MakeText(ApplicationContext, "A communication error occurred.", ToastLength.Long);
             }
+
+            return newGameState;
+        }
+
+        private void StartNewGameRound(GameState newGameState)
+        {
+            game.CurrentGameState = newGameState;
+
+            //TODO: reload UI with new game state
+            //iterate through territories via graph, display new map
+            throw new NotImplementedException();
         }
     }
 }

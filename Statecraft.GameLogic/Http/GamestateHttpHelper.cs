@@ -15,7 +15,7 @@ namespace Statecraft.GameLogic.Http
         public async Task<GameState> GetGameState(int gameId)
         {
             GameState gameState = null;
-            var requestUri = string.Format("gamestate?gameId=", gameId);
+            var requestUri = string.Format("gamestate?gameId={0}", gameId);
 
             using (var client = new HttpClient())
             {
