@@ -83,12 +83,13 @@ namespace Statecraft.App.Activities
         {
             try
             {
-                ordersHttpHelper.SaveOrders(game.Id, moveAttempt).RunSynchronously();
+                ordersHttpHelper.SaveOrders(game.Id, moveAttempt).Wait();
                 //TODO: update UI
                 moveAttempt = null;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                var innerException = ex.InnerException;
                 //TODO: log error
                 Toast.MakeText(ApplicationContext, "A communication error occurred.", ToastLength.Long);
             }

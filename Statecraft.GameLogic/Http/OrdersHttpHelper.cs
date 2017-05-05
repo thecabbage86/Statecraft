@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,8 +21,11 @@ namespace Statecraft.GameLogic.Http
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://statecraftservices.azurewebsites.net/"); //TODO: use config
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
                 var request = new SaveOrdersRequest(gameId, moveAttempt);
-                var httpContent = new StringContent(JsonConvert.SerializeObject(request));
+                string serializedObject = JsonConvert.SerializeObject(request, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+                var httpContent = new StringContent(serializedObject, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync(requestUri, httpContent).ConfigureAwait(false);
 
                 if (!response.IsSuccessStatusCode)
