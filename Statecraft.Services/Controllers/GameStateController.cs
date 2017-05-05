@@ -25,7 +25,24 @@ namespace Statecraft.Services.Controllers
         [HttpGet]
         public HttpResponseMessage GetCurrentGameState(int gameId)
         {
-            throw new NotImplementedException();
+            if (!ModelState.IsValid)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
+            Game game;
+
+            try
+            {
+                game = gameRepo.GetGameById(gameId);
+            }
+            catch (Exception)
+            {
+                //TODO: log
+                throw new HttpResponseException(HttpStatusCode.InternalServerError);
+            }
+
+            return Request.CreateResponse<GameStateResponse>(HttpStatusCode.OK, new GameStateResponse(game.CurrentGameState));
         }
 
         [HttpPost]

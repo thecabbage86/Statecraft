@@ -53,6 +53,7 @@
     <Compile Include="JsonModels\Requests\StartGameRequest.cs" />
     <Compile Include="JsonModels\Requests\UpdateGameStateRequest.cs" />
     <Compile Include="JsonModels\Responses\GameResponse.cs" />
+    <Compile Include="JsonModels\Responses\GameStateResponse.cs" />
     <Compile Include="Models\Territories\Coast.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameOptions.cs" />

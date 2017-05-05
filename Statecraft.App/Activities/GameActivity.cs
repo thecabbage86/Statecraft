@@ -22,6 +22,7 @@ namespace Statecraft.App.Activities
     public class GameActivity : Activity
     {
         private OrdersHttpHelper ordersHttpHelper;
+        private GameStateHttpHelper gameStateHttpHelper;
         private Game game;
         private Player player;
         private Country playerCountry;
@@ -35,6 +36,7 @@ namespace Statecraft.App.Activities
             SetContentView(Resource.Layout.Game);
 
             ordersHttpHelper = new OrdersHttpHelper();
+            gameStateHttpHelper = new GameStateHttpHelper();
 
             var serializedGame = Intent.GetStringExtra("Game");
             game = JsonConvert.DeserializeObject<Game>(serializedGame);
@@ -56,6 +58,7 @@ namespace Statecraft.App.Activities
                     if(moveAttempt.IsFinished)
                     {
                         CompleteMove();
+                        GetCurrentGameState();
                     }
                 }
             };
@@ -86,6 +89,21 @@ namespace Statecraft.App.Activities
                 ordersHttpHelper.SaveOrders(game.Id, moveAttempt).Wait();
                 //TODO: update UI
                 moveAttempt = null;
+            }
+            catch (Exception ex)
+            {
+                var innerException = ex.InnerException;
+                //TODO: log error
+                Toast.MakeText(ApplicationContext, "A communication error occurred.", ToastLength.Long);
+            }
+        }
+
+        private void GetCurrentGameState()
+        {
+            try
+            {
+                game.CurrentGameState = gameStateHttpHelper.GetGameState(game.Id).Result;
+                //TODO: update UI
             }
             catch (Exception ex)
             {
