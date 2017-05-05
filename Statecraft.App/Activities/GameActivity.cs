@@ -83,7 +83,7 @@ namespace Statecraft.App.Activities
         {
             try
             {
-                ordersHttpHelper.SaveOrders(moveAttempt);
+                ordersHttpHelper.SaveOrders(game.Id, moveAttempt).RunSynchronously();
                 //TODO: update UI
                 moveAttempt = null;
             }

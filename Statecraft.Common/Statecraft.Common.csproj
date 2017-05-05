@@ -49,6 +49,7 @@
     <Compile Include="Enums\TerritoryType.cs" />
     <Compile Include="Enums\UnitType.cs" />
     <Compile Include="JsonModels\Requests\CreateNewGameRequest.cs" />
+    <Compile Include="JsonModels\Requests\SaveOrdersRequest.cs" />
     <Compile Include="JsonModels\Requests\StartGameRequest.cs" />
     <Compile Include="JsonModels\Requests\UpdateGameStateRequest.cs" />
     <Compile Include="JsonModels\Responses\GameResponse.cs" />
