@@ -15,6 +15,8 @@ using Statecraft.GameLogic.UI;
 using Statecraft.GameLogic.GameLogic;
 using Statecraft.Common.Enums;
 using Statecraft.GameLogic.Http;
+using Statecraft.App.UI;
+using Android.Util;
 
 namespace Statecraft.App.Activities
 {
@@ -29,6 +31,7 @@ namespace Statecraft.App.Activities
         private ImageView map;
         private ClickHandler clickHandler;
         private MoveAttempt moveAttempt;
+        private TerritoryUnitCoordinates unitCoordinates;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -37,6 +40,7 @@ namespace Statecraft.App.Activities
 
             ordersHttpHelper = new OrdersHttpHelper();
             gameStateHttpHelper = new GameStateHttpHelper();
+            unitCoordinates = new TerritoryUnitCoordinates();
 
             var serializedGame = Intent.GetStringExtra("Game");
             game = JsonConvert.DeserializeObject<Game>(serializedGame);
@@ -130,9 +134,43 @@ namespace Statecraft.App.Activities
         {
             game.CurrentGameState = newGameState;
 
-            //TODO: reload UI with new game state
             //iterate through territories via graph, display new map
-            throw new NotImplementedException();
+            foreach(var territory in game.CurrentGameState.Map.Territories)
+            {
+                if(territory.OccupyingUnit != null && territory.Name == TerritoryName.SaintPetersburg) //TODO: remove second clause
+                {
+                    var coordinates = unitCoordinates.GetCoordinates(territory.Name);
+                    if (coordinates != null)
+                    {
+                        DisplayNewUnit(territory.OccupyingUnit.UnitType, coordinates.Item1, coordinates.Item2);
+                    }
+                }
+            }
+        }
+
+        private void DisplayNewUnit(UnitType unitType, int x, int y)
+        {
+            ImageView unit = null;
+
+            if (unitType == UnitType.Sea)
+            {
+                unit = FindViewById<ImageView>(Resource.Id.seaUnit);
+                unit.SetImageResource(Resource.Drawable.seaUnit);
+            }
+            else
+            {
+                unit = FindViewById<ImageView>(Resource.Id.landUnit);
+                unit.SetImageResource(Resource.Drawable.landUnit);
+            }
+
+            //unit.LayoutParameters = new ViewGroup.LayoutParams(x, y);
+
+            //unit.LayoutParameters = new ViewGroup.LayoutParams(WindowManagerLayoutParams.WrapContent, WindowManagerLayoutParams.WrapContent) { Height = y, Width = x };
+
+            //TODO: modify this to figure out x/y position dynamically as this varies by screen size
+            unit.SetX(x * ((float)Resources.DisplayMetrics.DensityDpi / 160));
+            unit.SetY(y * ((float)Resources.DisplayMetrics.DensityDpi / 160));
+            unit.Visibility = ViewStates.Visible;
         }
     }
 }

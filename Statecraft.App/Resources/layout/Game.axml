@@ -11,10 +11,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/horizontalScrollView1">
-        <ImageView
-            android:src="@drawable/map"
-            android:layout_width="1072px"
-            android:layout_height="match_parent"
-            android:id="@+id/map" />
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+          android:orientation="vertical"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:minWidth="25px"
+          android:minHeight="25px">
+          <ImageView
+              android:src="@drawable/map"
+              android:layout_width="1072px"
+              android:layout_height="match_parent"
+              android:id="@+id/map" 
+              android:layout_weight="1"/>
+          <ImageView
+            android:src="@drawable/landUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:scaleType="fitXY"
+            android:layout_weight="1"
+            android:id="@+id/landUnit" />
+          <ImageView
+            android:src="@drawable/seaUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:scaleType="fitXY"
+            android:id="@+id/seaUnit"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_weight="1"/>
+        </RelativeLayout>
     </HorizontalScrollView>
 </LinearLayout>

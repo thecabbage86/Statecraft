@@ -13,20 +13,22 @@ using Statecraft.Common.Enums;
 
 namespace Statecraft.App.UI
 {
+    //NOTE: coordinates are in dp (not px)
     public class TerritoryUnitCoordinates
     {
-        private Dictionary<TerritoryName, KeyValuePair<int, int>> territoryUnitCoordinates;
+        private Dictionary<TerritoryName, Tuple<int, int>> territoryUnitCoordinates;
 
         public TerritoryUnitCoordinates()
         {
-            territoryUnitCoordinates = new Dictionary<TerritoryName, KeyValuePair<int, int>>();
-            territoryUnitCoordinates.Add(TerritoryName.SaintPetersburg, new KeyValuePair<int, int>(1400, 200));
-            territoryUnitCoordinates.Add(TerritoryName.BerentsSea, new KeyValuePair<int, int>(1400, 40));
+            territoryUnitCoordinates = new Dictionary<TerritoryName, Tuple<int, int>>();
+            territoryUnitCoordinates.Add(TerritoryName.SaintPetersburg, new Tuple<int, int>(400, 100));
+            territoryUnitCoordinates.Add(TerritoryName.BerentsSea, new Tuple<int, int>(400, 40));
+            //TODO: add coordinates for every territory
         }
 
-        public KeyValuePair<int, int> GetCoordinates(TerritoryName territory)
+        public Tuple<int, int> GetCoordinates(TerritoryName territory)
         {
-            KeyValuePair<int, int> coordinates;
+            Tuple<int, int> coordinates;
 
             if (!territoryUnitCoordinates.TryGetValue(territory, out coordinates))
             {
