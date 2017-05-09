@@ -31,7 +31,7 @@ namespace Statecraft.App.Activities
         private ImageView map;
         private ClickHandler clickHandler;
         private MoveAttempt moveAttempt;
-        private TerritoryUnitCoordinates unitCoordinates;
+        private TerritoryUiData unitCoordinates;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -40,7 +40,7 @@ namespace Statecraft.App.Activities
 
             ordersHttpHelper = new OrdersHttpHelper();
             gameStateHttpHelper = new GameStateHttpHelper();
-            unitCoordinates = new TerritoryUnitCoordinates();
+            unitCoordinates = new TerritoryUiData();
 
             var serializedGame = Intent.GetStringExtra("Game");
             game = JsonConvert.DeserializeObject<Game>(serializedGame);
@@ -137,29 +137,27 @@ namespace Statecraft.App.Activities
             //iterate through territories via graph, display new map
             foreach(var territory in game.CurrentGameState.Map.Territories)
             {
-                if(territory.OccupyingUnit != null && territory.Name == TerritoryName.SaintPetersburg) //TODO: remove second clause
+                if(territory.OccupyingUnit != null && (territory.Name == TerritoryName.SaintPetersburg || territory.Name == TerritoryName.BerentsSea || territory.Name == TerritoryName.Ankara)) //TODO: remove second clause
                 {
                     var coordinates = unitCoordinates.GetCoordinates(territory.Name);
                     if (coordinates != null)
                     {
-                        DisplayNewUnit(territory.OccupyingUnit.UnitType, coordinates.Item1, coordinates.Item2);
+                        DisplayNewUnit(territory.Name, territory.OccupyingUnit.UnitType, coordinates.Item1, coordinates.Item2);
                     }
                 }
             }
         }
 
-        private void DisplayNewUnit(UnitType unitType, int x, int y)
+        private void DisplayNewUnit(TerritoryName territoryName, UnitType unitType, int x, int y)
         {
-            ImageView unit = null;
+            ImageView unit = FindViewById<ImageView>(unitCoordinates.GetResourceId(territoryName));
 
             if (unitType == UnitType.Sea)
             {
-                unit = FindViewById<ImageView>(Resource.Id.seaUnit);
                 unit.SetImageResource(Resource.Drawable.seaUnit);
             }
             else
             {
-                unit = FindViewById<ImageView>(Resource.Id.landUnit);
                 unit.SetImageResource(Resource.Drawable.landUnit);
             }
 

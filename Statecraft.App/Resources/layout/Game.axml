@@ -27,17 +27,26 @@
             android:src="@drawable/landUnit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:visibility="gone"
             android:scaleType="fitXY"
             android:layout_weight="1"
-            android:id="@+id/landUnit" />
+            android:id="@+id/berentsUnit" />
           <ImageView
             android:src="@drawable/seaUnit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:visibility="gone"
             android:scaleType="fitXY"
-            android:id="@+id/seaUnit"
+            android:id="@+id/stPetersUnit"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_weight="1"/>
+        <ImageView
+            android:src="@drawable/seaUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:scaleType="fitXY"
+            android:id="@+id/ankaraUnit"
             android:layout_gravity="center_horizontal|top"
             android:layout_weight="1"/>
         </RelativeLayout>
