@@ -10,6 +10,7 @@ namespace Statecraft.Common.Models
 {
     public class GameRound
     {
+        public GameRound() { }
         public GameRound(int gameRoundDboId)
         {
             Year = GameValues.STARTING_YEAR + (int)Math.Floor((double)(gameRoundDboId - 1) / 5);

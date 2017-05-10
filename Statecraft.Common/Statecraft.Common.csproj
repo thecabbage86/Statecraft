@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\GameValues.cs" />
     <Compile Include="Enums\CoastType.cs" />
     <Compile Include="Enums\Country.cs" />
     <Compile Include="Enums\OrdersType.cs" />

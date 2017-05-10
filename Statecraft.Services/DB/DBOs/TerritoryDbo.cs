@@ -10,7 +10,7 @@ namespace Statecraft.Services.DB.DBOs
         [Key, Column(Order =0)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
-        [Key, Column(Order = 1)]
+        [Key, Column(Order = 1), ForeignKey("GameDbo")]
         public int GameId { get; set; }
         [Key, Column(Order = 2)]
         public int GameRoundId { get; set; }

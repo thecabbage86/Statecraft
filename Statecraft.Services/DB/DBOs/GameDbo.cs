@@ -14,7 +14,6 @@ namespace Statecraft.Services.DB.DBOs
         public bool RoundLengthOption { get; set; }
         public bool HasBegun { get; set; }
         public bool IsFinished { get; set; }
-        //public IList<Player> Players { get; set; }
         public Guid CreatorPlayerId { get; set; }
         public Guid? EnglandPlayerId { get; set; }
         public Guid? FrancePlayerId { get; set; }
@@ -26,6 +25,6 @@ namespace Statecraft.Services.DB.DBOs
         public IList<Country> Winners { get; set; }
 
         public int GameRoundId { get; set; }
-        public IList<TerritoryDbo> Map { get; set; }
+        public virtual IList<TerritoryDbo> Map { get; set; }
     }
 }
