@@ -4,27 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Statecraft.Common.Models;
+using Statecraft.Services.DB.DBOs;
 
 namespace Statecraft.Services.Repositories
 {
     public class GameRepository : IGameRepository
     {
-        public Game CreateNewGame(Game game)
+        public GameDbo CreateNewGame(GameDbo game)
         {
             throw new NotImplementedException();
         }
 
-        public Game GetGameById(Guid id)
+        public GameDbo GetGameById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<Game> GetGamesByPlayerId(Guid playerId)
+        public IList<GameDbo> GetGamesByPlayerId(Guid playerId)
         {
             throw new NotImplementedException();
         }
 
-        public Game UpdateGame(Game game)
+        public GameDbo UpdateGame(GameDbo game)
         {
             throw new NotImplementedException();
         }

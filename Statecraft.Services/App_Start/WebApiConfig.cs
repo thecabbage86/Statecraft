@@ -6,6 +6,10 @@ using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
+using AutoMapper;
+using Statecraft.Services.DB.DBOs;
+using Statecraft.Common.Models;
+using Statecraft.Common.Models.Territories;
 
 namespace Statecraft.Services
 {
@@ -28,6 +32,11 @@ namespace Statecraft.Services
             );
 
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.Re‌​ferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
+            Mapper.Initialize(cfg => {
+                cfg.CreateMap<Game, GameDbo>();
+                cfg.CreateMap<Territory, TerritoryDbo>();
+            });
         }
     }
 }

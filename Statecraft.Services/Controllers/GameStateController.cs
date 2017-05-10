@@ -1,6 +1,8 @@
-﻿using Statecraft.Common.JsonModels.Requests;
+﻿using AutoMapper;
+using Statecraft.Common.JsonModels.Requests;
 using Statecraft.Common.JsonModels.Responses;
 using Statecraft.Common.Models;
+using Statecraft.Services.DB.DBOs;
 using Statecraft.Services.Interfaces;
 using Statecraft.Services.Repositories;
 using System;
@@ -30,7 +32,7 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
-            Game game;
+            GameDbo game;
 
             try
             {
@@ -42,7 +44,7 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.InternalServerError);
             }
 
-            return Request.CreateResponse<GameStateResponse>(HttpStatusCode.OK, new GameStateResponse(game.CurrentGameState));
+            return Request.CreateResponse<GameStateResponse>(HttpStatusCode.OK, new GameStateResponse(Mapper.Map<Game>(game).CurrentGameState));
         }
 
         [HttpPost]
@@ -54,15 +56,17 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
-            Game game;
+            GameDbo gameDbo;
 
             try
             {
-                game = gameRepo.GetGameById(updateGameStateRequest.UpdateGameState.GameId);
+                gameDbo = gameRepo.GetGameById(updateGameStateRequest.UpdateGameState.GameId);
 
+                var game = Mapper.Map<Game>(gameDbo);
                 game.CurrentGameState = updateGameStateRequest.UpdateGameState.GameState;
+                gameDbo = Mapper.Map<GameDbo>(game);
 
-                gameRepo.UpdateGame(game);
+                gameRepo.UpdateGame(gameDbo);
             }
             catch (Exception)
             {
@@ -70,7 +74,7 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.InternalServerError);
             }
 
-            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(game));
+            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(Mapper.Map<Game>(gameDbo)));
         }
     }
 }

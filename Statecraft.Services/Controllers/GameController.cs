@@ -1,7 +1,9 @@
-﻿using Statecraft.Common.Enums;
+﻿using AutoMapper;
+using Statecraft.Common.Enums;
 using Statecraft.Common.JsonModels.Requests;
 using Statecraft.Common.JsonModels.Responses;
 using Statecraft.Common.Models;
+using Statecraft.Services.DB.DBOs;
 using Statecraft.Services.Interfaces;
 using Statecraft.Services.Models;
 using Statecraft.Services.Repositories;
@@ -34,7 +36,7 @@ namespace Statecraft.Services.Controllers
         [HttpGet]
         public HttpResponseMessage GetGames([FromUri]Guid? playerId = null)
         {
-            IList<Game> games = null;
+            IList<GameDbo> games = null;
 
             try
             {
@@ -46,7 +48,7 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.InternalServerError);
             }
 
-            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(games));
+            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(Mapper.Map<IList<GameDbo>, IList<Game>>(games)));
         }
 
         [HttpPost]
@@ -82,7 +84,7 @@ namespace Statecraft.Services.Controllers
 
             try
             {
-                gameRepo.CreateNewGame(game);
+                gameRepo.CreateNewGame(Mapper.Map<GameDbo>(game));
             }
             catch (Exception)
             {
@@ -102,13 +104,17 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
-            Game game;
+            GameDbo game;
 
             try
             {
                 game = gameRepo.GetGameById(startGameRequest.StartGame.GameId);
 
-                game.Options = startGameRequest.StartGame.Options;
+                //game.Options = startGameRequest.StartGame.Options;
+                game.IsGunboatOption = startGameRequest.StartGame.Options.IsGunboat;
+                game.IsRankedOption = startGameRequest.StartGame.Options.IsRanked;
+                game.RoundLengthOption = startGameRequest.StartGame.Options.RoundLength;
+
                 game.EnglandPlayerId = startGameRequest.StartGame.EnglandPlayerId;
                 game.AustriaPlayerId = startGameRequest.StartGame.AustriaPlayerId;
                 game.FrancePlayerId = startGameRequest.StartGame.FrancePlayerId;
@@ -126,7 +132,7 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.InternalServerError);
             }
 
-            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(game));
+            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(Mapper.Map<Game>(game)));
         }
     }
 }

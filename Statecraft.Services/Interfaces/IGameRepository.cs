@@ -1,4 +1,5 @@
 ﻿using Statecraft.Common.Models;
+using Statecraft.Services.DB.DBOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace Statecraft.Services.Interfaces
 {
     public interface IGameRepository
     {
-        Game CreateNewGame(Game game);
-        Game GetGameById(Guid id);
-        IList<Game> GetGamesByPlayerId(Guid playerId);
-        Game UpdateGame(Game game);
+        GameDbo CreateNewGame(GameDbo game);
+        GameDbo GetGameById(Guid id);
+        IList<GameDbo> GetGamesByPlayerId(Guid playerId);
+        GameDbo UpdateGame(GameDbo game);
     }
 }

@@ -5,35 +5,35 @@ using System.Linq;
 using System.Web;
 using Statecraft.Common.Models;
 using Statecraft.Common.Enums;
+using Statecraft.Services.DB.DBOs;
 
 namespace Statecraft.Services.Repositories
 {
     public class GameRepositoryFake : IGameRepository
     {
 
-        public Game CreateNewGame(Game game)
+        public GameDbo CreateNewGame(GameDbo game)
         {
             game.Id = Guid.NewGuid();
             return game;
         }
 
-        public Game GetGameById(Guid id)
+        public GameDbo GetGameById(Guid id)
         {
-            return new Game() { Id = id, GermanyPlayerId = Guid.NewGuid(), HasBegun = true,
-                CurrentGameState = new GameState() { Round = new GameRound() { Phase = Phase.Retreat, Season = Season.Spring, Year = 1901 } },
-                Options = new GameOptions() { IsRanked = true, RoundLength = new TimeSpan(10, 0, 0) } };
+            return new GameDbo() { Id = id, GermanyPlayerId = Guid.NewGuid(), HasBegun = true,
+                GameRoundId = 2, 
+                IsRankedOption = true, RoundLengthOption = new TimeSpan(10, 0, 0) };
         }
 
-        public IList<Game> GetGamesByPlayerId(Guid playerId)
+        public IList<GameDbo> GetGamesByPlayerId(Guid playerId)
         {
-            return new List<Game>() { new Game() { Id = new Guid("00000000-0000-0000-0000-000000000010"), AustriaPlayerId = playerId, CreatorPlayerId = playerId, HasBegun = false },
-                new Game() { Id = new Guid("00000000-0000-0000-0000-000000000100"), GermanyPlayerId = playerId, HasBegun = true, CurrentGameState = new GameState() { Round = new GameRound() { Phase = Phase.Movement, Season = Season.Spring, Year = 1901 } },
-                    Options = new GameOptions() { IsRanked = true, RoundLength = new TimeSpan(10, 0, 0) }  },
-                new Game() { Id = new Guid("00000000-0000-0000-0000-000000000103"), EnglandPlayerId = playerId, HasBegun = true, IsFinished = true, CurrentGameState = new GameState(), Options = new GameOptions() { IsRanked = true, RoundLength = new TimeSpan(10, 0, 0) } },
+            return new List<GameDbo>() { new GameDbo() { Id = new Guid("00000000-0000-0000-0000-000000000010"), AustriaPlayerId = playerId, CreatorPlayerId = playerId, HasBegun = false },
+                new GameDbo() { Id = new Guid("00000000-0000-0000-0000-000000000100"), GermanyPlayerId = playerId, HasBegun = true, GameRoundId = 1, IsRankedOption = true, RoundLengthOption = new TimeSpan(10, 0, 0) },
+                new GameDbo() { Id = new Guid("00000000-0000-0000-0000-000000000103"), EnglandPlayerId = playerId, HasBegun = true, IsFinished = true, IsRankedOption = true, RoundLengthOption = new TimeSpan(10, 0, 0) }
             };
         }
 
-        public Game UpdateGame(Game game)
+        public GameDbo UpdateGame(GameDbo game)
         {
             return game;
         }
