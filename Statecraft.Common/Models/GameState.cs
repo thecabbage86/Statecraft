@@ -17,7 +17,7 @@ namespace Statecraft.Common.Models
 
         public GameState()
         { 
-            Round = new GameRound() { Phase = Phase.Movement, Season = Season.Spring, Year = 1901 };
+            Round = new GameRound(1) { Phase = Phase.Movement, Season = Season.Spring, Year = 1901 };
             InitializeMap(); //TODO: remove this call from here, only call it when the game is created; move InitializeMap to GameLogic
         }
 

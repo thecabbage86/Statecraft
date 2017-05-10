@@ -39,6 +39,7 @@ namespace Statecraft.Common.Models.Territories
             this.Coasts = coasts;
         }
 
+        public long Id { get; set; }
         public TerritoryName Name { get { return name; } }
         public bool IsSupplyCenter { get { return isSupplyCenter; } }
         public TerritoryType Type { get { return type; } }
