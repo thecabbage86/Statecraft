@@ -14,7 +14,7 @@ namespace Statecraft.GameLogic.Http
 {
     public class OrdersHttpHelper
     {
-        public async Task SaveOrders(int gameId, MoveAttempt moveAttempt)
+        public async Task SaveOrders(Guid gameId, MoveAttempt moveAttempt)
         {
             var requestUri = "orders";
 

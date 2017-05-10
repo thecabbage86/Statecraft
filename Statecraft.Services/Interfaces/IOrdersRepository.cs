@@ -8,6 +8,6 @@ namespace Statecraft.Services.Interfaces
 {
     public interface IOrdersRepository
     {
-        void SaveOrders(int gameId, IList<MoveAttempt> orders);
+        void SaveOrders(Guid gameId, IList<MoveAttempt> orders);
     }
 }

@@ -9,12 +9,12 @@ namespace Statecraft.Common.JsonModels.Requests
 {
     public class SaveOrdersRequest
     {
-        public int GameId { get; set; }
+        public Guid GameId { get; set; }
         public IList<MoveAttempt> Orders { get; set; }
 
         public SaveOrdersRequest() { }
 
-        public SaveOrdersRequest(int gameId, MoveAttempt order)
+        public SaveOrdersRequest(Guid gameId, MoveAttempt order)
         {
             GameId = gameId;
             Orders = new List<MoveAttempt>() { order };

@@ -23,7 +23,7 @@ namespace Statecraft.Services.Controllers
         }
 
         [HttpGet]
-        public HttpResponseMessage GetCurrentGameState(int gameId)
+        public HttpResponseMessage GetCurrentGameState(Guid gameId)
         {
             if (!ModelState.IsValid)
             {

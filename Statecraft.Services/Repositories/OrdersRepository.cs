@@ -9,7 +9,7 @@ namespace Statecraft.Services.Repositories
 {
     public class OrdersRepository : IOrdersRepository
     {
-        public void SaveOrders(int gameId, IList<MoveAttempt> orders)
+        public void SaveOrders(Guid gameId, IList<MoveAttempt> orders)
         {
             throw new NotImplementedException();
         }

@@ -9,7 +9,7 @@ namespace Statecraft.Common.Models
 {
     public class Game
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public GameOptions Options { get; set; }
         public GameState CurrentGameState { get; set; }
         public bool HasBegun { get; set; }

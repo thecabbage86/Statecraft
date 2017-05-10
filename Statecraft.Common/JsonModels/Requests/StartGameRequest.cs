@@ -13,7 +13,7 @@ namespace Statecraft.Common.JsonModels.Requests
 
     public class StartGameModel
     {
-        public int GameId { get; set; }
+        public Guid GameId { get; set; }
         public Guid? EnglandPlayerId { get; set; }
         public Guid? FrancePlayerId { get; set; }
         public Guid? ItalyPlayerId { get; set; }

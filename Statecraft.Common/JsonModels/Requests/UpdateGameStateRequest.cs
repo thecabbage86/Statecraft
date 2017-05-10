@@ -13,7 +13,7 @@ namespace Statecraft.Common.JsonModels.Requests
 
     public class UpdateGameStateModel
     {
-        public int GameId { get; set; }
+        public Guid GameId { get; set; }
         public GameState GameState { get; set; }
     }
 }

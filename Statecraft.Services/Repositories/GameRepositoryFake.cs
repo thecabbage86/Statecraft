@@ -10,15 +10,14 @@ namespace Statecraft.Services.Repositories
 {
     public class GameRepositoryFake : IGameRepository
     {
-        private Random rand = new Random(55);
 
         public Game CreateNewGame(Game game)
         {
-            game.Id = rand.Next(100, int.MaxValue);
+            game.Id = Guid.NewGuid();
             return game;
         }
 
-        public Game GetGameById(int id)
+        public Game GetGameById(Guid id)
         {
             return new Game() { Id = id, GermanyPlayerId = Guid.NewGuid(), HasBegun = true,
                 CurrentGameState = new GameState() { Round = new GameRound() { Phase = Phase.Retreat, Season = Season.Spring, Year = 1901 } },
@@ -27,10 +26,10 @@ namespace Statecraft.Services.Repositories
 
         public IList<Game> GetGamesByPlayerId(Guid playerId)
         {
-            return new List<Game>() { new Game() { Id = 10, AustriaPlayerId = playerId, CreatorPlayerId = playerId, HasBegun = false },
-                new Game() { Id = 100, GermanyPlayerId = playerId, HasBegun = true, CurrentGameState = new GameState() { Round = new GameRound() { Phase = Phase.Movement, Season = Season.Spring, Year = 1901 } },
+            return new List<Game>() { new Game() { Id = new Guid("00000000-0000-0000-0000-000000000010"), AustriaPlayerId = playerId, CreatorPlayerId = playerId, HasBegun = false },
+                new Game() { Id = new Guid("00000000-0000-0000-0000-000000000100"), GermanyPlayerId = playerId, HasBegun = true, CurrentGameState = new GameState() { Round = new GameRound() { Phase = Phase.Movement, Season = Season.Spring, Year = 1901 } },
                     Options = new GameOptions() { IsRanked = true, RoundLength = new TimeSpan(10, 0, 0) }  },
-                new Game() { Id = 103, EnglandPlayerId = playerId, HasBegun = true, IsFinished = true, CurrentGameState = new GameState(), Options = new GameOptions() { IsRanked = true, RoundLength = new TimeSpan(10, 0, 0) } },
+                new Game() { Id = new Guid("00000000-0000-0000-0000-000000000103"), EnglandPlayerId = playerId, HasBegun = true, IsFinished = true, CurrentGameState = new GameState(), Options = new GameOptions() { IsRanked = true, RoundLength = new TimeSpan(10, 0, 0) } },
             };
         }
 

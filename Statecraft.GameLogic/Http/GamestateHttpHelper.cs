@@ -12,7 +12,7 @@ namespace Statecraft.GameLogic.Http
 {
     public class GameStateHttpHelper
     {
-        public async Task<GameState> GetGameState(int gameId)
+        public async Task<GameState> GetGameState(Guid gameId)
         {
             GameState gameState = null;
             var requestUri = string.Format("gamestate?gameId={0}", gameId);
