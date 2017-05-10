@@ -12,14 +12,14 @@ namespace Statecraft.GameLogic.Http
 {
     public class GameStateHttpHelper
     {
-        public async Task<GameState> GetGameState(Guid gameId)
+        public async Task<GameState> GetGameState(Guid gameId, string baseApiUrl)
         {
             GameState gameState = null;
             var requestUri = string.Format("gamestate?gameId={0}", gameId);
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://statecraftservices.azurewebsites.net/"); //TODO: use config
+                client.BaseAddress = new Uri(baseApiUrl); 
                 //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 var response = await client.GetAsync(requestUri).ConfigureAwait(false);

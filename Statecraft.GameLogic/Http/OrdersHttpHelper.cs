@@ -14,13 +14,13 @@ namespace Statecraft.GameLogic.Http
 {
     public class OrdersHttpHelper
     {
-        public async Task SaveOrders(Guid gameId, MoveAttempt moveAttempt)
+        public async Task SaveOrders(Guid gameId, MoveAttempt moveAttempt, string baseApiUrl)
         {
             var requestUri = "orders";
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://statecraftservices.azurewebsites.net/"); //TODO: use config
+                client.BaseAddress = new Uri(baseApiUrl); 
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 var request = new SaveOrdersRequest(gameId, moveAttempt);

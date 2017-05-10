@@ -38,7 +38,7 @@ namespace Statecraft.App
 
             try
             {
-                games = gameHttpHelper.GetGamesByPlayerId(player.Id).Result;
+                games = gameHttpHelper.GetGamesByPlayerId(player.Id, Configuration.BaseApiUrl).Result;
             }
             catch (Exception ex)
             {

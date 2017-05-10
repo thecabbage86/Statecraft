@@ -100,7 +100,7 @@ namespace Statecraft.App.Activities
         {
             try
             {
-                ordersHttpHelper.SaveOrders(game.Id, moveAttempt).Wait();
+                ordersHttpHelper.SaveOrders(game.Id, moveAttempt, Configuration.BaseApiUrl).Wait();
                 //TODO: update UI
                 moveAttempt = null;
             }
@@ -118,7 +118,7 @@ namespace Statecraft.App.Activities
 
             try
             {
-                newGameState = gameStateHttpHelper.GetGameState(game.Id).Result;
+                newGameState = gameStateHttpHelper.GetGameState(game.Id, Configuration.BaseApiUrl).Result;
             }
             catch (Exception ex)
             {
