@@ -21,11 +21,11 @@ namespace Statecraft.Services.Controllers
     [Route("games")]
     public class GameController : ApiController
     {
-        private IGameRepository gameRepo;
+        private IGameRepository _gameRepo;
 
-        public GameController()
+        public GameController(IGameRepository gameRepo)
         {
-            gameRepo = new GameRepositoryFake(); //TODO: dependency injection
+            _gameRepo = gameRepo;
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Statecraft.Services.Controllers
 
             try
             {
-                var gameDtos = gameRepo.GetGamesByPlayerId((Guid)playerId);
+                var gameDtos = _gameRepo.GetGamesByPlayerId((Guid)playerId);
                 foreach(var dto in gameDtos)
                 {
                     games.Add(new Game(dto));
@@ -88,7 +88,7 @@ namespace Statecraft.Services.Controllers
 
             try
             {
-                gameRepo.CreateNewGame(game.ToDto());
+                _gameRepo.CreateNewGame(game.ToDto());
             }
             catch (Exception)
             {
@@ -112,7 +112,7 @@ namespace Statecraft.Services.Controllers
 
             try
             {
-                game = gameRepo.GetGameById(startGameRequest.StartGame.GameId);
+                game = _gameRepo.GetGameById(startGameRequest.StartGame.GameId);
 
                 //game.Options = startGameRequest.StartGame.Options;
                 game.IsGunboatOption = startGameRequest.StartGame.Options.IsGunboat;
@@ -128,7 +128,7 @@ namespace Statecraft.Services.Controllers
                 game.TurkeyPlayerId = startGameRequest.StartGame.TurkeyPlayerId;
                 game.HasBegun = true;
 
-                gameRepo.UpdateGame(game);
+                _gameRepo.UpdateGame(game);
             }
             catch (Exception)
             {

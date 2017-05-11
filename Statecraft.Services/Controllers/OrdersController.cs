@@ -13,11 +13,11 @@ namespace Statecraft.Services.Controllers
     [Route("orders")]
     public class OrdersController : ApiController
     {
-        private IOrdersRepository ordersRepo;
+        private IOrdersRepository _ordersRepo;
 
-        public OrdersController()
+        public OrdersController(IOrdersRepository ordersRepo)
         {
-            ordersRepo = new OrdersRepositoryFake(); //TODO: dependency injection
+            _ordersRepo = ordersRepo;
         }
 
 
@@ -31,7 +31,7 @@ namespace Statecraft.Services.Controllers
 
             try
             {
-                ordersRepo.SaveOrders(saveOrdersRequest.GameId, saveOrdersRequest.Orders);
+                _ordersRepo.SaveOrders(saveOrdersRequest.GameId, saveOrdersRequest.Orders);
             }
             catch (Exception)
             {
