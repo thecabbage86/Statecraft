@@ -28,12 +28,16 @@ namespace Statecraft.GameLogic.UI
         {
             Territory territoryClicked = null;
 
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine(x + ", " + y);
+#endif
+
             //TODO: only set territoryClicked if it's a validly selectable territory for this player (from moveAttempt.AllowedNextTerritories)
-            if (x >= 1300 && x <= 1590 && y >= 55 && y <= 350)
+            if (x >= 730 && x <= 973 && y >= 116 && y <= 372)
             {
                 territoryClicked = game.CurrentGameState.Map.Territories.FirstOrDefault(t => t.Name == TerritoryName.SaintPetersburg); 
             }
-            else if (x >= 1250 && x <= 1590 && y >= 0 && y < 55)
+            else if (x >= 667 && x <= 898 && y >= 0 && y < 116)
             {
                 territoryClicked = game.CurrentGameState.Map.Territories.FirstOrDefault(t => t.Name == TerritoryName.BerentsSea);
             }
