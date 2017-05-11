@@ -36,7 +36,7 @@ namespace Statecraft.Services.Controllers
         [HttpGet]
         public HttpResponseMessage GetGames([FromUri]Guid? playerId = null)
         {
-            IList<Game> games = null;
+            IList<Game> games = new List<Game>();
 
             try
             {

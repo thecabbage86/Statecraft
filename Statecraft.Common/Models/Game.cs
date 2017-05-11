@@ -35,7 +35,7 @@ namespace Statecraft.Common.Models
         {
             Id = dto.Id;
             Options = new GameOptions() { IsGunboat = dto.IsGunboatOption, IsRanked = dto.IsRankedOption, RoundLength = dto.RoundLengthOption };
-            CurrentGameState = new GameState(dto.GameRoundId, dto.Map);
+            CurrentGameState = dto.Map != null ? new GameState(dto.GameRoundId, dto.Map) : null;
             HasBegun = dto.HasBegun;
             IsFinished = dto.IsFinished;
             CreatorPlayerId = dto.CreatorPlayerId;
