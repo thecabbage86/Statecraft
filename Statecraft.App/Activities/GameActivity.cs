@@ -62,15 +62,19 @@ namespace Statecraft.App.Activities
                     if(moveAttempt.IsFinished)
                     {
                         CompleteMove();
-                        var newGameState = GetCurrentGameState();
-                        //if game progressed to next round, reload UI with new game state
-                        if(newGameState != null && newGameState.Round.Phase != game.CurrentGameState.Round.Phase)
-                        {
-                            StartNewGameRound(newGameState);
-                        }
                     }
                 }
             };
+
+            //TODO: add button press for saving orders
+                //SaveOrders()
+                //var newGameState = GetCurrentGameState();
+                ////if game progressed to next round, reload UI with new game state
+                //if (newGameState != null && newGameState.Round.Phase != game.CurrentGameState.Round.Phase)
+                //{
+                //    StartNewGameRound(newGameState);
+                //}
+
             //map.Click += (s, e) =>
             //{
             //    //Toast.MakeText(ActivationContext, "Clicked on map", ToastLength.Long);
@@ -98,11 +102,17 @@ namespace Statecraft.App.Activities
 
         private void CompleteMove()
         {
+            moveAttempt = null;
+
+            //TODO: save move in local storage
+            //TODO: update UI
+        }
+
+        private void SaveOrders()
+        {
             try
             {
                 ordersHttpHelper.SaveOrders(game.Id, moveAttempt, Configuration.BaseApiUrl).Wait();
-                //TODO: update UI
-                moveAttempt = null;
             }
             catch (Exception ex)
             {
