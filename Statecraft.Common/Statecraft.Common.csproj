@@ -42,12 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\GameValues.cs" />
-    <Compile Include="DTOs\GameDbo.cs" />
-    <Compile Include="DTOs\GameRoundDbo.cs" />
-    <Compile Include="DTOs\GameStateDbo.cs" />
-    <Compile Include="DTOs\MoveAttemptDbo.cs" />
-    <Compile Include="DTOs\PlayerDbo.cs" />
-    <Compile Include="DTOs\TerritoryDbo.cs" />
+    <Compile Include="DTOs\GameDto.cs" />
+    <Compile Include="DTOs\GameRoundDto.cs" />
+    <Compile Include="DTOs\GameStateDto.cs" />
+    <Compile Include="DTOs\MoveAttemptDto.cs" />
+    <Compile Include="DTOs\PlayerDto.cs" />
+    <Compile Include="DTOs\TerritoryDto.cs" />
     <Compile Include="Enums\CoastType.cs" />
     <Compile Include="Enums\Country.cs" />
     <Compile Include="Enums\OrdersType.cs" />

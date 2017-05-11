@@ -36,7 +36,7 @@ namespace Statecraft.Services.Controllers
         [HttpGet]
         public HttpResponseMessage GetGames([FromUri]Guid? playerId = null)
         {
-            IList<GameDbo> games = null;
+            IList<GameDto> games = null;
 
             try
             {
@@ -48,7 +48,7 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.InternalServerError);
             }
 
-            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(Mapper.Map<IList<GameDbo>, IList<Game>>(games)));
+            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(Mapper.Map<IList<GameDto>, IList<Game>>(games)));
         }
 
         [HttpPost]
@@ -84,7 +84,7 @@ namespace Statecraft.Services.Controllers
 
             try
             {
-                gameRepo.CreateNewGame(Mapper.Map<GameDbo>(game));
+                gameRepo.CreateNewGame(Mapper.Map<GameDto>(game));
             }
             catch (Exception)
             {
@@ -104,7 +104,7 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
-            GameDbo game;
+            GameDto game;
 
             try
             {

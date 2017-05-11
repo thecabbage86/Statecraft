@@ -10,9 +10,9 @@ namespace Statecraft.Services.Interfaces
 {
     public interface IGameRepository
     {
-        GameDbo CreateNewGame(GameDbo game);
-        GameDbo GetGameById(Guid id);
-        IList<GameDbo> GetGamesByPlayerId(Guid playerId);
-        GameDbo UpdateGame(GameDbo game);
+        GameDto CreateNewGame(GameDto game);
+        GameDto GetGameById(Guid id);
+        IList<GameDto> GetGamesByPlayerId(Guid playerId);
+        GameDto UpdateGame(GameDto game);
     }
 }

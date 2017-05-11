@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Statecraft.Common.DTOs
 {
-    public class MoveAttemptDbo
+    public class MoveAttemptDto
     {
         public long Id { get; set; }
         public OrdersType OrdersType { get; set; }

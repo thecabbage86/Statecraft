@@ -1,4 +1,5 @@
-﻿using Statecraft.Common.Enums;
+﻿using Statecraft.Common.DTOs;
+using Statecraft.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,22 @@ namespace Statecraft.Common.Models
             //CurrentGameState = new GameState();
         }
 
-        //public Game(GameDbo)
+        public Game(GameDto dto)
+        {
+            Id = dto.Id;
+            Options = new GameOptions() { IsGunboat = dto.IsGunboatOption, IsRanked = dto.IsRankedOption, RoundLength = dto.RoundLengthOption };
+            CurrentGameState = new GameState(dto.GameRoundId, dto.Map);
+            HasBegun = dto.HasBegun;
+            IsFinished = dto.IsFinished;
+            CreatorPlayerId = dto.CreatorPlayerId;
+            EnglandPlayerId = dto.EnglandPlayerId;
+            FrancePlayerId = dto.FrancePlayerId;
+            ItalyPlayerId = dto.ItalyPlayerId;
+            RussiaPlayerId = dto.RussiaPlayerId;
+            AustriaPlayerId = dto.AustriaPlayerId;
+            TurkeyPlayerId = dto.TurkeyPlayerId;
+            GermanyPlayerId = dto.GermanyPlayerId;
+            Winners = dto.Winners;
+        }
     }
 }

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Statecraft.Common.DTOs
 {
-    public class GameDbo
+    public class GameDto
     {
         public Guid Id { get; set; }
         public bool IsGunboatOption { get; set; }
@@ -25,6 +25,6 @@ namespace Statecraft.Common.DTOs
         public IList<Country> Winners { get; set; }
 
         public int GameRoundId { get; set; }
-        public virtual IList<TerritoryDbo> Map { get; set; }
+        public virtual IList<TerritoryDto> Map { get; set; }
     }
 }

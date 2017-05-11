@@ -10,22 +10,22 @@ namespace Statecraft.Services.Repositories
 {
     public class GameRepository : IGameRepository
     {
-        public GameDbo CreateNewGame(GameDbo game)
+        public GameDto CreateNewGame(GameDto game)
         {
             throw new NotImplementedException();
         }
 
-        public GameDbo GetGameById(Guid id)
+        public GameDto GetGameById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<GameDbo> GetGamesByPlayerId(Guid playerId)
+        public IList<GameDto> GetGamesByPlayerId(Guid playerId)
         {
             throw new NotImplementedException();
         }
 
-        public GameDbo UpdateGame(GameDbo game)
+        public GameDto UpdateGame(GameDto game)
         {
             throw new NotImplementedException();
         }

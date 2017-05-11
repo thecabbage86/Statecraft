@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Statecraft.Common.DTOs
 {
-    public class PlayerDbo
+    public class PlayerDto
     {
         public Guid Id { get; set; }
         public int RankScore { get; set; }

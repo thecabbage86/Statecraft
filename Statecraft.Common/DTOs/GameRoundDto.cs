@@ -2,7 +2,7 @@
 
 namespace Statecraft.Common.DTOs
 {
-    public class GameRoundDbo
+    public class GameRoundDto
     {
         public int Id { get; set; }
         public Season Season { get; set; }

@@ -32,7 +32,7 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
-            GameDbo game;
+            GameDto game;
 
             try
             {
@@ -56,7 +56,7 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
-            GameDbo gameDbo;
+            GameDto gameDbo;
 
             try
             {
@@ -64,7 +64,7 @@ namespace Statecraft.Services.Controllers
 
                 var game = Mapper.Map<Game>(gameDbo);
                 game.CurrentGameState = updateGameStateRequest.UpdateGameState.GameState;
-                gameDbo = Mapper.Map<GameDbo>(game);
+                gameDbo = Mapper.Map<GameDto>(game);
 
                 gameRepo.UpdateGame(gameDbo);
             }

@@ -32,11 +32,6 @@ namespace Statecraft.Services
             );
 
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.Re‌​ferenceLoopHandling = ReferenceLoopHandling.Ignore;
-
-            Mapper.Initialize(cfg => {
-                cfg.CreateMap<Game, GameDbo>();
-                cfg.CreateMap<Territory, TerritoryDbo>();
-            });
         }
     }
 }

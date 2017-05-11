@@ -29,15 +29,6 @@ namespace Statecraft.Common.Models.Territories
             else
                 throw new ArgumentException("There already exists a Territory in the map with name " + territory.Name);
         }
-
-        //public virtual void AddTerritory(Territory n)
-        //{
-        //    // Make sure this Territory is unique
-        //    if (!territoryList.ContainsKey(n.Name))
-        //        territoryList.Add(n);
-        //    else
-        //        throw new ArgumentException("There already exists a Territory in the map with name " + n.Name);
-        //}
    
         public virtual void AddUndirectedEdge(TerritoryName uKey, TerritoryName vKey)
         {

@@ -10,8 +10,8 @@ namespace Statecraft.Services.DB
 {
     public class GameContext : DbContext
     {
-        public DbSet<GameDbo> Games { get; set; }
-        public DbSet<TerritoryDbo> Territories { get; set; }
+        public DbSet<GameDto> Games { get; set; }
+        public DbSet<TerritoryDto> Territories { get; set; }
 
     }
 }
