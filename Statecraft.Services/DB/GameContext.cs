@@ -12,6 +12,7 @@ namespace Statecraft.Services.DB
     {
         public DbSet<GameDto> Games { get; set; }
         public DbSet<TerritoryDto> Territories { get; set; }
-
+        public DbSet<MoveAttemptDto> Orders { get; set; }
+        public DbSet<PlayerDto> Players { get; set; }
     }
 }
