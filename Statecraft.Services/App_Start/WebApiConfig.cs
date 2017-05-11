@@ -32,6 +32,8 @@ namespace Statecraft.Services
             );
 
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.Re‌​ferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
+            UnityConfig.RegisterComponents();
         }
     }
 }
