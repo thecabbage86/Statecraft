@@ -12,7 +12,7 @@ namespace Statecraft.Services
         {
 			var container = new UnityContainer();
             
-            container.RegisterType<IGameRepository, GameRepositoryFake>();
+            container.RegisterType<IGameRepository, GameRepository>();
             container.RegisterType<IOrdersRepository, OrdersRepositoryFake>();
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
