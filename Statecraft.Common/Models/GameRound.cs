@@ -10,11 +10,47 @@ namespace Statecraft.Common.Models
 {
     public class GameRound
     {
-        public GameRound() { }
-        public GameRound(int gameRoundDboId)
+        public Season Season { get; set; }
+
+        public Phase Phase { get; set; }
+        public int Year { get; set; }
+
+        public int GameRoundId
         {
-            Year = GameValues.STARTING_YEAR + (int)Math.Floor((double)(gameRoundDboId - 1) / 5);
-            int roundInYear = ((gameRoundDboId - 1) % 5) + 1;
+            get
+            {
+                int seasonRoundOffset;
+
+                if(Season == Season.Spring && Phase == Phase.Movement)
+                {
+                    seasonRoundOffset = 0;
+                }
+                else if (Season == Season.Spring && Phase == Phase.Retreat)
+                {
+                    seasonRoundOffset = 1;
+                }
+                else if (Season == Season.Fall && Phase == Phase.Movement)
+                {
+                    seasonRoundOffset = 2;
+                }
+                else if (Season == Season.Fall && Phase == Phase.Retreat)
+                {
+                    seasonRoundOffset = 3;
+                }
+                else //if (Season == Season.Fall && Phase == Phase.Build)
+                {
+                    seasonRoundOffset = 4;
+                }
+
+                return (Year - GameValues.STARTING_YEAR) * 5 + 1 + seasonRoundOffset;
+            }
+        }
+
+        public GameRound() { }
+        public GameRound(int gameRoundDtoId)
+        {
+            Year = GameValues.STARTING_YEAR + (int)Math.Floor((double)(gameRoundDtoId - 1) / 5);
+            int roundInYear = ((gameRoundDtoId - 1) % 5) + 1;
             switch (roundInYear)
             {
                 case 1:
@@ -23,7 +59,7 @@ namespace Statecraft.Common.Models
                     break;
                 case 2:
                     Season = Season.Spring;
-                    Phase = Phase.Build;
+                    Phase = Phase.Retreat;
                     break;
                 case 3:
                     Season = Season.Fall;
@@ -39,10 +75,6 @@ namespace Statecraft.Common.Models
                     break;
             }
         }
-        public Season Season { get; set; }
-
-        public Phase Phase { get; set; }
-        public int Year { get; set; }
 
         public override string ToString()
         {

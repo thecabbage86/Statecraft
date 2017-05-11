@@ -36,11 +36,15 @@ namespace Statecraft.Services.Controllers
         [HttpGet]
         public HttpResponseMessage GetGames([FromUri]Guid? playerId = null)
         {
-            IList<GameDto> games = null;
+            IList<Game> games = null;
 
             try
             {
-                games = gameRepo.GetGamesByPlayerId((Guid)playerId);
+                var gameDtos = gameRepo.GetGamesByPlayerId((Guid)playerId);
+                foreach(var dto in gameDtos)
+                {
+                    games.Add(new Game(dto));
+                }
             }
             catch (Exception)
             {
@@ -48,7 +52,7 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.InternalServerError);
             }
 
-            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(Mapper.Map<IList<GameDto>, IList<Game>>(games)));
+            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(games));
         }
 
         [HttpPost]
@@ -84,7 +88,7 @@ namespace Statecraft.Services.Controllers
 
             try
             {
-                gameRepo.CreateNewGame(Mapper.Map<GameDto>(game));
+                gameRepo.CreateNewGame(game.ToDto());
             }
             catch (Exception)
             {
@@ -132,7 +136,7 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.InternalServerError);
             }
 
-            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(Mapper.Map<Game>(game)));
+            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(new Game(game)));
         }
     }
 }

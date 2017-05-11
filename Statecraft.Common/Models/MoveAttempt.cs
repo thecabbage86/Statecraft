@@ -1,4 +1,5 @@
-﻿using Statecraft.Common.Enums;
+﻿using Statecraft.Common.DTOs;
+using Statecraft.Common.Enums;
 using Statecraft.Common.Models.Territories;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,14 @@ namespace Statecraft.Common.Models
         public IList<Territory> AllowedNextTerritories { get; set; }
         public bool IsFinished { get; set; }
         //public bool MoveSaved { get; set; }
+
+        public MoveAttempt(){}
+
+        //TODO: complete this mapping
+        public MoveAttempt(MoveAttemptDto dto)
+        {
+            this.OrdersType = dto.OrdersType;
+            //this.SelectedTerritory
+        }
     }
 }

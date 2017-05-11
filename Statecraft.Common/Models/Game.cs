@@ -48,5 +48,36 @@ namespace Statecraft.Common.Models
             GermanyPlayerId = dto.GermanyPlayerId;
             Winners = dto.Winners;
         }
+
+        public GameDto ToDto()
+        {
+            var dto = new GameDto()
+            {
+                Id = this.Id,
+                IsGunboatOption = this.Options.IsGunboat,
+                IsRankedOption = this.Options.IsRanked,
+                RoundLengthOption = this.Options.RoundLength,
+                HasBegun = this.HasBegun,
+                IsFinished = this.IsFinished,
+                CreatorPlayerId = this.CreatorPlayerId,
+                EnglandPlayerId = this.EnglandPlayerId,
+                FrancePlayerId = this.FrancePlayerId,
+                ItalyPlayerId = this.ItalyPlayerId,
+                RussiaPlayerId = this.RussiaPlayerId,
+                AustriaPlayerId = this.AustriaPlayerId,
+                TurkeyPlayerId = this.TurkeyPlayerId,
+                GermanyPlayerId = this.GermanyPlayerId,
+                Winners = this.Winners,
+                GameRoundId = this.CurrentGameState.Round.GameRoundId,
+                Map = new List<TerritoryDto>()
+            };
+
+            foreach(var territory in this.CurrentGameState.Map.Territories)
+            {
+                dto.Map.Add(territory.ToDto(this.Id, this.CurrentGameState.Round.GameRoundId));
+            }
+
+            return dto;
+        }
     }
 }

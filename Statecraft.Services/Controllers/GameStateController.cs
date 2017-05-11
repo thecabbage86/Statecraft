@@ -44,7 +44,7 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.InternalServerError);
             }
 
-            return Request.CreateResponse<GameStateResponse>(HttpStatusCode.OK, new GameStateResponse(Mapper.Map<Game>(game).CurrentGameState));
+            return Request.CreateResponse<GameStateResponse>(HttpStatusCode.OK, new GameStateResponse(new Game(game).CurrentGameState));
         }
 
         [HttpPost]
@@ -56,17 +56,18 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
-            GameDto gameDbo;
+            GameDto gameDto;
 
             try
             {
-                gameDbo = gameRepo.GetGameById(updateGameStateRequest.UpdateGameState.GameId);
+                gameDto = gameRepo.GetGameById(updateGameStateRequest.UpdateGameState.GameId);
 
-                var game = Mapper.Map<Game>(gameDbo);
+                //TODO: refactor/possibly fix
+                var game = new Game(gameDto);
                 game.CurrentGameState = updateGameStateRequest.UpdateGameState.GameState;
-                gameDbo = Mapper.Map<GameDto>(game);
+                gameDto = game.ToDto();
 
-                gameRepo.UpdateGame(gameDbo);
+                gameRepo.UpdateGame(gameDto);
             }
             catch (Exception)
             {
@@ -74,7 +75,7 @@ namespace Statecraft.Services.Controllers
                 throw new HttpResponseException(HttpStatusCode.InternalServerError);
             }
 
-            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(Mapper.Map<Game>(gameDbo)));
+            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(new Game(gameDto)));
         }
     }
 }

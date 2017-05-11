@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Statecraft.Common.DTOs;
 
 namespace Statecraft.Common.Models.Territories
 {
@@ -52,6 +53,19 @@ namespace Statecraft.Common.Models.Territories
         public void AddNeighbor(Territory e)
         {
             neighbors.Add(e);
+        }
+
+        public TerritoryDto ToDto(Guid gameId, int gameRoundId)
+        {
+            return new TerritoryDto()
+            {
+                Id = this.Id,
+                GameId = gameId,
+                GameRoundId = gameRoundId,
+                OccupyingUnitCountry = this.OccupyingUnit != null ? (Country?)this.OccupyingUnit.Country : null,
+                OccupyingUnitType = this.OccupyingUnit != null ? (UnitType?)this.OccupyingUnit.UnitType : null,
+                Owner = this.Owner
+            };
         }
     }
 }
