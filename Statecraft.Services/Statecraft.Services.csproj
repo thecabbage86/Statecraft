@@ -252,12 +252,6 @@
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\GameStateController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
-    <Compile Include="DB\DBOs\GameDbo.cs" />
-    <Compile Include="DB\DBOs\MoveAttemptDbo.cs" />
-    <Compile Include="DB\DBOs\PlayerDbo.cs" />
-    <Compile Include="DB\DBOs\TerritoryDbo.cs" />
-    <Compile Include="DB\DBOs\GameRoundDbo.cs" />
-    <Compile Include="DB\DBOs\GameStateDbo.cs" />
     <Compile Include="DB\GameContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

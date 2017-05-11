@@ -7,9 +7,9 @@ using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using AutoMapper;
-using Statecraft.Services.DB.DBOs;
 using Statecraft.Common.Models;
 using Statecraft.Common.Models.Territories;
+using Statecraft.Common.DTOs;
 
 namespace Statecraft.Services
 {

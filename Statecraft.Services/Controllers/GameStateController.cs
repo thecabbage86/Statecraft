@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using Statecraft.Common.DTOs;
 using Statecraft.Common.JsonModels.Requests;
 using Statecraft.Common.JsonModels.Responses;
 using Statecraft.Common.Models;
-using Statecraft.Services.DB.DBOs;
 using Statecraft.Services.Interfaces;
 using Statecraft.Services.Repositories;
 using System;

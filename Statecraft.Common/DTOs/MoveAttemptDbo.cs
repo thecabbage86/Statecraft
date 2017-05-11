@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Statecraft.Services.DB.DBOs
+namespace Statecraft.Common.DTOs
 {
     public class MoveAttemptDbo
     {

@@ -29,5 +29,7 @@ namespace Statecraft.Common.Models
         {
             //CurrentGameState = new GameState();
         }
+
+        //public Game(GameDbo)
     }
 }

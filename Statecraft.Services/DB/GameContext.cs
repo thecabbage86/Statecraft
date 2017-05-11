@@ -1,5 +1,5 @@
-﻿using Statecraft.Common.Models;
-using Statecraft.Services.DB.DBOs;
+﻿using Statecraft.Common.DTOs;
+using Statecraft.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

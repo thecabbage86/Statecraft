@@ -1,6 +1,6 @@
 ﻿using Statecraft.Common.Enums;
 
-namespace Statecraft.Services.DB.DBOs
+namespace Statecraft.Common.DTOs
 {
     public class GameRoundDbo
     {

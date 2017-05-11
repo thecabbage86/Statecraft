@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Statecraft.Services.DB.DBOs
+namespace Statecraft.Common.DTOs
 {
     public class TerritoryDbo
     {

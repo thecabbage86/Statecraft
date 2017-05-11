@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Statecraft.Services.DB.DBOs
+namespace Statecraft.Common.DTOs
 {
     public class GameStateDbo
     {

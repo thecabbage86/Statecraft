@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using Statecraft.Common.Models;
 using Statecraft.Common.Enums;
-using Statecraft.Services.DB.DBOs;
+using Statecraft.Common.DTOs;
 
 namespace Statecraft.Services.Repositories
 {
