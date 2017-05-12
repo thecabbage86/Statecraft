@@ -44,8 +44,8 @@ namespace Statecraft.Services.Repositories
 
             using (var context = new GameContext())
             {
-                games = context.Games.Where(g => g.AustriaPlayerId == playerId || g.EnglandPlayerId == playerId || g.FrancePlayerId == playerId 
-                    || g.GermanyPlayerId == playerId || g.ItalyPlayerId == playerId || g.RussiaPlayerId == playerId || g.TurkeyPlayerId == playerId).ToList();
+                games = context.Games.Where(g => g.AustriaPlayerId == playerId || g.EnglandPlayerId == playerId || g.FrancePlayerId == playerId || g.GermanyPlayerId == playerId || g.ItalyPlayerId == playerId || g.RussiaPlayerId == playerId || g.TurkeyPlayerId == playerId)
+                    .Include(g => g.Map).ToList();
             }
 
             return games;
