@@ -45,7 +45,7 @@
     <Compile Include="DTOs\GameDto.cs" />
     <Compile Include="DTOs\GameRoundDto.cs" />
     <Compile Include="DTOs\GameStateDto.cs" />
-    <Compile Include="DTOs\MoveAttemptDto.cs" />
+    <Compile Include="DTOs\OrdersDto.cs" />
     <Compile Include="DTOs\PlayerDto.cs" />
     <Compile Include="DTOs\TerritoryDto.cs" />
     <Compile Include="Enums\CoastType.cs" />

@@ -9,9 +9,8 @@ namespace Statecraft.Common.DTOs
     public class TerritoryDto
     {
         [Key, Column(Order =0)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Key, Column(Order = 1), ForeignKey("GameDbo")]
+        [Key, Column(Order = 1), ForeignKey("Game")]
         public Guid GameId { get; set; }
         [Key, Column(Order = 2)]
         public int GameRoundId { get; set; }
@@ -19,5 +18,7 @@ namespace Statecraft.Common.DTOs
         public UnitType? OccupyingUnitType { get; set; }
         public Country? OccupyingUnitCountry { get; set; }
         public Country? Owner { get; set; }
+
+        public virtual GameDto Game { get; set; }
     }
 }

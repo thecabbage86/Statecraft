@@ -23,7 +23,7 @@ namespace Statecraft.Common.Models
         public MoveAttempt(){}
 
         //TODO: complete this mapping
-        public MoveAttempt(MoveAttemptDto dto)
+        public MoveAttempt(OrdersDto dto)
         {
             this.OrdersType = dto.OrdersType;
             //this.SelectedTerritory

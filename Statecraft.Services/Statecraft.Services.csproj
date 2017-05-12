@@ -279,6 +279,11 @@
     </Compile>
     <Compile Include="Interfaces\IGameRepository.cs" />
     <Compile Include="Interfaces\IOrdersRepository.cs" />
+    <Compile Include="Migrations\201705121535131_InitialCreate.cs" />
+    <Compile Include="Migrations\201705121535131_InitialCreate.Designer.cs">
+      <DependentUpon>201705121535131_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -369,6 +374,11 @@
       <Project>{70ef42c5-4a7d-479b-9425-3e4c23b81cfc}</Project>
       <Name>Statecraft.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705121535131_InitialCreate.resx">
+      <DependentUpon>201705121535131_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
