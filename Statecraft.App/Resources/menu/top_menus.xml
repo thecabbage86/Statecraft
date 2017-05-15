@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      android:textSize="10sp">
+  <!--<item
+    android:id="@+id/menu_hamburger"
+    android:icon="@drawable/ic_menu_black_24dp"
+    android:showAsAction="ifRoom"
+    android:title="Hamburger" />-->
+  <item
+    android:id="@+id/menu_messages"
+    android:icon="@drawable/ic_forum_black_24dp"
+    android:showAsAction="ifRoom"
+    android:title="Negotiations" />
+  <item
+    android:id="@+id/menu_commit"
+    android:icon="@drawable/ic_done_black_24dp"
+    android:showAsAction="ifRoom"
+    android:title="Commit Orders" />
+  <item
+    android:id="@+id/menu_back"
+    android:icon="@drawable/ic_chevron_left_black_24dp"
+    android:showAsAction="ifRoom"
+    android:title="Previous Round" />
+  <item
+    android:id="@+id/menu_forward"
+    android:icon="@drawable/ic_chevron_right_black_24dp"
+    android:showAsAction="ifRoom"
+    android:title="Next Round" />
+  <item
+    android:id="@+id/menu_all_games"
+    android:showAsAction="never"
+    android:title="All Games" />
+  <item
+    android:id="@+id/menu_game_intent"
+    android:showAsAction="never"
+    android:title="Set Game Intent" />
+  <item
+    android:id="@+id/menu_settings"
+    android:showAsAction="never"
+    android:title="Settings" />
+</menu>

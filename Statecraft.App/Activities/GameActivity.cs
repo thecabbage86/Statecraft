@@ -20,7 +20,7 @@ using Android.Util;
 
 namespace Statecraft.App.Activities
 {
-    [Activity(Label = "GameActivity")]
+    [Activity(Label = "GameActivity")]//, Theme = "@android:style/Theme.NoTitleBar")]
     public class GameActivity : Activity
     {
         private OrdersHttpHelper ordersHttpHelper;
@@ -66,14 +66,18 @@ namespace Statecraft.App.Activities
                 }
             };
 
+            var gameToolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            SetActionBar(gameToolbar);
+            ActionBar.Title = DisplayTextHelper.GetGameStateDisplayText(game, playerCountry);
+
             //TODO: add button press for saving orders
-                //SaveOrders()
-                //var newGameState = GetCurrentGameState();
-                ////if game progressed to next round, reload UI with new game state
-                //if (newGameState != null && newGameState.Round.Phase != game.CurrentGameState.Round.Phase)
-                //{
-                //    StartNewGameRound(newGameState);
-                //}
+            //SaveOrders()
+            //var newGameState = GetCurrentGameState();
+            ////if game progressed to next round, reload UI with new game state
+            //if (newGameState != null && newGameState.Round.Phase != game.CurrentGameState.Round.Phase)
+            //{
+            //    StartNewGameRound(newGameState);
+            //}
 
             //map.Click += (s, e) =>
             //{
@@ -98,6 +102,19 @@ namespace Statecraft.App.Activities
             {
                 StartNewGameRound(newGameState);
             }
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.top_menus, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            Toast.MakeText(this, "Action selected: " + item.TitleFormatted,
+                ToastLength.Short).Show();
+            return base.OnOptionsItemSelected(item);
         }
 
         private void CompleteMove()

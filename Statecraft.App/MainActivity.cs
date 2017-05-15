@@ -96,6 +96,10 @@ namespace Statecraft.App
                 prefsEditor.Commit();
             }
 
+#if DEBUG
+            playerId = "66390a2c-f0f2-4bc0-b0c3-38bdb89896ad";
+#endif
+
             return new Player() { Id = Guid.Parse(playerId) }; //TODO: retrieve player info from web service, when necessary
         }
     }

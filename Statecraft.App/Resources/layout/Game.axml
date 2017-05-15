@@ -1,54 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minWidth="25px"
     android:minHeight="25px">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:textSize="10sp"/>
     <HorizontalScrollView
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
         android:id="@+id/horizontalScrollView1">
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-          android:orientation="vertical"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:minWidth="25px"
-          android:minHeight="25px">
-          <ImageView
-              android:src="@drawable/map"
-              android:layout_width="1072px"
-              android:layout_height="match_parent"
-              android:id="@+id/map" 
-              android:layout_weight="1"/>
-          <ImageView
-            android:src="@drawable/landUnit"
+        <RelativeLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:scaleType="fitXY"
-            android:layout_weight="1"
-            android:id="@+id/berentsUnit" />
-          <ImageView
-            android:src="@drawable/seaUnit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:scaleType="fitXY"
-            android:id="@+id/stPetersUnit"
-            android:layout_gravity="center_horizontal|top"
-            android:layout_weight="1"/>
-        <ImageView
-            android:src="@drawable/seaUnit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:scaleType="fitXY"
-            android:id="@+id/ankaraUnit"
-            android:layout_gravity="center_horizontal|top"
-            android:layout_weight="1"/>
+            android:minWidth="25px"
+            android:minHeight="25px">
+            <ImageView
+                android:src="@drawable/map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/map"
+                android:layout_weight="1" />
+            <ImageView
+                android:src="@drawable/landUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:scaleType="fitXY"
+                android:layout_weight="1"
+                android:id="@+id/berentsUnit" />
+            <ImageView
+                android:src="@drawable/seaUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:scaleType="fitXY"
+                android:id="@+id/stPetersUnit"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_weight="1" />
+            <ImageView
+                android:src="@drawable/seaUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:scaleType="fitXY"
+                android:id="@+id/ankaraUnit"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_weight="1" />
         </RelativeLayout>
     </HorizontalScrollView>
-</LinearLayout>
+</RelativeLayout>
