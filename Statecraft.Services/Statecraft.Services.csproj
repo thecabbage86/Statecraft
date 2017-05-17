@@ -279,9 +279,9 @@
     </Compile>
     <Compile Include="Interfaces\IGameRepository.cs" />
     <Compile Include="Interfaces\IOrdersRepository.cs" />
-    <Compile Include="Migrations\201705121535131_InitialCreate.cs" />
-    <Compile Include="Migrations\201705121535131_InitialCreate.Designer.cs">
-      <DependentUpon>201705121535131_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201705171603446_InitialCreate.cs" />
+    <Compile Include="Migrations\201705171603446_InitialCreate.Designer.cs">
+      <DependentUpon>201705171603446_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -376,8 +376,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705121535131_InitialCreate.resx">
-      <DependentUpon>201705121535131_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705171603446_InitialCreate.resx">
+      <DependentUpon>201705171603446_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -46,7 +46,7 @@ namespace Statecraft.Services.Controllers
                     games.Add(new Game(dto));
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 //TODO: log
                 throw new HttpResponseException(HttpStatusCode.InternalServerError);

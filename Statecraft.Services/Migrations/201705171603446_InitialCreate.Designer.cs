@@ -13,7 +13,7 @@ namespace Statecraft.Services.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201705121535131_InitialCreate"; }
+            get { return "201705171603446_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source
