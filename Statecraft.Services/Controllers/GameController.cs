@@ -12,12 +12,14 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Statecraft.Services.Controllers
 {
     /// <summary>
     /// Create, start, and retrieve games.
     /// </summary>
+    [EnableCors(origins: "http://localhost:4200", headers:"*", methods:"*")]
     [Route("games")]
     public class GameController : ApiController
     {
