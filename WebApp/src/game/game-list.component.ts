@@ -1,5 +1,6 @@
+import { IGameResponse } from './models/game-response';
 import { GameService } from './game.service';
-import { IGame } from './game';
+import { IGame } from './models/game';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,8 +9,8 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['game-list.component.css']
 })
 export class GameListComponent implements OnInit {
-    games: IGame[];
-    playerId: AAGUID = "1f29a1c0-f2f9-41b7-8c9d-17455e980d71"; //TODO: handle playerId properly
+    games: IGameResponse;
+    playerId: AAGUID = "3d63cafe-48b7-4254-a837-96094440e70e"; //TODO: handle playerId properly
     errorMessage: string;
 
     constructor(private _gameService: GameService){}

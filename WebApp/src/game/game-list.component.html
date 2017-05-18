@@ -3,29 +3,45 @@
         {{title}}
     </div>-->
     <div class="panel-body">
-        <div class="row">
-            <div class="col-md-2">Id</div>
+        <!--<div class="row">
+            <div class="col-md-2">GameId</div>
             <div class="col-md-4">
                 CreatorPlayerId
-                <!--<input type="text" [(ngModel)]="listFilter" />-->
+                <input type="text" [(ngModel)]="listFilter" />
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <!--<h3>Filtered by: {{listFilter}} </h3>-->
+                <h3>Filtered by: {{listFilter}} </h3>
             </div>
-        </div>
+        </div>-->
+        <div class="row">Games for Player with ID = {{playerId}}</div>
+        <br/><br/>
         <div class="table-responsive">
-            <table class="table" *ngIf="games && games.length">
+            <table class="table" *ngIf="games && games.Games && games.Games.length">
                 <thead>
                     <tr>
                         <th>GameId</th>
+                        <th>Started</th>
+                        <th>Finished</th>
+                        <th>Country</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!--<tr *ngFor="let game of games">
-                        <td>game.Id</td>
-                    </tr>-->
+                    <tr *ngFor="let game of games.Games"> <!--finishedGames-->
+                        <td>{{game.Id}}</td>
+                        <td>{{(game.HasBegun ? 'yes' : 'no')}}</td>
+                        <td>{{(game.IsFinished ? 'yes' : 'no')}}</td>
+                        <td>
+                            <span *ngIf="game.FrancePlayerId && playerId == game.FrancePlayerId">France</span>
+                            <span *ngIf="game.GermanyPlayerId && playerId == game.GermanyPlayerId">Germany</span>
+                            <span *ngIf="game.AustriaPlayerId && playerId == game.AustriaPlayerId">Austria</span>
+                            <span *ngIf="game.RussiaPlayerId && playerId == game.RussiaPlayerId">Austria</span>
+                            <span *ngIf="game.EnglandPlayerId && playerId == game.EnglandPlayerId">England</span>
+                            <span *ngIf="game.TurkeyPlayerId && playerId == game.TurkeyPlayerId">Turkey</span>
+                            <span *ngIf="game.ItalyPlayerId && playerId == game.ItalyPlayerId">Italy</span>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
