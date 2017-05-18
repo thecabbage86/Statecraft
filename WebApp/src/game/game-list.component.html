@@ -15,8 +15,8 @@
                 <h3>Filtered by: {{listFilter}} </h3>
             </div>
         </div>-->
-        <div class="row">Games for Player with ID = {{playerId}}</div>
-        <br/><br/>
+        <h2>Games for Player with ID = {{playerId}}</h2>
+        <h3>Finished Games</h3>
         <div class="table-responsive">
             <table class="table" *ngIf="games && games.Games && games.Games.length">
                 <thead>
@@ -25,11 +25,14 @@
                         <th>Started</th>
                         <th>Finished</th>
                         <th>Country</th>
+                        <th>Round</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let game of games.Games"> <!--finishedGames-->
-                        <td>{{game.Id}}</td>
+                    <tr *ngFor="let game of games.Games | finishedGames">
+                        <a href="">
+                            <td>{{game.Id}}</td>
+                        </a>
                         <td>{{(game.HasBegun ? 'yes' : 'no')}}</td>
                         <td>{{(game.IsFinished ? 'yes' : 'no')}}</td>
                         <td>
@@ -41,6 +44,7 @@
                             <span *ngIf="game.TurkeyPlayerId && playerId == game.TurkeyPlayerId">Turkey</span>
                             <span *ngIf="game.ItalyPlayerId && playerId == game.ItalyPlayerId">Italy</span>
                         </td>
+                        <td>{{game | gameRound}}</td>
                     </tr>
                 </tbody>
             </table>
