@@ -24,6 +24,16 @@ export class GameService {
             .catch(this.handleError);
     }
 
+    getGameById(gameId: AAGUID): Observable<IGameResponse> {
+        let headers = new Headers({ 'Accept': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        
+        return this._http.get(this._url + "/" + gameId, options)
+            .map((response: Response) => <IGameResponse>response.json())
+            .do(data => console.log("All: " + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+
     private handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || "A server error has occurred");

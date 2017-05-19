@@ -7,6 +7,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from "@angular/router";
 
 import { AppComponent } from './app.component';
+import { GameDisplayComponent } from "game/game-display.component";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     RouterModule.forRoot([
-        { path: "mygames", component: GameListComponent }
+        { path: "mygames", component: GameListComponent },
+        { path: "game", component: GameDisplayComponent }
         // { path: "", redirectTo: "mygames", pathMatch: "full" },
         // { path: "**", redirectTo: "mygames", pathMatch: "full" }
     ]),

@@ -1,7 +1,7 @@
 <h3>{{listName}}</h3>
 <div class="table-responsive">
     <table class="table" *ngIf="gameResponse && gameResponse.Games && gameResponse.Games.length">
-        <thead>
+        <thead *ngIf="gameResponse.Games  | gamesFilter:filterBy">
             <tr>
                 <th>GameId</th>
                 <th>Country</th>
@@ -10,7 +10,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let game of gameResponse.Games  | gamesFilter:filterBy">
-                <a href="">
+                <a href="game?id={{game.Id}}">
                     <td>{{game.Id}}</td>
                 </a>
                 <td>
