@@ -32,7 +32,7 @@ namespace Statecraft.Services.Repositories
 
             using (var context = new GameContext())
             {
-                game = context.Games.FirstOrDefault(g => g.Id == id);
+                game = context.Games.Include(g => g.Map).FirstOrDefault(g => g.Id == id);
             }
 
             return game;

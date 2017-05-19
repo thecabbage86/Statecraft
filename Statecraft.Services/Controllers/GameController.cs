@@ -57,6 +57,30 @@ namespace Statecraft.Services.Controllers
             return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(games));
         }
 
+        [HttpGet]
+        [Route("~/games/{gameId}")]
+        public HttpResponseMessage GetGameById(Guid gameId)
+        {
+            if (!ModelState.IsValid)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
+            GameDto game;
+
+            try
+            {
+                game = _gameRepo.GetGameById(gameId);
+            }
+            catch (Exception)
+            {
+                //TODO: log
+                throw new HttpResponseException(HttpStatusCode.InternalServerError);
+            }
+
+            return Request.CreateResponse<GameResponse>(HttpStatusCode.OK, new GameResponse(new Game(game)));
+        }
+
         [HttpPost]
         [Route("_services/create")]
         public HttpResponseMessage CreateNewGame(CreateNewGameRequest createNewGameRequest)
