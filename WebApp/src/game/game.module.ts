@@ -1,3 +1,4 @@
+import { GameCountryPipe } from './../pipes/game-country';
 import { GameDisplayComponent } from './game-display.component';
 import { GamesFilterPipe } from './../pipes/games-filter';
 import { GameSubListComponent } from './game-sublist.component';
@@ -9,7 +10,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';  
 
 @NgModule({
-    declarations: [GameListComponent, GameSubListComponent, GameDisplayComponent, GameRoundPipe, GamesFilterPipe], 
+    declarations: [GameListComponent, GameSubListComponent, GameDisplayComponent, GameRoundPipe, GamesFilterPipe, GameCountryPipe], 
     imports: [CommonModule],
     providers: [
         GameService

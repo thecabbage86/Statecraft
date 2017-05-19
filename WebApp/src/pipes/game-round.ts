@@ -8,8 +8,8 @@ import { Pipe } from '@angular/core';
 export class GameRoundPipe implements PipeTransform{
     transform(game: IGame) {
 
-        return game.CurrentGameState != null && game.CurrentGameState.Round != null ? 
+        return game != null && game.CurrentGameState != null && game.CurrentGameState.Round != null ? 
             Season[game.CurrentGameState.Round.Season] + " " + game.CurrentGameState.Round.Year + ", " + Phase[game.CurrentGameState.Round.Phase]
-            : "N/A";
+            : "";
     }
 }
