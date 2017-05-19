@@ -16,7 +16,7 @@ import { GameDisplayComponent } from "game/game-display.component";
   imports: [
     RouterModule.forRoot([
         { path: "mygames", component: GameListComponent },
-        { path: "game", component: GameDisplayComponent }
+        { path: "game", component: GameDisplayComponent }//, data: [{playerId: }] }
         // { path: "", redirectTo: "mygames", pathMatch: "full" },
         // { path: "**", redirectTo: "mygames", pathMatch: "full" }
     ]),

@@ -4,9 +4,8 @@ import { PipeTransform } from '@angular/core';
 
 @Pipe({name: "gameCountry"})
 export class GameCountryPipe implements PipeTransform{
-    transform(game: IGame) { //playerId: AAGUID, 
+    transform(game: IGame, playerId: AAGUID) { 
         let playerCountry:string = "";
-        let playerId:AAGUID="3d63cafe-48b7-4254-a837-96094440e70e"; //TODO: delete
 
         if(game != null)
         {

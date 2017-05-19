@@ -11,4 +11,5 @@ export class GameSubListComponent {
     @Input() listName: string;
     @Input() gameResponse: IGameResponse;
     @Input() filterBy: GameFilterBy;
+    @Input() playerId: AAGUID;
 }

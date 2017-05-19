@@ -10,17 +10,11 @@
         </thead>
         <tbody>
             <tr *ngFor="let game of gameResponse.Games  | gamesFilter:filterBy">
-                <a href="game?id={{game.Id}}">
+                <a href="game?gameId={{game.Id}}&playerId={{playerId}}">
                     <td>{{game.Id}}</td>
                 </a>
                 <td>
-                    <span *ngIf="game.FrancePlayerId && playerId == game.FrancePlayerId">France</span>
-                    <span *ngIf="game.GermanyPlayerId && playerId == game.GermanyPlayerId">Germany</span>
-                    <span *ngIf="game.AustriaPlayerId && playerId == game.AustriaPlayerId">Austria</span>
-                    <span *ngIf="game.RussiaPlayerId && playerId == game.RussiaPlayerId">Austria</span>
-                    <span *ngIf="game.EnglandPlayerId && playerId == game.EnglandPlayerId">England</span>
-                    <span *ngIf="game.TurkeyPlayerId && playerId == game.TurkeyPlayerId">Turkey</span>
-                    <span *ngIf="game.ItalyPlayerId && playerId == game.ItalyPlayerId">Italy</span>
+                    <span>{{game | gameCountry:playerId}}</span>
                 </td>
                 <td>{{game | gameRound}}</td>
             </tr>

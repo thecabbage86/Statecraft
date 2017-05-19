@@ -8,12 +8,14 @@ import { ActivatedRoute, Params } from "@angular/router";
 })
 export class GameDisplayComponent implements OnInit{
     gameId: AAGUID;
+    playerId: AAGUID;
     game: IGame;
     errorMessage: string;
 
     constructor(private _gameService: GameService, private activatedRoute: ActivatedRoute){
         this.activatedRoute.queryParams.subscribe((params: Params) => {
-            this.gameId = params['id'];
+            this.gameId = params['gameId'];
+            this.playerId = params['playerId'];
             console.log(this.gameId);
         });
     }
