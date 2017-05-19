@@ -14,9 +14,9 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     RouterModule.forRoot([
-        { path: "mygames", component: GameListComponent },
-        { path: "", redirectTo: "mygames", pathMatch: "full" },
-        { path: "**", redirectTo: "mygames", pathMatch: "full" }
+        { path: "mygames", component: GameListComponent }
+        // { path: "", redirectTo: "mygames", pathMatch: "full" },
+        // { path: "**", redirectTo: "mygames", pathMatch: "full" }
     ]),
     BrowserModule,
     FormsModule,

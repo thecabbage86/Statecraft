@@ -12,6 +12,7 @@ export class GameListComponent implements OnInit {
     games: IGameResponse;
     playerId: AAGUID = "3d63cafe-48b7-4254-a837-96094440e70e"; //TODO: handle playerId properly
     errorMessage: string;
+    finishedListName: "Finished Games";
 
     constructor(private _gameService: GameService){}
 

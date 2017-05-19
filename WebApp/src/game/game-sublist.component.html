@@ -1,0 +1,33 @@
+<h3>{{listName}}</h3>
+<div class="table-responsive">
+    <table class="table" *ngIf="gameResponse && gameResponse.Games && gameResponse.Games.length">
+        <thead>
+            <tr>
+                <th>GameId</th>
+                <th>Started</th>
+                <th>Finished</th>
+                <th>Country</th>
+                <th>Round</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let game of gameResponse.Games  | finishedGames">
+                <a href="">
+                    <td>{{game.Id}}</td>
+                </a>
+                <td>{{(game.HasBegun ? 'yes' : 'no')}}</td>
+                <td>{{(game.IsFinished ? 'yes' : 'no')}}</td>
+                <td>
+                    <span *ngIf="game.FrancePlayerId && playerId == game.FrancePlayerId">France</span>
+                    <span *ngIf="game.GermanyPlayerId && playerId == game.GermanyPlayerId">Germany</span>
+                    <span *ngIf="game.AustriaPlayerId && playerId == game.AustriaPlayerId">Austria</span>
+                    <span *ngIf="game.RussiaPlayerId && playerId == game.RussiaPlayerId">Austria</span>
+                    <span *ngIf="game.EnglandPlayerId && playerId == game.EnglandPlayerId">England</span>
+                    <span *ngIf="game.TurkeyPlayerId && playerId == game.TurkeyPlayerId">Turkey</span>
+                    <span *ngIf="game.ItalyPlayerId && playerId == game.ItalyPlayerId">Italy</span>
+                </td>
+                <td>{{game | gameRound}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
