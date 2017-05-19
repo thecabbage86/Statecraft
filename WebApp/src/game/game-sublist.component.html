@@ -4,19 +4,15 @@
         <thead>
             <tr>
                 <th>GameId</th>
-                <th>Started</th>
-                <th>Finished</th>
                 <th>Country</th>
                 <th>Round</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let game of gameResponse.Games  | finishedGames">
+            <tr *ngFor="let game of gameResponse.Games  | gamesFilter:filterBy">
                 <a href="">
                     <td>{{game.Id}}</td>
                 </a>
-                <td>{{(game.HasBegun ? 'yes' : 'no')}}</td>
-                <td>{{(game.IsFinished ? 'yes' : 'no')}}</td>
                 <td>
                     <span *ngIf="game.FrancePlayerId && playerId == game.FrancePlayerId">France</span>
                     <span *ngIf="game.GermanyPlayerId && playerId == game.GermanyPlayerId">Germany</span>

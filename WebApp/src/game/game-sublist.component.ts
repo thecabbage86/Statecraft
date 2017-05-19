@@ -1,4 +1,4 @@
-import { PipeTransform } from '@angular/core';
+import { GameFilterBy } from 'game/enums/game-filter-by';
 import { Component, OnInit, Input } from '@angular/core';
 import { IGameResponse } from "game/models/game-response";
 
@@ -10,5 +10,5 @@ import { IGameResponse } from "game/models/game-response";
 export class GameSubListComponent {
     @Input() listName: string;
     @Input() gameResponse: IGameResponse;
-    @Input() filter: PipeTransform;
+    @Input() filterBy: GameFilterBy;
 }

@@ -16,6 +16,10 @@
             </div>
         </div>-->
         <h2>Games for Player with ID = {{playerId}}</h2>
-        <game-sublist [listName]="finishedListName" [gameResponse]="games"></game-sublist>
+        <game-sublist [listName]="pendingListName" [gameResponse]="games" [filterBy]="filterByPending"></game-sublist>
+        <br/>
+        <game-sublist [listName]="startedListName" [gameResponse]="games" [filterBy]="filterByStarted"></game-sublist>
+        <br/>
+        <game-sublist [listName]="finishedListName" [gameResponse]="games" [filterBy]="filterByFinished"></game-sublist>
     </div>
 </div>
