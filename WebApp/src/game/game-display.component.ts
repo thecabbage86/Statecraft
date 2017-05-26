@@ -1,3 +1,4 @@
+import { MapService } from './map.service';
 import { IGame } from './models/game';
 import { OnInit, Component } from '@angular/core';
 import { GameService } from "game/game.service";
@@ -12,7 +13,7 @@ export class GameDisplayComponent implements OnInit{
     game: IGame;
     errorMessage: string;
 
-    constructor(private _gameService: GameService, private activatedRoute: ActivatedRoute){
+    constructor(private _gameService: GameService, private activatedRoute: ActivatedRoute, private _mapService: MapService){
         this.activatedRoute.queryParams.subscribe((params: Params) => {
             this.gameId = params['gameId'];
             this.playerId = params['playerId'];
@@ -23,5 +24,13 @@ export class GameDisplayComponent implements OnInit{
     ngOnInit(): void {
         this._gameService.getGameById(this.gameId)
             .subscribe(games => this.game = games.Games[0], error => this.errorMessage = <any>error);
+
+        this._mapService.getMap().subscribe(
+            data => this.createMap(data), 
+            error => this.errorMessage = <any>error );
+    }
+
+    private createMap(mapJsonData: any){
+        
     }
 }
