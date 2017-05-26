@@ -39,10 +39,10 @@ export class GameDisplayComponent implements OnInit{
 
     private createMap(d3: D3, mapData: any){
         let d3ParentElement: Selection<any, any, any, any> = this.d3.select(this.parentNativeElement);
-        let w: number = 750;
+        let w: number = 600;
         let h: number = 500;
 
-        var projection = d3.geoMercator().translate([w/2, h/2]).scale(300);
+        var projection = d3.geoMercator().translate([w/2-100, h/2+500]).scale(400);
         var path = d3.geoPath(projection);
 
         let svg: Selection<SVGSVGElement, any, null, undefined> = d3ParentElement.append<SVGSVGElement>("svg").attr("width", w).attr("height", h);
