@@ -9,12 +9,13 @@ import { GameListComponent } from './game-list.component';
 import { GameService } from './game.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';  
+import { D3Service } from 'd3-ng2-service'; 
 
 @NgModule({
     declarations: [GameListComponent, GameSubListComponent, GameDisplayComponent, GameRoundPipe, GamesFilterPipe, GameCountryPipe], 
     imports: [CommonModule],
     providers: [
-        GameService, MapService
+        D3Service, GameService, MapService
     ],
     exports: [GameListComponent]
 })
