@@ -1,3 +1,4 @@
+import { Territory } from 'game/models/territory';
 import { CountryColorDictionary } from './../shared/country-color-dictionary';
 import { Country } from 'game/enums/country';
 import { MapService } from './map.service';
@@ -18,7 +19,6 @@ export class GameDisplayComponent implements OnInit{
     private playerId: AAGUID;
     private game: IGame;
     private errorMessage: string;
-    private countryColors: CountryColorDictionary;
 
     constructor(private _gameService: GameService, private activatedRoute: ActivatedRoute, private _mapService: MapService, d3Service: D3Service, element: ElementRef){
         this.activatedRoute.queryParams.subscribe((params: Params) => {
@@ -29,7 +29,6 @@ export class GameDisplayComponent implements OnInit{
 
         this.d3 = d3Service.getD3();
         this.parentNativeElement = element.nativeElement;
-        this.countryColors = new CountryColorDictionary;
     }
 
     ngOnInit(): void {
@@ -37,11 +36,11 @@ export class GameDisplayComponent implements OnInit{
             .subscribe(games => this.game = games.Games[0], error => this.errorMessage = <any>error);
 
         this._mapService.getMap().subscribe(
-            data => this.createMap(this.d3, this.countryColors, data), 
+            data => this.createMap(this.d3, new CountryColorDictionary, data, this.game), 
             error => this.errorMessage = <any>error );
     }
 
-    private createMap(d3: D3, countryColors: CountryColorDictionary, mapData: any){
+    private createMap(d3: D3, countryColors: CountryColorDictionary, mapData: any, game: IGame){
         let d3ParentElement: Selection<any, any, any, any> = this.d3.select(this.parentNativeElement);
         let w: number = 600;
         let h: number = 500;
@@ -53,18 +52,12 @@ export class GameDisplayComponent implements OnInit{
         //var color = d3.scaleLinear().range([7,7,0,0]);//'rgb(241,238,246)', 'rgb(208,209,230)', 'rgb(166,189,219)', 'rgb(116,169,207)', 'rgb(43,140,190)', 'rgb(4,90,141)']);
         
         //create map
+        //console.log(game.CurrentGameState.Map);
+        var cMap = this.colorMap;
         svg.selectAll("path").data(mapData.features).enter().append("path")
             .attr("d", path)
             .attr("class", "territory")
-            //.attr("fill", "blue"); 
-            .attr("fill", function(d: JSON){
-                if(d["properties"]["sov_a3"] === "ESP" || d["properties"]["sov_a3"] === "RUS") {
-                    return countryColors[Country.Russia]; 
-                }
-                else{
-                    return countryColors[Country.England];
-                }
-            });
+            .attr("fill", function(d:JSON){ return cMap(d, countryColors, game.CurrentGameState.Map.Territories); });
 
         //populate map with units/ownership
         // svg.selectAll("image").data(mapData.features)//.filter(function(d){ return d["capital"].length > 0; })
@@ -92,13 +85,20 @@ export class GameDisplayComponent implements OnInit{
         //     })
     }
 
-    private colorMap(d:JSON): string
+    private colorMap(d:JSON, countryColors: CountryColorDictionary, territories: Territory[]): string
     {
-        if(d["properties"]["sov_a3"] === "ESP" || d["properties"]["sov_a3"] === "RUS") {
-            return "red"; 
+        var territory = territories.filter(t => t.Id == d["properties"]["id"])[0];
+        
+        if(territory != null)
+        {
+            return countryColors[territory.Owner];
         }
-        else{
-            return this.countryColors[Country.England];
-        }
+
+        // if(d["properties"]["sov_a3"] === "ESP" || d["properties"]["sov_a3"] === "RUS") {
+        //     return countryColors[Country.Russia];
+        // }
+        // else{
+        //     return countryColors[Country.England];
+        // }
     }
 }

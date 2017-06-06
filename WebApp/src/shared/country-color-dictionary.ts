@@ -8,7 +8,7 @@ export class CountryColorDictionary implements ICountryColorDictionary {
         this[Country.Austria] = "orange";
         this[Country.England] = "blue";
         this[Country.France] = "purple";
-        this[Country.Germany] = "black";
+        this[Country.Germany] = "pink";
         this[Country.Italy] = "green";
         this[Country.Russia] = "red";
         this[Country.Turkey] = "magenta";
