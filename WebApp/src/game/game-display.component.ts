@@ -1,3 +1,5 @@
+import { CountryColorDictionary } from './../shared/country-color-dictionary';
+import { Country } from 'game/enums/country';
 import { MapService } from './map.service';
 import { IGame } from './models/game';
 import { OnInit, Component, ElementRef } from '@angular/core';
@@ -16,6 +18,7 @@ export class GameDisplayComponent implements OnInit{
     private playerId: AAGUID;
     private game: IGame;
     private errorMessage: string;
+    private countryColors: CountryColorDictionary;
 
     constructor(private _gameService: GameService, private activatedRoute: ActivatedRoute, private _mapService: MapService, d3Service: D3Service, element: ElementRef){
         this.activatedRoute.queryParams.subscribe((params: Params) => {
@@ -26,6 +29,7 @@ export class GameDisplayComponent implements OnInit{
 
         this.d3 = d3Service.getD3();
         this.parentNativeElement = element.nativeElement;
+        this.countryColors = new CountryColorDictionary;
     }
 
     ngOnInit(): void {
@@ -33,11 +37,11 @@ export class GameDisplayComponent implements OnInit{
             .subscribe(games => this.game = games.Games[0], error => this.errorMessage = <any>error);
 
         this._mapService.getMap().subscribe(
-            data => this.createMap(this.d3, data), 
+            data => this.createMap(this.d3, this.countryColors, data), 
             error => this.errorMessage = <any>error );
     }
 
-    private createMap(d3: D3, mapData: any){
+    private createMap(d3: D3, countryColors: CountryColorDictionary, mapData: any){
         let d3ParentElement: Selection<any, any, any, any> = this.d3.select(this.parentNativeElement);
         let w: number = 600;
         let h: number = 500;
@@ -52,15 +56,15 @@ export class GameDisplayComponent implements OnInit{
         svg.selectAll("path").data(mapData.features).enter().append("path")
             .attr("d", path)
             .attr("class", "territory")
-            .attr("fill", "blue"); //function(d:JSON) { 
-                // if(d["properties"]["GEO_ID"] === "0400000US23" || d["properties"]["GEO_ID"] === "0400000US53" || d["properties"]["GEO_ID"] === "0400000US06"
-                //     || d["properties"]["GEO_ID"] === "0400000US41") {
-                //     return "blue";
-                // }
-                // else{
-                //     return "red";
-                // }
-            //});
+            //.attr("fill", "blue"); 
+            .attr("fill", function(d: JSON){
+                if(d["properties"]["sov_a3"] === "ESP" || d["properties"]["sov_a3"] === "RUS") {
+                    return countryColors[Country.Russia]; 
+                }
+                else{
+                    return countryColors[Country.England];
+                }
+            });
 
         //populate map with units/ownership
         // svg.selectAll("image").data(mapData.features)//.filter(function(d){ return d["capital"].length > 0; })
@@ -86,5 +90,15 @@ export class GameDisplayComponent implements OnInit{
         //         }
         //         return "visible";
         //     })
+    }
+
+    private colorMap(d:JSON): string
+    {
+        if(d["properties"]["sov_a3"] === "ESP" || d["properties"]["sov_a3"] === "RUS") {
+            return "red"; 
+        }
+        else{
+            return this.countryColors[Country.England];
+        }
     }
 }
