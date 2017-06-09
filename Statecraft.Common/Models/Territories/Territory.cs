@@ -29,6 +29,11 @@ namespace Statecraft.Common.Models.Territories
             neighbors = new List<Territory>();
         }
 
+        public Territory(int id)
+        {
+            this.Id = id;
+        }
+
         public Territory(int id, TerritoryName name, bool isSupplyCenter, TerritoryType type, Unit occupyingUnit = null)
         {
             this.Id = id;

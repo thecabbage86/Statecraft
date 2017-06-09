@@ -81,9 +81,13 @@ namespace Statecraft.GameLogic.GameLogic
             {
                 moveAttempt.AllowedNextTerritories = moveAttempt.SelectedTerritory.Neighbors.Where(n => n.Type == TerritoryType.Land).ToList();
             }
-            else
+            else if(moveAttempt.SelectedTerritory.OccupyingUnit.UnitType == UnitType.Sea && moveAttempt.SelectedTerritory.Type == TerritoryType.Sea)
             {
                 moveAttempt.AllowedNextTerritories = moveAttempt.SelectedTerritory.Neighbors;
+            }
+            else
+            {
+                moveAttempt.AllowedNextTerritories = moveAttempt.SelectedTerritory.Neighbors.Where(n => n.Type == TerritoryType.Sea || n.Coasts != null).ToList();
             }
         }
         private static void HandleFirstSupportMove(GameState gameState, ref MoveAttempt moveAttempt)
@@ -100,7 +104,6 @@ namespace Statecraft.GameLogic.GameLogic
         {
             moveAttempt.DestinationTerritory = selectedTerritory;
             moveAttempt.IsFinished = true;
-            //update gameState?
         }
 
         private static void HandleSupportMove(GameState gameState, ref MoveAttempt moveAttempt)

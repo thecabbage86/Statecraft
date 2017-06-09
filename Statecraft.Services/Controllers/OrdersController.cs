@@ -1,4 +1,5 @@
-﻿using Statecraft.Common.JsonModels.Requests;
+﻿using Statecraft.Common.DTOs;
+using Statecraft.Common.JsonModels.Requests;
 using Statecraft.Services.Interfaces;
 using Statecraft.Services.Repositories;
 using System;
@@ -31,7 +32,13 @@ namespace Statecraft.Services.Controllers
 
             try
             {
-                _ordersRepo.SaveOrders(saveOrdersRequest.GameId, saveOrdersRequest.Orders);
+                IList<OrdersDto> ordersDbos = new List<OrdersDto>();
+                foreach (var order in saveOrdersRequest.Orders)
+                {
+                    ordersDbos.Add(order.ToDbo(saveOrdersRequest.GameId));
+                }
+                 
+                _ordersRepo.SaveOrders(saveOrdersRequest.GameId, ordersDbos);
             }
             catch (Exception)
             {

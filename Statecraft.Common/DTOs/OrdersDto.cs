@@ -21,11 +21,11 @@ namespace Statecraft.Common.DTOs
 
         public OrdersType OrdersType { get; set; }
 
-        public long SelectedTerritoryId { get; set; }
+        public int SelectedTerritoryId { get; set; }
 
-        public long SupportedOrConvoyedTerritoryId { get; set; }
+        public int? SupportedOrConvoyedTerritoryId { get; set; }
 
-        public long DestinationTerritoryId { get; set; }
+        public int? DestinationTerritoryId { get; set; }
 
 
         public virtual GameDto Game { get; set; }

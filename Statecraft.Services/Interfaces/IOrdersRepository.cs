@@ -1,4 +1,5 @@
-﻿using Statecraft.Common.Models;
+﻿using Statecraft.Common.DTOs;
+using Statecraft.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,6 @@ namespace Statecraft.Services.Interfaces
 {
     public interface IOrdersRepository
     {
-        void SaveOrders(Guid gameId, IList<MoveAttempt> orders);
+        void SaveOrders(Guid gameId, IList<OrdersDto> orders);
     }
 }

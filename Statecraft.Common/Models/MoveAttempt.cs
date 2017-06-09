@@ -22,11 +22,24 @@ namespace Statecraft.Common.Models
 
         public MoveAttempt(){}
 
-        //TODO: complete this mapping
         public MoveAttempt(OrdersDto dto)
         {
             this.OrdersType = dto.OrdersType;
-            //this.SelectedTerritory
+            this.SelectedTerritory = new Territory(dto.SelectedTerritoryId);
+            this.DestinationTerritory = dto.DestinationTerritoryId != null ? new Territory((int)dto.DestinationTerritoryId) : null;
+            this.SupportedOrConvoyedTerritory = dto.SupportedOrConvoyedTerritoryId != null ? new Territory((int)dto.SupportedOrConvoyedTerritoryId) : null;
+        }
+
+        public OrdersDto ToDbo(Guid gameId)
+        {
+            return new OrdersDto()
+            {
+                GameId = gameId,
+                OrdersType = this.OrdersType,
+                DestinationTerritoryId = this.DestinationTerritory != null ? (int?)this.DestinationTerritory.Id : null,
+                SelectedTerritoryId = this.SelectedTerritory.Id,
+                SupportedOrConvoyedTerritoryId = this.SupportedOrConvoyedTerritory != null ? (int?)this.SupportedOrConvoyedTerritory.Id : null
+            };
         }
     }
 }
