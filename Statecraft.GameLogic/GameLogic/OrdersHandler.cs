@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Statecraft.GameLogic.GameLogic
 {
+    //TODO: remove any unncessary params
     public static class OrdersHandler
     {
         public static MoveAttempt SetFirstTerritoriesAllowed(Game game, Country playerCountry)
@@ -28,13 +29,9 @@ namespace Statecraft.GameLogic.GameLogic
                 moveAttempt.SelectedTerritory = selectedTerritory;
                 moveAttempt.OrdersType = orderType;
 
-                if(orderType == OrdersType.Attack)
+                if(orderType == OrdersType.Attack || orderType == OrdersType.Support || orderType == OrdersType.Defend)
                 {
-                    HandleFirstAttackMove(gameState, ref moveAttempt);
-                }
-                else if(orderType == OrdersType.Support)
-                {
-                    HandleFirstSupportMove(gameState, ref moveAttempt);
+                    HandleFirstAttackSupportOrDefendMove(gameState, ref moveAttempt);
                 }
                 else if(orderType == OrdersType.Convoy)
                 {
@@ -45,7 +42,7 @@ namespace Statecraft.GameLogic.GameLogic
             {
                 if (orderType == OrdersType.Attack)
                 {
-                    HandleAttackDestinationMove(gameState, selectedTerritory, ref moveAttempt);
+                    HandleDestinationMove(gameState, selectedTerritory, ref moveAttempt);
                 }
 
                 if (moveAttempt.SupportedOrConvoyedTerritory == null)
@@ -63,18 +60,18 @@ namespace Statecraft.GameLogic.GameLogic
                 {
                     if (orderType == OrdersType.Support)
                     {
-                        HandleSupportDestinationMove(gameState, ref moveAttempt);
+                        HandleDestinationMove(gameState, selectedTerritory, ref moveAttempt);
                     }
                     else if (orderType == OrdersType.Convoy)
                     {
-                        HandleConvoyDestinationMove(gameState, ref moveAttempt);
+                        HandleDestinationMove(gameState, selectedTerritory, ref moveAttempt);
                     }
                 }
             }
 
         }
 
-        private static void HandleFirstAttackMove(GameState gameState, ref MoveAttempt moveAttempt)
+        private static void HandleFirstAttackSupportOrDefendMove(GameState gameState, ref MoveAttempt moveAttempt)
         {
             //allowed moves: adjacent territories, taking UnitType into account
             if (moveAttempt.SelectedTerritory.OccupyingUnit.UnitType == UnitType.Land)
@@ -90,25 +87,27 @@ namespace Statecraft.GameLogic.GameLogic
                 moveAttempt.AllowedNextTerritories = moveAttempt.SelectedTerritory.Neighbors.Where(n => n.Type == TerritoryType.Sea || n.Coasts != null).ToList();
             }
         }
-        private static void HandleFirstSupportMove(GameState gameState, ref MoveAttempt moveAttempt)
-        {
-            throw new NotImplementedException();
-        }
 
         private static void HandleFirstConvoyMove(GameState gameState, ref MoveAttempt moveAttempt)
         {
             throw new NotImplementedException();
         }
 
-        private static void HandleAttackDestinationMove(GameState gameState, Territory selectedTerritory, ref MoveAttempt moveAttempt)
-        {
-            moveAttempt.DestinationTerritory = selectedTerritory;
-            moveAttempt.IsFinished = true;
-        }
-
         private static void HandleSupportMove(GameState gameState, ref MoveAttempt moveAttempt)
         {
-            throw new NotImplementedException();
+            //allowed moves: adjacent territories, taking UnitType into account
+            if (moveAttempt.SupportedOrConvoyedTerritory.OccupyingUnit.UnitType == UnitType.Land)
+            {
+                moveAttempt.AllowedNextTerritories = moveAttempt.SupportedOrConvoyedTerritory.Neighbors.Where(n => n.Type == TerritoryType.Land).ToList();
+            }
+            else if (moveAttempt.SupportedOrConvoyedTerritory.OccupyingUnit.UnitType == UnitType.Sea && moveAttempt.SupportedOrConvoyedTerritory.Type == TerritoryType.Sea)
+            {
+                moveAttempt.AllowedNextTerritories = moveAttempt.SupportedOrConvoyedTerritory.Neighbors;
+            }
+            else
+            {
+                moveAttempt.AllowedNextTerritories = moveAttempt.SupportedOrConvoyedTerritory.Neighbors.Where(n => n.Type == TerritoryType.Sea || n.Coasts != null).ToList();
+            }
         }
 
         private static void HandleConvoyMove(GameState gameState, ref MoveAttempt moveAttempt)
@@ -116,14 +115,15 @@ namespace Statecraft.GameLogic.GameLogic
             throw new NotImplementedException();
         }
 
-        private static void HandleSupportDestinationMove(GameState gameState, ref MoveAttempt moveAttempt)
+        private static void HandleDefendMove(GameState gameState, Territory selectedTerritory, ref MoveAttempt moveAttempt)
         {
             throw new NotImplementedException();
         }
 
-        private static void HandleConvoyDestinationMove(GameState gameState, ref MoveAttempt moveAttempt)
+        private static void HandleDestinationMove(GameState gameState, Territory selectedTerritory, ref MoveAttempt moveAttempt)
         {
-            throw new NotImplementedException();
+            moveAttempt.DestinationTerritory = selectedTerritory;
+            moveAttempt.IsFinished = true;
         }
     }
 }

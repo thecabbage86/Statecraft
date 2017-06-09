@@ -11,6 +11,7 @@ namespace Statecraft.Common.Enums
         Attack,
         Hold,
         Support,
-        Convoy
+        Convoy,
+        Defend
     }
 }
