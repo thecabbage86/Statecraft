@@ -1,4 +1,5 @@
-﻿import { IGameResponse } from './models/game-response';
+﻿import { IPlayer } from './models/player';
+import { IGameResponse } from './models/game-response';
 import { IGame } from './models/game';
 
 import { Http, Response, RequestOptions, Headers } from "@angular/http";
@@ -10,7 +11,8 @@ import "rxjs/add/operator/catch";
 
 @Injectable()
 export class GameService {
-    private _url = "http://localhost:64660/games";
+    private _url = "http://localhost:64660/";
+    private _gameUrl = "http://localhost:64660/games";
 
     constructor(private _http: Http){ }
 
@@ -18,7 +20,7 @@ export class GameService {
         let headers = new Headers({ 'Accept': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         
-        return this._http.get(this._url + "?playerId=" + playerId, options)
+        return this._http.get(this._gameUrl + "?playerId=" + playerId, options)
             .map((response: Response) => <IGameResponse>response.json())
             .do(data => console.log("All: " + JSON.stringify(data)))
             .catch(this.handleError);
@@ -28,9 +30,19 @@ export class GameService {
         let headers = new Headers({ 'Accept': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         
-        return this._http.get(this._url + "/" + gameId, options)
+        return this._http.get(this._gameUrl + "/" + gameId, options)
             .map((response: Response) => <IGameResponse>response.json())
             .do(data => console.log("All: " + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+
+    getPlayerById(playerId: string) : Observable<IPlayer> {
+        let headers = new Headers({ 'Accept': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this._http.get(this._url + "players/" + playerId, options)
+            .map((response: Response) => <IPlayer>response.json())
+            .do(data => console.log("Player: " + JSON.stringify(data)))
             .catch(this.handleError);
     }
 

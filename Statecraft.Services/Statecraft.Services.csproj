@@ -99,6 +99,22 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.2.4.0\lib\net45\Serilog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.File.3.2.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serilog.Sinks.Literate, Version=2.1.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.Literate.2.1.0\lib\net45\Serilog.Sinks.Literate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serilog.Sinks.RollingFile, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.RollingFile.3.3.0\lib\net45\Serilog.Sinks.RollingFile.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
       <HintPath>..\packages\Swashbuckle.Core.5.5.3\lib\net40\Swashbuckle.Core.dll</HintPath>
       <Private>True</Private>
@@ -281,12 +297,14 @@
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\GameStateController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="DB\GameContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IGameRepository.cs" />
     <Compile Include="Interfaces\IOrdersRepository.cs" />
+    <Compile Include="Interfaces\IPlayerRepository.cs" />
     <Compile Include="Migrations\201705171603446_InitialCreate.cs" />
     <Compile Include="Migrations\201705171603446_InitialCreate.Designer.cs">
       <DependentUpon>201705171603446_InitialCreate.cs</DependentUpon>
@@ -294,6 +312,10 @@
     <Compile Include="Migrations\201706121519182_addmigration2.cs" />
     <Compile Include="Migrations\201706121519182_addmigration2.Designer.cs">
       <DependentUpon>201706121519182_addmigration2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710112031096_addmigration3.cs" />
+    <Compile Include="Migrations\201710112031096_addmigration3.Designer.cs">
+      <DependentUpon>201710112031096_addmigration3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -305,6 +327,7 @@
     <Compile Include="Repositories\GameRepositoryFake.cs" />
     <Compile Include="Repositories\OrdersRepositoryFake.cs" />
     <Compile Include="Repositories\OrdersRepository.cs" />
+    <Compile Include="Repositories\PlayerRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -393,6 +416,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706121519182_addmigration2.resx">
       <DependentUpon>201706121519182_addmigration2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710112031096_addmigration3.resx">
+      <DependentUpon>201710112031096_addmigration3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

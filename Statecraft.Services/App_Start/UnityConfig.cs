@@ -14,6 +14,7 @@ namespace Statecraft.Services
             
             container.RegisterType<IGameRepository, GameRepository>();
             container.RegisterType<IOrdersRepository, OrdersRepositoryFake>();
+            container.RegisterType<IPlayerRepository, PlayerRepository>();
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

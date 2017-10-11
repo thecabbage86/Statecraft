@@ -34,13 +34,13 @@ namespace Statecraft.Services.Migrations
             List<Guid> playerIds = new List<Guid>() { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() };
             var players = new List<PlayerDto>()
             {
-                new PlayerDto() { Id = playerIds[0], RankScore = 10, Reliability = 10 },
-                new PlayerDto() { Id = playerIds[1], RankScore = 10, Reliability = 10 },
-                new PlayerDto() { Id = playerIds[2], RankScore = 10, Reliability = 10 },
-                new PlayerDto() { Id = playerIds[3], RankScore = 10, Reliability = 10 },
-                new PlayerDto() { Id = playerIds[4], RankScore = 10, Reliability = 10 },
-                new PlayerDto() { Id = playerIds[5], RankScore = 10, Reliability = 10 },
-                new PlayerDto() { Id = playerIds[6], RankScore = 10, Reliability = 10 }
+                new PlayerDto() { Id = playerIds[0], RankScore = 10, Reliability = 10, Name = "Bob" },
+                new PlayerDto() { Id = playerIds[1], RankScore = 10, Reliability = 10, Name = "Joe" },
+                new PlayerDto() { Id = playerIds[2], RankScore = 10, Reliability = 10, Name = "Joe Bob" },
+                new PlayerDto() { Id = playerIds[3], RankScore = 10, Reliability = 10, Name = "Joe Bob Thornton" },
+                new PlayerDto() { Id = playerIds[4], RankScore = 10, Reliability = 10, Name = "GoodPlayerDude101" },
+                new PlayerDto() { Id = playerIds[5], RankScore = 10, Reliability = 10, Name = "Rob the Snob" },
+                new PlayerDto() { Id = playerIds[6], RankScore = 10, Reliability = 10, Name = "DANCEMANTRON40000" }
             };
             players.ForEach(pl => context.Players.AddOrUpdate(p => p.Id, pl));
             context.SaveChanges();

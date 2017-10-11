@@ -1,3 +1,4 @@
+import { IPlayer } from './models/player';
 import { GameFilterBy } from 'game/enums/game-filter-by';
 import { IGameResponse } from './models/game-response';
 import { GameService } from './game.service';
@@ -11,7 +12,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameListComponent implements OnInit {
     games: IGameResponse;
-    playerId: AAGUID = "3d63cafe-48b7-4254-a837-96094440e70e"; //TODO: handle playerId properly
+    player: IPlayer;
+    playerId: AAGUID = "AB858B6C-3D5E-4388-A49E-10ED3115800C"; //TODO: handle playerId properly
     errorMessage: string;
 
     finishedListName:string = "Finished Games";
@@ -26,6 +28,8 @@ export class GameListComponent implements OnInit {
     ngOnInit(): void {
         this._gameService.getGamesByPlayerId(this.playerId)
             .subscribe(games => this.games = games, error => this.errorMessage = <any>error);
+        this._gameService.getPlayerById(this.playerId)
+            .subscribe(player => this.player = player, error => this.errorMessage = <any>error);
     }
 
 }

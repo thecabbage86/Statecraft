@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Serilog;
 using Statecraft.Common.DTOs;
 using Statecraft.Common.Enums;
 using Statecraft.Common.JsonModels.Requests;

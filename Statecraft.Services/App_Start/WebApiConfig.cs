@@ -10,6 +10,7 @@ using AutoMapper;
 using Statecraft.Common.Models;
 using Statecraft.Common.Models.Territories;
 using Statecraft.Common.DTOs;
+using Serilog;
 
 namespace Statecraft.Services
 {
@@ -34,6 +35,16 @@ namespace Statecraft.Services
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.Re‌​ferenceLoopHandling = ReferenceLoopHandling.Ignore;
 
             UnityConfig.RegisterComponents();
+
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.LiterateConsole()
+                .WriteTo.RollingFile("mylog-{Date}.txt")
+                .CreateLogger();
+
+            Mapper.Initialize(cfg => {
+                cfg.CreateMap<Player, PlayerDto>().ReverseMap();
+            });
         }
     }
 }

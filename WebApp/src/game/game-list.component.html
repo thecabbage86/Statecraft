@@ -15,7 +15,7 @@
                 <h3>Filtered by: {{listFilter}} </h3>
             </div>
         </div>-->
-        <h2>Games for Player with ID = {{playerId}}</h2>
+        <h2>Games for {{player.Name}}</h2>
         <game-sublist [listName]="pendingListName" [gameResponse]="games" [filterBy]="filterByPending" [playerId]="playerId"></game-sublist>
         <br/>
         <game-sublist [listName]="startedListName" [gameResponse]="games" [filterBy]="filterByStarted" [playerId]="playerId"></game-sublist>
