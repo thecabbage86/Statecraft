@@ -1,3 +1,5 @@
+import { GameService } from 'game/game.service';
+import { SharedService } from './../shared/shared-service';
 import { GameListComponent } from './../game/game-list.component';
 import { GameModule } from './../game/game.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,7 +27,7 @@ import { GameDisplayComponent } from "game/game-display.component";
     HttpModule,
     GameModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ SharedService, GameService ],
+  bootstrap: [AppComponent ]
 })
 export class AppModule { }

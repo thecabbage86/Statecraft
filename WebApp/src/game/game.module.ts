@@ -1,3 +1,4 @@
+import { SharedService } from './../shared/shared-service';
 import { MapService } from './map.service';
 import { GameCountryPipe } from './../pipes/game-country';
 import { GameDisplayComponent } from './game-display.component';

@@ -1,3 +1,4 @@
+import { SharedService } from './../shared/shared-service';
 import { IPlayer } from './models/player';
 import { GameFilterBy } from 'game/enums/game-filter-by';
 import { IGameResponse } from './models/game-response';
@@ -23,13 +24,13 @@ export class GameListComponent implements OnInit {
     filterByStarted: GameFilterBy = GameFilterBy.HasBegun;
     filterByPending: GameFilterBy = GameFilterBy.HasNotBegun;
 
-    constructor(private _gameService: GameService){}
+    constructor(private _gameService: GameService, private _sharedService: SharedService){
+        this.player = _sharedService.player;
+    }
 
     ngOnInit(): void {
         this._gameService.getGamesByPlayerId(this.playerId)
             .subscribe(games => this.games = games, error => this.errorMessage = <any>error);
-        this._gameService.getPlayerById(this.playerId)
-            .subscribe(player => this.player = player, error => this.errorMessage = <any>error);
     }
 
 }
