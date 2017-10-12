@@ -10,5 +10,6 @@ namespace Statecraft.Services.Interfaces
     public interface IPlayerRepository
     {
         PlayerDto GetPlayerById(Guid playerId);
+        PlayerDto CreatePlayer(PlayerDto player);
     }
 }

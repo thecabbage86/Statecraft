@@ -302,6 +302,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Http\OptionsModule.cs" />
     <Compile Include="Interfaces\IGameRepository.cs" />
     <Compile Include="Interfaces\IOrdersRepository.cs" />
     <Compile Include="Interfaces\IPlayerRepository.cs" />

@@ -1,3 +1,5 @@
+import { FormsModule } from '@angular/forms';
+import { CreatePlayerComponent } from './../player/create-player.component';
 import { SharedService } from './../shared/shared-service';
 import { MapService } from './map.service';
 import { GameCountryPipe } from './../pipes/game-country';
@@ -13,8 +15,8 @@ import { CommonModule } from '@angular/common';
 import { D3Service } from 'd3-ng2-service'; 
 
 @NgModule({
-    declarations: [GameListComponent, GameSubListComponent, GameDisplayComponent, GameRoundPipe, GamesFilterPipe, GameCountryPipe], 
-    imports: [CommonModule],
+    declarations: [GameListComponent, GameSubListComponent, GameDisplayComponent, GameRoundPipe, GamesFilterPipe, GameCountryPipe, CreatePlayerComponent], 
+    imports: [CommonModule, FormsModule],
     providers: [
         D3Service, GameService, MapService
     ],

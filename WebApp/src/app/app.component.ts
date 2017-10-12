@@ -1,5 +1,5 @@
 import { GameService } from 'game/game.service';
-import { IPlayer } from './../game/models/player';
+import { IPlayer } from './../player/models/player';
 import { SharedService } from './../shared/shared-service';
 import { Component } from '@angular/core';
 
@@ -14,7 +14,7 @@ export class AppComponent {
 
   constructor(private _sharedService: SharedService, private _gameService: GameService){
     this._gameService.getPlayerById(_sharedService.playerId)
-            .subscribe(player => { _sharedService.setPlayer(player); this.player = player; }, error => _sharedService.errorMessage = <any>error);
+            .subscribe(player => { _sharedService.setPlayer(player); this.player = _sharedService.player; }, error => _sharedService.errorMessage = <any>error);
     // this._gameService.getPlayerById(_sharedService.playerId)
     //         .subscribe(player => this.player = player, error => _sharedService.errorMessage = <any>error);
     //this.player = _sharedService.player;

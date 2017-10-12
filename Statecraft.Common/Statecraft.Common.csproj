@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\GameValues.cs" />
+    <Compile Include="Constants\PlayerValues.cs" />
     <Compile Include="DTOs\GameDto.cs" />
     <Compile Include="DTOs\GameRoundDto.cs" />
     <Compile Include="DTOs\GameStateDto.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Enums\TerritoryType.cs" />
     <Compile Include="Enums\UnitType.cs" />
     <Compile Include="JsonModels\Requests\CreateNewGameRequest.cs" />
+    <Compile Include="JsonModels\Requests\CreatePlayerRequest.cs" />
     <Compile Include="JsonModels\Requests\SaveOrdersRequest.cs" />
     <Compile Include="JsonModels\Requests\StartGameRequest.cs" />
     <Compile Include="JsonModels\Requests\UpdateGameStateRequest.cs" />

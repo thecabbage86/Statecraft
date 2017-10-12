@@ -1,3 +1,4 @@
+import { CreatePlayerComponent } from './../player/create-player.component';
 import { GameService } from 'game/game.service';
 import { SharedService } from './../shared/shared-service';
 import { GameListComponent } from './../game/game-list.component';
@@ -18,7 +19,8 @@ import { GameDisplayComponent } from "game/game-display.component";
   imports: [
     RouterModule.forRoot([
         { path: "mygames", component: GameListComponent },
-        { path: "game", component: GameDisplayComponent }//, data: [{playerId: }] }
+        { path: "game", component: GameDisplayComponent }, //, data: [{playerId: }] }
+        { path: "createplayer", component: CreatePlayerComponent }
         // { path: "", redirectTo: "mygames", pathMatch: "full" },
         // { path: "**", redirectTo: "mygames", pathMatch: "full" }
     ]),

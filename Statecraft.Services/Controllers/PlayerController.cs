@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using Statecraft.Common.Constants;
+using Statecraft.Common.DTOs;
+using Statecraft.Common.JsonModels.Requests;
 using Statecraft.Common.Models;
 using Statecraft.Services.Interfaces;
 using System;
@@ -28,14 +31,45 @@ namespace Statecraft.Services.Controllers
         [Route("~/players/{playerId}")]
         public IHttpActionResult GetPlayerById(Guid playerId)
         {
-            var player = _playerRepository.GetPlayerById(playerId);
+            Player player;
 
-            if(player == null)
+            try
             {
-                return NotFound();
+                var playerDto = _playerRepository.GetPlayerById(playerId);
+
+                if (playerDto == null)
+                {
+                    return NotFound();
+                }
+
+                player = Mapper.Map<Player>(playerDto);
+            }
+            catch (Exception ex)
+            {
+                //TODO: log
+                throw new HttpResponseException(HttpStatusCode.InternalServerError);
             }
 
-            return Ok(Mapper.Map<Player>(player));
+            return Ok(player);
+        }
+
+        [Route("~/players")]
+        [HttpPost]
+        public IHttpActionResult CreatePlayer(CreatePlayerRequest createPlayerRequest)
+        {
+            Player player;
+
+            try
+            {
+                var playerDto = _playerRepository.CreatePlayer(new PlayerDto() { Name = createPlayerRequest.Name, RankScore = PlayerValues.DEFAULT_RANK_SCORE, Reliability = PlayerValues.DEFAULT_RELIABILITY });
+                player = Mapper.Map<Player>(playerDto);
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(HttpStatusCode.InternalServerError);
+            }
+
+            return Ok(player);
         }
     }
 }

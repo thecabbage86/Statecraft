@@ -21,5 +21,17 @@ namespace Statecraft.Services.Repositories
 
             return player;
         }
+
+        public PlayerDto CreatePlayer(PlayerDto player)
+        {
+            using (var context = new GameContext())
+            {
+                player.Id = Guid.NewGuid(); //TODO: this should be generated on the DB-level
+                player = context.Players.Add(player);
+                context.SaveChanges();
+            }
+
+            return player;
+        }
     }
 }

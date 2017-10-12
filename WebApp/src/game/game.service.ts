@@ -1,4 +1,4 @@
-﻿import { IPlayer } from './models/player';
+﻿import { IPlayer } from 'player/models/player';
 import { IGameResponse } from './models/game-response';
 import { IGame } from './models/game';
 
@@ -41,6 +41,16 @@ export class GameService {
         let options = new RequestOptions({ headers: headers });
 
         return this._http.get(this._url + "players/" + playerId, options)
+            .map((response: Response) => <IPlayer>response.json())
+            .do(data => console.log("Player: " + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+
+    createPlayer(player: IPlayer) : Observable<IPlayer> {
+        let headers = new Headers({ 'Accept': 'application/json', 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this._http.post(this._url + "players", JSON.stringify(player), options)
             .map((response: Response) => <IPlayer>response.json())
             .do(data => console.log("Player: " + JSON.stringify(data)))
             .catch(this.handleError);

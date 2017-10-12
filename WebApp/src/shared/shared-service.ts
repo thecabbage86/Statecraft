@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 import { GameService } from 'game/game.service';
 import { Injectable } from '@angular/core';
-import { IPlayer } from "game/models/player";
+import { IPlayer } from "player/models/player";
 import { Observer } from "rxjs/Observer";
 
 @Injectable()
@@ -20,8 +20,9 @@ export class SharedService {
         //     .subscribe(player => this.player = player, error => this.errorMessage = <any>error);
     //}
 
-    setPlayer(player: any){
-        this.player = player;
+    setPlayer(player: IPlayer){
+        //this.player = player;
         //this.playerObserver.next(this.player);
+        this.player = player;
     }
 }

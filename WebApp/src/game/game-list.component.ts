@@ -1,5 +1,5 @@
 import { SharedService } from './../shared/shared-service';
-import { IPlayer } from './models/player';
+import { IPlayer } from 'player/models/player';
 import { GameFilterBy } from 'game/enums/game-filter-by';
 import { IGameResponse } from './models/game-response';
 import { GameService } from './game.service';
@@ -14,7 +14,6 @@ import { Component, OnInit } from '@angular/core';
 export class GameListComponent implements OnInit {
     games: IGameResponse;
     player: IPlayer;
-    playerId: AAGUID = "AB858B6C-3D5E-4388-A49E-10ED3115800C"; //TODO: handle playerId properly
     errorMessage: string;
 
     finishedListName:string = "Finished Games";
@@ -29,7 +28,7 @@ export class GameListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this._gameService.getGamesByPlayerId(this.playerId)
+        this._gameService.getGamesByPlayerId(this.player.Id)
             .subscribe(games => this.games = games, error => this.errorMessage = <any>error);
     }
 
